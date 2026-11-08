@@ -203,9 +203,9 @@ export default function Home() {
       <SiteNav />
 
       {/* Hero */}
-      {/* The nav sits in flow above the hero and the negative margin pulls the hero
-          up behind it, so the extra 20px makes the black panel reach the fold. */}
-      <section className="hero-gradient-bg" style={{ marginTop: -80, padding: "250px 0 176px", minHeight: "calc(100vh + 20px)" }}>
+      {/* Slightly deeper than the default 96px so the black panel runs a little
+          further down the screen, without filling the whole viewport. */}
+      <section className="hero-gradient-bg" style={{ marginTop: -80, padding: "250px 0 160px" }}>
         <div className="hero-ascii-word" aria-hidden>
           <FloatingAsciiWord word="Shuroq" />
         </div>
