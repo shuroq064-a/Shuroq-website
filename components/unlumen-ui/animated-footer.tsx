@@ -496,7 +496,11 @@ export function AnimatedFooter({
             }
           }
         },
-        { root: getScrollParent(root), threshold: 0.35 },
+        // Wait until the footer has climbed to the upper half of the viewport.
+        // At the old `threshold: 0.35` the hands were still half below the fold
+        // when the curtain opened, so they read as rising from the bottom; by
+        // then they are fully on screen and glide in from the sides.
+        { root: getScrollParent(root), rootMargin: "0px 0px -60% 0px", threshold: 0 },
       );
       observer.observe(root);
     } else {
