@@ -267,9 +267,9 @@ export default function Home() {
         </div>
         <OrbitalImageWheel
           images={wheelImages}
-          turns={2.2}
+          turns={1.4}
           wheelSize={1600}
-          scrollLength={220}
+          scrollLength={180}
           cropRatio={0.7}
           itemWidth={300}
           itemHeight={400}

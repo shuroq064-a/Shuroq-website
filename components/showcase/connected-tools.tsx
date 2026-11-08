@@ -14,22 +14,17 @@ import { useMediaQuery } from "@/components/showcase/use-media-query";
  * so the diagram keeps its colours offline and never waits on a third-party CDN.
  * Order matters: satellites are placed clockwise from 12 o'clock.
  *
- * Three mark shapes need help on a 48px card: near-black glyphs (`mono`) are
- * forced to pure white on the dark theme, OpenAI's artwork is white and so is
- * darkened on the light theme, and n8n ships a 2.5:1 wordmark that needs width
- * rather than a square box. Pinecone is vendored as its `mono` variant, which is
- * the square symbol instead of the wordmark.
+ * Two mark shapes need help on a 48px card: near-black glyphs (`mono`) are
+ * forced to pure white on the dark theme, and the n8n legacy lockup is 1.9:1,
+ * so it gets width rather than a square box. Pinecone is vendored as its `mono`
+ * variant, which is the square symbol instead of the wordmark; OpenAI uses the
+ * `openai-badge` lockup, whose black disc plus white spiral reads on both themes.
  */
-type MarkVariant = "colour" | "mono" | "light" | "wordmarkMono";
+type MarkVariant = "colour" | "mono" | "wordmark";
 
 function Mark({ src, variant = "colour" }: { src: string; variant?: MarkVariant }) {
-  const sizing = variant === "wordmarkMono" ? "h-auto w-[92%]" : "size-1/2";
-  const filter =
-    variant === "mono" || variant === "wordmarkMono"
-      ? "dark:brightness-0 dark:invert"
-      : variant === "light"
-        ? "invert dark:invert-0"
-        : "";
+  const sizing = variant === "wordmark" ? "h-auto w-[86%]" : "size-1/2";
+  const filter = variant === "mono" ? "dark:brightness-0 dark:invert" : "";
   return (
     // Vendored SVGs pass straight through; next/image would need dangerouslyAllowSVG.
     // eslint-disable-next-line @next/next/no-img-element
@@ -57,9 +52,9 @@ const nodes: AnimatedBeamNode[] = [
       />
     ),
   },
-  { id: "n8n", label: "n8n", icon: <Mark src="/icons/n8n.svg" variant="wordmarkMono" /> },
+  { id: "n8n", label: "n8n", icon: <Mark src="/icons/n8n-legacy.svg" variant="wordmark" /> },
   { id: "langgraph", label: "LangGraph", icon: <Mark src="/icons/langgraph.svg" variant="mono" /> },
-  { id: "openai", label: "OpenAI", icon: <Mark src="/icons/openai.svg" variant="light" /> },
+  { id: "openai", label: "OpenAI", icon: <Mark src="/icons/openai-badge.svg" /> },
   { id: "pinecone", label: "Pinecone", icon: <Mark src="/icons/pinecone.svg" variant="mono" /> },
   { id: "redis", label: "Redis", src: "/icons/redis.svg" },
   { id: "kafka", label: "Apache Kafka", icon: <Mark src="/icons/apache-kafka.svg" variant="mono" /> },
