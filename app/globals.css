@@ -1,0 +1,695 @@
+@import "tailwindcss";
+@import "@fontsource-variable/manrope/index.css";
+@import "@fontsource-variable/caveat/index.css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--secondary);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--secondary);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-destructive-strong: var(--destructive-strong);
+  --color-border-strong: var(--border-strong);
+  --color-success: var(--success);
+  --color-success-strong: var(--success-strong);
+  --color-success-foreground: var(--success-foreground);
+  --color-warning: var(--warning);
+  --color-warning-strong: var(--warning-strong);
+  --color-warning-foreground: var(--warning-foreground);
+  --color-info: var(--info);
+  --color-info-foreground: var(--info-foreground);
+  --color-info-strong: var(--info-strong);
+  --color-segment: var(--segment);
+  --color-primary-hover: var(--primary-hover);
+  --shadow-surface: var(--surface-shadow);
+  --shadow-overlay: var(--overlay-shadow);
+  --shadow-field: var(--field-shadow);
+  --shadow-thumb: var(--thumb-shadow);
+  --ease-ui-out: var(--ease-ui-out);
+  --ease-ui-in-out: var(--ease-ui-in-out);
+  --ease-drawer: var(--ease-drawer);
+  --text-2xl--letter-spacing: -0.015em;
+  --text-4xl--letter-spacing: -0.025em;
+  --text-6xl--letter-spacing: -0.035em;
+  --modal-enter-scale: var(--modal-enter-scale);
+  --popover-exit-scale: var(--popover-exit-scale);
+  --popover-enter-scale: var(--popover-enter-scale);
+  --enter-lift: var(--enter-lift);
+  --enter-scale: var(--enter-scale);
+  --hover-scale: var(--hover-scale);
+  --press-scale-row: var(--press-scale-row);
+  --press-scale-icon: var(--press-scale-icon);
+  --press-scale-lg: var(--press-scale-lg);
+  --press-scale-sm: var(--press-scale-sm);
+  --press-scale: var(--press-scale);
+  --stagger-step: var(--stagger-step);
+  --duration-panel-exit: var(--duration-panel-exit);
+  --duration-exit: var(--duration-exit);
+  --duration-drawer: var(--duration-drawer);
+  --duration-overlay: var(--duration-overlay);
+  --duration-collapse: var(--duration-collapse);
+  --duration-backdrop: var(--duration-backdrop);
+  --duration-dropdown: var(--duration-dropdown);
+  --duration-tooltip: var(--duration-tooltip);
+  --duration-press: var(--duration-press);
+  --duration-slow: var(--duration-slow);
+  --duration-base: var(--duration-base);
+  --duration-fast: var(--duration-fast);
+  --duration-instant: var(--duration-instant);
+  --duration-spring-bouncy: var(--duration-spring-bouncy);
+  --duration-spring-snappy: var(--duration-spring-snappy);
+  --ease-spring-bouncy: var(--ease-spring-bouncy);
+  --ease-spring-snappy: var(--ease-spring-snappy);
+  --ease-smooth: var(--ease-smooth);
+  --ease-out-quad: var(--ease-out-quad);
+  --ease-out-quart: var(--ease-out-quart);
+  --ease-spring: var(--ease-spring);
+  --control-height-xl: var(--control-height-xl);
+  --control-height-lg: var(--control-height-lg);
+  --control-height-default: var(--control-height-default);
+  --control-height-sm: var(--control-height-sm);
+  --control-height-xs: var(--control-height-xs);
+  --color-track: var(--track);
+  --color-field: var(--field);
+  --thumb-shadow: var(--thumb-shadow);
+  --field-shadow: var(--field-shadow);
+  --overlay-shadow: var(--overlay-shadow);
+  --surface-shadow: var(--surface-shadow);
+  --info-strong: var(--info-strong);
+  --warning-strong: var(--warning-strong);
+  --success-strong: var(--success-strong);
+  --destructive-strong: var(--destructive-strong);
+  --color-neon: var(--neon);
+  --color-violet: var(--violet);
+  --background-image-brand-bg: var(--gradient-bg);
+  --background-image-brand-accent: var(--gradient-accent);
+  --gradient-accent: var(--gradient-accent);
+  --gradient-bg: var(--gradient-bg);
+  --color-glass-border: var(--glass-border);
+  --color-glass-bg: var(--glass-bg);
+}
+
+/* Figma-inspired design system tokens */
+:root {
+  --bg: #ffffff;
+  --surface: #ffffff;
+  --surface-warm: var(--surface);
+  --fg: #000000;
+  --fg-2: #000000;
+  --muted: rgba(0, 0, 0, 0.55);
+  --meta: rgba(0, 0, 0, 0.40);
+  --border: rgba(0, 0, 0, 0.12);
+  --border-soft: rgba(0, 0, 0, 0.06);
+  --accent: #000000;
+  --accent-on: #ffffff;
+  --accent-hover: rgba(0, 0, 0, 0.85);
+  --accent-active: rgba(0, 0, 0, 0.08);
+  --success: oklch(73.29% 0.1935 150.81);
+  --warn: #eab308;
+  --danger: #dc2626;
+
+  --font-display: "Manrope Variable", "figmaSans", "figmaSans Fallback", "SF Pro Display", system-ui, -apple-system, Helvetica, Arial, sans-serif;
+  --font-body: "figmaSans", "figmaSans Fallback", "SF Pro Display", system-ui, -apple-system, Helvetica, Arial, sans-serif;
+  --font-mono: "figmaMono", "figmaMono Fallback", "SF Mono", Menlo, ui-monospace, monospace;
+
+  --text-xs: 12px;
+  --text-sm: 16px;
+  --text-base: 16px;
+  --text-lg: 20px;
+  --text-xl: 26px;
+  --text-2xl: 26px;
+  --text-3xl: 64px;
+  --text-4xl: 86px;
+
+  --leading-body: 1.40;
+  --leading-tight: 1.00;
+  --tracking-display: -0.02em;
+
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-12: 48px;
+
+  --section-y-desktop: 96px;
+  --section-y-tablet: 64px;
+  --section-y-phone: 40px;
+
+  --radius-sm: 50px;
+  --radius-md: 8px;
+  --radius-lg: 8px;
+  --radius-pill: 9999px;
+
+  --elev-flat: none;
+  --elev-ring: 0 0 0 1px var(--border);
+  --elev-raised: 0 4px 16px rgba(0, 0, 0, 0.08);
+
+  --focus-ring: 0 0 0 2px rgba(0, 0, 0, 0.8);
+
+  --motion-fast: 150ms;
+  --motion-base: 200ms;
+  --ease-standard: cubic-bezier(0.2, 0, 0, 1);
+
+  --container-max: 1920px;
+  --container-gutter-desktop: 40px;
+  --container-gutter-tablet: 24px;
+  --container-gutter-phone: 16px;
+
+  /* shadcn-style tokens used by motion components */
+  --background: #ffffff;
+  --foreground: #000000;
+  --card: #ffffff;
+  --card-foreground: #000000;
+  --popover: #ffffff;
+  --popover-foreground: #000000;
+  --primary: #000000;
+  --primary-foreground: #ffffff;
+  --secondary: #f4f4f5;
+  --secondary-foreground: #000000;
+  --muted-foreground: rgba(0, 0, 0, 0.55);
+  --accent-foreground: #000000;
+  --destructive: #dc2626;
+  --destructive-foreground: #ffffff;
+  --border: rgba(0, 0, 0, 0.12);
+  --input: rgba(0, 0, 0, 0.12);
+  --ring: rgba(0, 0, 0, 0.8);
+  --radius: 8px;
+  --segment: oklch(100% 0 0);
+  --border-strong: oklch(16% 0.002 265 / 0.14);
+  --destructive-strong: color-mix(in oklab, var(--destructive) 64%, var(--foreground));
+  --success-strong: color-mix(in oklab, var(--success) 57%, var(--foreground));
+  --success-foreground: oklch(21.03% 0.0059 285.89);
+  --warning: oklch(78.19% 0.1585 72.33);
+  --warning-strong: color-mix(in oklab, var(--warning) 53%, var(--foreground));
+  --warning-foreground: oklch(21.03% 0.0059 285.89);
+  --info: oklch(56% 0.195 253.83);
+  --info-strong: color-mix(in oklab, var(--info) 70%, var(--foreground));
+  --info-foreground: oklch(99.11% 0 0);
+  --surface-shadow: 0 2px 4px 0 rgb(0 0 0 / 0.04), 0 1px 2px 0 rgb(0 0 0 / 0.06), 0 0 1px 0 rgb(0 0 0 / 0.06);
+  --overlay-shadow: 0 0 0 1px oklch(16% 0.002 265 / 0.06), 0 2px 8px 0 rgb(0 0 0 / 0.06), 0 -6px 12px 0 rgb(0 0 0 / 0.03), 0 14px 28px 0 rgb(0 0 0 / 0.08);
+  --field-shadow: none;
+  --thumb-shadow: 0 0 5px 0 rgb(0 0 0 / 0.02), 0 2px 10px 0 rgb(0 0 0 / 0.06), 0 0 1px 0 rgb(0 0 0 / 0.3);
+  --field: oklch(100% 0 0);
+  --track: oklch(16% 0.002 265 / 0.15);
+  --control-height-xs: 1.5rem;
+  --control-height-sm: 1.75rem;
+  --control-height-default: 2rem;
+  --control-height-lg: 2.25rem;
+  --control-height-xl: 2.5rem;
+  --ease-ui-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-ui-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+  --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-out-quart: cubic-bezier(0.165, 0.84, 0.44, 1);
+  --ease-out-quad: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --ease-smooth: ease;
+  --ease-spring-snappy: linear( 0, 0.049, 0.158, 0.285, 0.412, 0.526, 0.624, 0.706, 0.772, 0.825, 0.867, 0.899, 0.924, 0.943, 0.957, 0.968, 0.976, 0.983, 0.987, 0.991, 0.993, 0.995, 0.996, 0.997, 1 );
+  --ease-spring-bouncy: linear( 0, 0.044, 0.149, 0.283, 0.424, 0.558, 0.676, 0.776, 0.856, 0.916, 0.961, 0.992, 1.011, 1.022, 1.027, 1.028, 1.027, 1.023, 1.019, 1.015, 1.012, 1.008, 1.006, 1.004, 1 );
+  --duration-spring-snappy: 400ms;
+  --duration-spring-bouncy: 600ms;
+  --duration-instant: 100ms;
+  --duration-fast: 150ms;
+  --duration-base: 200ms;
+  --duration-slow: 250ms;
+  --duration-press: var(--duration-fast);
+  --duration-tooltip: var(--duration-fast);
+  --duration-dropdown: var(--duration-fast);
+  --duration-backdrop: var(--duration-fast);
+  --duration-collapse: var(--duration-base);
+  --duration-overlay: var(--duration-slow);
+  --duration-drawer: 500ms;
+  --duration-exit: var(--duration-instant);
+  --duration-panel-exit: var(--duration-base);
+  --stagger-step: 45ms;
+  --press-scale: 0.98;
+  --press-scale-sm: 0.97;
+  --press-scale-lg: 0.985;
+  --press-scale-icon: 0.96;
+  --press-scale-row: 0.985;
+  --hover-scale: 1.02;
+  --enter-scale: 0.95;
+  --enter-lift: 8px;
+  --popover-enter-scale: 0.97;
+  --popover-exit-scale: 0.98;
+  --modal-enter-scale: 1.02;
+  --neon: oklch(80% 0.22 145);
+  --violet: oklch(68% 0.22 295);
+  --glass-bg: oklch(100% 0 0 / 0.55);
+  --glass-border: oklch(15% 0 0 / 0.08);
+  --gradient-bg: linear-gradient(135deg, oklch(100% 0 0) 0%, oklch(96% 0.008 210) 100%);
+  --gradient-accent: linear-gradient( to right, oklch(72% 0.18 195) 0%, oklch(68% 0.22 295) 100% );
+}
+
+.dark {
+  --bg: #0a0a0a;
+  --surface: #111111;
+  --surface-warm: #111111;
+  --fg: #ffffff;
+  --fg-2: #ffffff;
+  --muted: rgba(255, 255, 255, 0.6);
+  --meta: rgba(255, 255, 255, 0.45);
+  --border: rgba(255, 255, 255, 0.12);
+  --border-soft: rgba(255, 255, 255, 0.08);
+  --accent: #ffffff;
+  --accent-on: #000000;
+  --accent-hover: rgba(255, 255, 255, 0.85);
+  --accent-active: rgba(255, 255, 255, 0.10);
+  --success: oklch(73.29% 0.1935 150.81);
+  --warn: #facc15;
+  --danger: #f87171;
+
+  --background: #0a0a0a;
+  --foreground: #ffffff;
+  --card: #111111;
+  --card-foreground: #ffffff;
+  --popover: #111111;
+  --popover-foreground: #ffffff;
+  --primary: #ffffff;
+  --primary-foreground: #000000;
+  --secondary: #1f1f1f;
+  --secondary-foreground: #ffffff;
+  --muted-foreground: rgba(255, 255, 255, 0.6);
+  --accent-foreground: #ffffff;
+  --destructive: #f87171;
+  --destructive-foreground: #ffffff;
+  --border: rgba(255, 255, 255, 0.12);
+  --input: rgba(255, 255, 255, 0.12);
+  --ring: rgba(255, 255, 255, 0.8);
+  --segment: oklch(30% 0.004 265);
+  --border-strong: oklch(100% 0 0 / 0.12);
+  --destructive-strong: color-mix(in oklab, var(--destructive) 73%, var(--foreground));
+  --success-strong: color-mix(in oklab, var(--success) 73%, var(--foreground));
+  --success-foreground: oklch(21.03% 0.0059 285.89);
+  --warning: oklch(82.03% 0.1388 76.34);
+  --warning-strong: color-mix(in oklab, var(--warning) 73%, var(--foreground));
+  --warning-foreground: oklch(21.03% 0.0059 285.89);
+  --info: oklch(56% 0.195 253.83);
+  --info-strong: color-mix(in oklab, var(--info) 73%, var(--foreground));
+  --info-foreground: oklch(99.11% 0 0);
+  --surface-shadow: none;
+  --overlay-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.08), inset 0 1px 0 0 rgb(255 255 255 / 0.04), 0 2px 6px 0 rgb(0 0 0 / 0.3), 0 16px 32px -4px rgb(0 0 0 / 0.5);
+  --thumb-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.4);
+  --field: oklch(21% 0.003 265);
+  --track: oklch(100% 0 0 / 0.145);
+  --glass-bg: oklch(17% 0.002 265 / 0.55);
+  --glass-border: rgb(255 255 255 / 0.08);
+  --gradient-bg: linear-gradient(135deg, oklch(17% 0.002 265) 0%, oklch(21% 0.008 210) 100%);
+  --gradient-accent: linear-gradient( to right, oklch(80% 0.18 195) 0%, oklch(72% 0.18 295) 100% );
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: var(--leading-body);
+  letter-spacing: -0.14px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a { color: inherit; text-decoration: none; }
+img { max-width: 100%; display: block; }
+
+.container {
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 0 var(--container-gutter-desktop);
+}
+
+/* Typography */
+.display { font-family: var(--font-display); font-size: var(--text-4xl); font-weight: 520; line-height: 1.02; letter-spacing: -2.6px; }
+.section-title { font-family: var(--font-display); font-size: var(--text-3xl); font-weight: 460; line-height: 1.10; letter-spacing: -1.4px; }
+.subheading { font-size: var(--text-xl); font-weight: 540; line-height: 1.35; letter-spacing: -0.26px; }
+.subheading-light { font-size: var(--text-xl); font-weight: 340; line-height: 1.35; letter-spacing: -0.26px; }
+.feature-title { font-size: 24px; font-weight: 700; line-height: 1.45; }
+.body-lg { font-size: var(--text-lg); font-weight: 330; line-height: 1.40; letter-spacing: -0.14px; }
+.body { font-size: var(--text-base); font-weight: 330; line-height: 1.45; letter-spacing: -0.14px; }
+.mono-label { font-family: var(--font-mono); font-size: 18px; font-weight: 400; line-height: 1.30; letter-spacing: 0.54px; text-transform: uppercase; }
+.mono-small { font-family: var(--font-mono); font-size: 12px; font-weight: 400; line-height: 1.00; letter-spacing: 0.6px; text-transform: uppercase; }
+
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-family: var(--font-body);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.45;
+  letter-spacing: -0.14px;
+  border: none;
+  cursor: pointer;
+  transition: background var(--motion-fast) var(--ease-standard), color var(--motion-fast) var(--ease-standard);
+  outline: none;
+}
+.btn:focus { outline: 2px dashed var(--fg); outline-offset: 2px; }
+
+.btn-pill { border-radius: var(--radius-sm); padding: 8px 18px 10px; }
+.btn-circle { border-radius: 50%; width: 44px; height: 44px; padding: 0; }
+
+.btn-black { background: var(--fg); color: var(--bg); }
+.btn-black:hover { background: var(--accent-hover); }
+.btn-white { background: var(--bg); color: var(--fg); }
+.btn-white:hover { background: rgba(0,0,0,0.04); }
+.btn-glass-dark { background: rgba(0,0,0,0.08); color: var(--fg); }
+.btn-glass-light { background: rgba(255,255,255,0.16); color: var(--bg); }
+
+/* Nav */
+.nav {
+  position: sticky;
+  top: 16px;
+  z-index: 50;
+  background: transparent;
+  border-bottom: none;
+}
+.nav-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 64px;
+}
+
+/* Nav — glasscn-style liquid glass (see components/ui/liquid-glass.tsx).
+   The surface is the ported LiquidGlass: an 8% white pane (upstream's
+   `bg-white/[0.08]`), real refraction and a 1px rim. No sheen, no drop
+   shadow: the page shows straight through the pane and only the edge bends
+   it, exactly like glasscn's HeaderPill. These rules supply the text tone
+   and the rim colour for each backdrop. */
+.nav-glass {
+  --nav-fg: #111111;
+  --nav-fg-muted: rgba(17, 17, 17, 0.62);
+  --nav-border: rgba(17, 17, 17, 0.14);
+  --liquid-glass-rim-width: 1px;
+  --liquid-glass-rim-light: rgba(17, 17, 17, 0.1);
+  --liquid-glass-rim-dark: rgba(17, 17, 17, 0.16);
+  color: var(--nav-fg);
+}
+
+/* Only animate once the first measurement has landed, so the bar does not
+   visibly fade from the light fallback on load. */
+.nav-glass[data-tone-ready="true"] {
+  transition: color 0.35s ease;
+}
+
+/* Over the black hero (or any dark surface) the text flips to white, exactly
+   like the glasscn header pill. */
+.nav-glass[data-tone="dark"] {
+  --nav-fg: #ffffff;
+  --nav-fg-muted: rgba(255, 255, 255, 0.64);
+  --nav-border: rgba(255, 255, 255, 0.24);
+  --liquid-glass-rim-light: rgba(255, 255, 255, 0.45);
+  --liquid-glass-rim-dark: rgba(0, 0, 0, 0.28);
+}
+
+/* The Arc switch brings its own control tokens. In the nav it should read as
+   part of the glass pill, not as a second surface inside it: no fill, no
+   border, and the nav's tone for the icon. */
+.nav-theme-toggle {
+  display: inline-flex;
+  --foreground: var(--nav-fg);
+  --surface: transparent;
+  --surface-muted: color-mix(in srgb, var(--nav-fg) 10%, transparent);
+  --border: transparent;
+  --border-strong: color-mix(in srgb, var(--nav-fg) 22%, transparent);
+  --radius-control: 999px;
+  --control-height-sm: 38px;
+  --shadow-resting: none;
+  --duration-fast: 0.16s;
+  --duration-spring: 0.42s;
+  --ease-spring: cubic-bezier(0.16, 1, 0.3, 1);
+  color: var(--nav-fg);
+  transition: color 0.35s ease;
+}
+.nav-theme-toggle button {
+  border-radius: 999px;
+  color: inherit;
+}
+
+/* The motion menu ships dark-only trigger colours; follow the glass tone. */
+.nav-glass [data-slot="navigation-menu-trigger"] {
+  color: var(--nav-fg);
+  padding-left: 12px;
+  padding-right: 12px;
+  transition: color 0.35s ease;
+}
+.nav-glass [data-slot="navigation-menu-trigger"]:hover,
+.nav-glass [data-slot="navigation-menu-trigger"]:focus-visible,
+.nav-glass [data-slot="navigation-menu-trigger"][data-state="open"] {
+  color: var(--nav-fg);
+}
+
+.nav-logo { font-weight: 700; font-size: 20px; letter-spacing: -0.26px; }
+.nav-links { display: flex; gap: 24px; align-items: center; }
+.nav-links a { font-size: 16px; font-weight: 330; letter-spacing: -0.14px; }
+.nav-links a:hover { text-decoration: underline; text-underline-offset: 4px; }
+.nav-cta { margin-left: 16px; }
+
+/* Hero — a black surface with the floating ASCII wordmark on the right */
+.hero-gradient-bg {
+  position: relative;
+  overflow: hidden;
+  color: #f5f5f5;
+  background-color: #000000;
+}
+
+.hero-gradient-bg > .container {
+  position: relative;
+  z-index: 3;
+}
+
+/* Floating ASCII "Shuroq": right half of the hero, behind the copy */
+.hero-ascii-word {
+  position: absolute;
+  z-index: 2;
+  top: 17%;
+  right: 3%;
+  width: 46%;
+  height: 60%;
+  pointer-events: none;
+}
+.hero-ascii-word::before {
+  content: "";
+  position: absolute;
+  inset: 8% 4%;
+  border-radius: 50%;
+  pointer-events: none;
+  background: radial-gradient(
+    closest-side,
+    rgba(255, 126, 43, 0.12) 0%,
+    rgba(255, 126, 43, 0.05) 45%,
+    rgba(255, 126, 43, 0) 72%
+  );
+  filter: blur(18px);
+}
+
+/* Hero sits on black in every theme, so its controls invert */
+.hero-gradient-bg .btn-black {
+  background: #ffffff;
+  color: #0a0a0a;
+}
+.hero-gradient-bg .btn-black:hover {
+  background: rgba(255, 255, 255, 0.85);
+}
+.hero-gradient-bg .btn-glass-dark {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  color: #ffffff;
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
+}
+.hero-gradient-bg .btn-glass-dark:hover {
+  background: rgba(255, 255, 255, 0.14);
+}
+
+/* Handwritten headline (Caveat variable font, typed) */
+.hero-headline {
+  margin: 0;
+  color: #ffffff;
+}
+
+.hero-headline-text {
+  display: block;
+  font-family: "Caveat Variable", "Caveat", "Segoe Script", cursive;
+  font-size: clamp(29px, 3.7vw, 53px);
+  font-weight: 600;
+  line-height: 1.02;
+  letter-spacing: 0.2px;
+  white-space: pre-line;
+  min-height: 1.15em;
+  max-width: 100%;
+  overflow-wrap: break-word;
+}
+
+.hero-headline-caret {
+  display: inline-block;
+  width: 3px;
+  height: 0.72em;
+  margin-left: 4px;
+  vertical-align: -0.06em;
+  background: currentColor;
+  animation: hero-caret 1.05s steps(1, end) infinite;
+}
+
+@media (max-width: 1024px) {
+  .hero-ascii-word {
+    top: auto;
+    bottom: 4%;
+    right: 0;
+    width: 100%;
+    height: 40%;
+    opacity: 0.5;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-headline-text {
+    font-size: clamp(23px, 6vw, 32px);
+    line-height: 1.05;
+    /* Mid-length phrases may wrap to two lines on phones; reserve both so the
+       paragraph below never shifts while the headline cycles. */
+    min-height: 2.2em;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-headline-caret {
+    animation: none;
+    opacity: 0;
+  }
+  :root {
+    --duration-press: 0ms;
+    --duration-drawer: 160ms;
+    --stagger-step: 0ms;
+    --press-scale: 1;
+    --press-scale-sm: 1;
+    --press-scale-lg: 1;
+    --press-scale-icon: 1;
+    --press-scale-row: 1;
+    --hover-scale: 1;
+    --enter-scale: 1;
+    --enter-lift: 0px;
+    --popover-enter-scale: 1;
+    --popover-exit-scale: 1;
+    --modal-enter-scale: 1;
+  }
+}
+
+@keyframes hero-caret {
+  0%, 49% { opacity: 1; }
+  50%, 100% { opacity: 0; }
+}
+
+.hero-gradient-bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0.05;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+
+/* Card */
+.card {
+  background: var(--bg);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius-md);
+  padding: var(--space-6);
+}
+.card:hover { box-shadow: var(--elev-raised); }
+
+/* Section */
+.section { padding: var(--section-y-desktop) 0; }
+.section-sm { padding: var(--space-12) 0; }
+
+/* Grid */
+.grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-6); }
+.grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-6); }
+
+/* Stack side-by-side blocks before the columns get too narrow to hold a card. */
+@media (max-width: 900px) {
+  .grid-2 { grid-template-columns: 1fr; }
+}
+
+/* Footer */
+.footer { background: var(--fg); color: var(--bg); padding: var(--section-y-desktop) 0; }
+.footer a { color: var(--bg); }
+
+/* Arc site footer on the inverted closing surface.
+   The Arc block reads its own design tokens (--text-secondary, --surface, --radius-control, …).
+   Remap them on the footer element instead of importing Arc's global foundation stylesheet, which
+   would overwrite this site's palette, fonts and `color-scheme`. */
+.site-footer-inverted {
+  --background: var(--fg);
+  --foreground: var(--bg);
+  --surface: color-mix(in srgb, var(--bg) 8%, transparent);
+  --surface-raised: color-mix(in srgb, var(--bg) 10%, transparent);
+  --surface-muted: color-mix(in srgb, var(--bg) 12%, transparent);
+  --text-secondary: color-mix(in srgb, var(--bg) 66%, transparent);
+  --text-muted: color-mix(in srgb, var(--bg) 50%, transparent);
+  --border: color-mix(in srgb, var(--bg) 16%, transparent);
+  --border-subtle: color-mix(in srgb, var(--bg) 10%, transparent);
+  --border-strong: color-mix(in srgb, var(--bg) 30%, transparent);
+  --warning: var(--warn);
+  --tracking-body: -0.01em;
+  --radius-control: 999px;
+  --control-height-md: 44px;
+  --duration-fast: 160ms;
+  --duration-standard: 240ms;
+  --ease-enter: cubic-bezier(0.22, 1, 0.36, 1);
+  --space-10: 40px;
+  --space-16: 64px;
+}
+
+/* Theme page motion (Arc theme-switch variants). The nav stamps the variant
+   the switch reported onto <html>, so the incoming snapshot runs the matching
+   reveal. This is the Arc site's own transition CSS, so "rise" reads exactly
+   as designed: the new appearance rises from the bottom edge. */
+html[data-theme-motion]::view-transition-old(root) { animation: none; }
+html[data-theme-motion]::view-transition-new(root) {
+  animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+  animation-fill-mode: both;
+}
+html[data-theme-motion="reveal"]::view-transition-new(root) { animation-name: theme-reveal; animation-duration: 0.38s; }
+html[data-theme-motion="eclipse"]::view-transition-new(root) { animation-name: theme-eclipse; animation-duration: 0.43s; }
+html[data-theme-motion="split"]::view-transition-new(root) { animation-name: theme-split; animation-duration: 0.39s; }
+html[data-theme-motion="rise"]::view-transition-new(root) { animation-name: theme-rise; animation-duration: 0.36s; }
+
+@keyframes theme-reveal { 0% { clip-path: inset(0 100% 0 0); } to { clip-path: inset(0); } }
+@keyframes theme-eclipse { 0% { clip-path: ellipse(0 110%); } to { clip-path: ellipse(80% 110%); } }
+@keyframes theme-split { 0% { clip-path: inset(50% 0); } to { clip-path: inset(0); } }
+@keyframes theme-rise { 0% { clip-path: inset(100% 0 0); } to { clip-path: inset(0); } }
+
+@media (prefers-reduced-motion: reduce) {
+  html[data-theme-motion]::view-transition-old(root) { animation-duration: 0.01ms !important; }
+  html[data-theme-motion]::view-transition-new(root) { animation-duration: 0.01ms !important; }
+}
+  :root, .dark {
+    --primary-hover: color-mix(in oklab, var(--primary) 90%, var(--foreground));
+}
