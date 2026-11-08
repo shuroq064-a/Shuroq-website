@@ -14,12 +14,34 @@ import { useMediaQuery } from "@/components/showcase/use-media-query";
  * so the diagram keeps its colours offline and never waits on a third-party CDN.
  * Order matters: satellites are placed clockwise from 12 o'clock.
  *
- * The hub uses thesvg's `ui:inference` outline mark and is labelled AI Workflow.
- * Its strokes are `currentColor`, which an `<img>` resolves to black, so it is
- * inverted on the dark theme. GitHub's octocat is near-black for the same
- * reason; Notion's is black-on-white page art and reads on both. Everything
- * else is a colour mark.
+ * Three mark shapes need help on a 48px card: near-black glyphs (`mono`) are
+ * forced to pure white on the dark theme, OpenAI's artwork is white and so is
+ * darkened on the light theme, and n8n ships a 2.5:1 wordmark that needs width
+ * rather than a square box. Pinecone is vendored as its `mono` variant, which is
+ * the square symbol instead of the wordmark.
  */
+type MarkVariant = "colour" | "mono" | "light" | "wordmarkMono";
+
+function Mark({ src, variant = "colour" }: { src: string; variant?: MarkVariant }) {
+  const sizing = variant === "wordmarkMono" ? "h-auto w-[92%]" : "size-1/2";
+  const filter =
+    variant === "mono" || variant === "wordmarkMono"
+      ? "dark:brightness-0 dark:invert"
+      : variant === "light"
+        ? "invert dark:invert-0"
+        : "";
+  return (
+    // Vendored SVGs pass straight through; next/image would need dangerouslyAllowSVG.
+    // eslint-disable-next-line @next/next/no-img-element
+    <img
+      src={src}
+      alt=""
+      draggable={false}
+      className={`${sizing} object-contain select-none ${filter}`}
+    />
+  );
+}
+
 const nodes: AnimatedBeamNode[] = [
   {
     id: "app",
@@ -35,45 +57,32 @@ const nodes: AnimatedBeamNode[] = [
       />
     ),
   },
-  { id: "slack", label: "Slack", src: "/icons/slack.svg" },
-  { id: "figma", label: "Figma", src: "/icons/figma.svg" },
-  {
-    id: "github",
-    label: "GitHub",
-    icon: (
-      // SVG mark passed straight through; next/image would need dangerouslyAllowSVG.
-      // eslint-disable-next-line @next/next/no-img-element
-      <img
-        src="/icons/github.svg"
-        alt=""
-        draggable={false}
-        className="size-1/2 object-contain select-none dark:invert"
-      />
-    ),
-  },
-  { id: "notion", label: "Notion", src: "/icons/notion.svg" },
-  { id: "linear", label: "Linear", src: "/icons/linear.svg" },
-  { id: "jira", label: "Jira", src: "/icons/jira.svg" },
-  { id: "stripe", label: "Stripe", src: "/icons/stripe.svg" },
-  { id: "dropbox", label: "Dropbox", src: "/icons/dropbox.svg" },
+  { id: "n8n", label: "n8n", icon: <Mark src="/icons/n8n.svg" variant="wordmarkMono" /> },
+  { id: "langgraph", label: "LangGraph", icon: <Mark src="/icons/langgraph.svg" variant="mono" /> },
+  { id: "openai", label: "OpenAI", icon: <Mark src="/icons/openai.svg" variant="light" /> },
+  { id: "pinecone", label: "Pinecone", icon: <Mark src="/icons/pinecone.svg" variant="mono" /> },
+  { id: "redis", label: "Redis", src: "/icons/redis.svg" },
+  { id: "kafka", label: "Apache Kafka", icon: <Mark src="/icons/apache-kafka.svg" variant="mono" /> },
   { id: "datadog", label: "Datadog", src: "/icons/datadog.svg" },
   { id: "hubspot", label: "HubSpot", src: "/icons/hubspot.svg" },
-  { id: "drive", label: "Google Drive", src: "/icons/google-drive.svg" },
+  { id: "slack", label: "Slack", src: "/icons/slack.svg" },
+  { id: "github", label: "GitHub", icon: <Mark src="/icons/github.svg" variant="mono" /> },
+  { id: "jira", label: "Jira", src: "/icons/jira.svg" },
 ];
 
 /** One pulse starts every 300 ms, so the eleven beams fill the 3.2 s travel time. */
 const beams: BeamLink[] = [
-  { from: "slack", to: "app" },
-  { from: "figma", to: "app", delay: 300 },
-  { from: "github", to: "app", delay: 600 },
-  { from: "notion", to: "app", delay: 900 },
-  { from: "linear", to: "app", delay: 1200 },
-  { from: "jira", to: "app", delay: 1500 },
-  { from: "stripe", to: "app", delay: 1800, reverse: true },
-  { from: "dropbox", to: "app", delay: 2100 },
-  { from: "datadog", to: "app", delay: 2400 },
-  { from: "hubspot", to: "app", delay: 2700 },
-  { from: "drive", to: "app", delay: 3000, reverse: true },
+  { from: "n8n", to: "app" },
+  { from: "langgraph", to: "app", delay: 300 },
+  { from: "openai", to: "app", delay: 600 },
+  { from: "pinecone", to: "app", delay: 900 },
+  { from: "redis", to: "app", delay: 1200, reverse: true },
+  { from: "kafka", to: "app", delay: 1500 },
+  { from: "datadog", to: "app", delay: 1800 },
+  { from: "hubspot", to: "app", delay: 2100 },
+  { from: "slack", to: "app", delay: 2400 },
+  { from: "github", to: "app", delay: 2700 },
+  { from: "jira", to: "app", delay: 3000, reverse: true },
 ];
 
 /**
