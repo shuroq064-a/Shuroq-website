@@ -220,8 +220,10 @@ export function AnimatedFooter({
   const footerBackground = background ?? (isDark ? "var(--bg)" : "var(--fg)");
   const footerTextColor = textColor ?? (isDark ? "var(--fg)" : "var(--bg)");
 
-  const cc = charColor ?? (isDark ? "#803500" : "#e6b093");
-  const hcc = hoverCharColor ?? (isDark ? "#0f0f0f" : "#ffffff");
+  // Both themes sit on a black slab, so the ASCII hands keep the warm sand tone
+  // instead of dimming to a dark brown on the dark theme.
+  const cc = charColor ?? "#e6b093";
+  const hcc = hoverCharColor ?? "#ffffff";
 
   // Live-tunable values read inside the animation loop, so tweaking a color or
   // the parallax strength never tears down and rebuilds the ASCII scene.
