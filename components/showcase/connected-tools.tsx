@@ -10,25 +10,29 @@ import {
 import { useMediaQuery } from "@/components/showcase/use-media-query";
 
 /**
- * Brand marks self-hosted from thesvg.org (`/icons/<name>/default.svg`), so the
- * diagram keeps its colours offline and never waits on a third-party CDN.
+ * Every mark is vendored with `npx @thesvg/cli add <slug> --dir ./public/icons`,
+ * so the diagram keeps its colours offline and never waits on a third-party CDN.
  * Order matters: satellites are placed clockwise from 12 o'clock.
  *
- * The hub is a monogram rather than the full logo: at 64px the illustrated
- * globe turns to mush. GitHub's mark is near-black, so it is inverted to white
- * on the dark theme — everything else is a colour mark that reads on both.
+ * The hub uses thesvg's `ui:inference` outline mark and is labelled AI Workflow.
+ * Its strokes are `currentColor`, which an `<img>` resolves to black, so it is
+ * inverted on the dark theme. GitHub's octocat is near-black for the same
+ * reason; Notion's is black-on-white page art and reads on both. Everything
+ * else is a colour mark.
  */
 const nodes: AnimatedBeamNode[] = [
   {
     id: "app",
-    label: "Your app",
+    label: "AI Workflow",
     icon: (
-      <span
-        aria-hidden="true"
-        className="text-[26px] font-semibold leading-none tracking-[-0.04em] text-foreground"
-      >
-        S
-      </span>
+      // Vendored ui:inference; <img> cannot inherit currentColor, hence dark:invert.
+      // eslint-disable-next-line @next/next/no-img-element
+      <img
+        src="/icons/ui-inference.svg"
+        alt=""
+        draggable={false}
+        className="size-8 object-contain select-none dark:invert"
+      />
     ),
   },
   { id: "slack", label: "Slack", src: "/icons/slack.svg" },
@@ -47,27 +51,34 @@ const nodes: AnimatedBeamNode[] = [
       />
     ),
   },
+  { id: "notion", label: "Notion", src: "/icons/notion.svg" },
   { id: "linear", label: "Linear", src: "/icons/linear.svg" },
+  { id: "jira", label: "Jira", src: "/icons/jira.svg" },
   { id: "stripe", label: "Stripe", src: "/icons/stripe.svg" },
   { id: "dropbox", label: "Dropbox", src: "/icons/dropbox.svg" },
+  { id: "datadog", label: "Datadog", src: "/icons/datadog.svg" },
   { id: "hubspot", label: "HubSpot", src: "/icons/hubspot.svg" },
   { id: "drive", label: "Google Drive", src: "/icons/google-drive.svg" },
 ];
 
+/** One pulse starts every 300 ms, so the eleven beams fill the 3.2 s travel time. */
 const beams: BeamLink[] = [
   { from: "slack", to: "app" },
-  { from: "figma", to: "app", delay: 400 },
-  { from: "github", to: "app", delay: 800 },
+  { from: "figma", to: "app", delay: 300 },
+  { from: "github", to: "app", delay: 600 },
+  { from: "notion", to: "app", delay: 900 },
   { from: "linear", to: "app", delay: 1200 },
-  { from: "stripe", to: "app", delay: 1600, reverse: true },
-  { from: "dropbox", to: "app", delay: 2000 },
-  { from: "hubspot", to: "app", delay: 2400 },
-  { from: "drive", to: "app", delay: 2800, reverse: true },
+  { from: "jira", to: "app", delay: 1500 },
+  { from: "stripe", to: "app", delay: 1800, reverse: true },
+  { from: "dropbox", to: "app", delay: 2100 },
+  { from: "datadog", to: "app", delay: 2400 },
+  { from: "hubspot", to: "app", delay: 2700 },
+  { from: "drive", to: "app", delay: 3000, reverse: true },
 ];
 
 /**
  * Hub-and-spoke integration diagram with a pulse travelling along each beam.
- * Eight spokes crowd the 16:10 box on phones, so below `sm` the nodes shrink to
+ * Eleven spokes crowd the 16:10 box on phones, so below `sm` the nodes shrink to
  * `sm` and the labels drop to screen-reader only, which also halves the bow
  * (curvature is in px, so 80 would swallow the whole box at that size).
  */
@@ -83,6 +94,8 @@ export function ConnectedTools() {
       size={compact ? "sm" : "md"}
       tone="spectrum"
       curvature={compact ? 40 : 80}
+      // 11 spokes need a taller box on phones or the side nodes touch.
+      className={compact ? "aspect-[4/3]" : undefined}
     >
       <AnimatedBeamBeams />
       <AnimatedBeamNodes label="Integrations" showLabels={!compact} />
