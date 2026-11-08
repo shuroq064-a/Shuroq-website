@@ -186,8 +186,8 @@ export function AnimatedFooter({
   headingLines = ["Shuroq"],
   leftImage = "/animated-footer/hand-left.jpg",
   rightImage = "/animated-footer/hand-right.jpg",
-  background = "var(--fg)",
-  textColor = "var(--bg)",
+  background,
+  textColor,
   charColor,
   hoverColor = "#ff6a00",
   hoverCharColor,
@@ -214,6 +214,11 @@ export function AnimatedFooter({
 
   const { resolvedTheme } = useTheme();
   const isDark = resolvedTheme === "dark";
+
+  // The footer is a high-contrast slab: black with white ink in light mode. On
+  // the dark theme it keeps the page's black instead of flipping to white.
+  const footerBackground = background ?? (isDark ? "var(--bg)" : "var(--fg)");
+  const footerTextColor = textColor ?? (isDark ? "var(--fg)" : "var(--bg)");
 
   const cc = charColor ?? (isDark ? "#803500" : "#e6b093");
   const hcc = hoverCharColor ?? (isDark ? "#0f0f0f" : "#ffffff");
@@ -524,13 +529,8 @@ export function AnimatedFooter({
   return (
     <footer
       ref={rootRef}
-      className={cn(
-        "relative h-full w-full overflow-hidden",
-        !background && "bg-white dark:bg-black",
-        !textColor && "text-black dark:text-white",
-        className,
-      )}
-      style={{ backgroundColor: background, color: textColor, containerType: "inline-size" }}
+      className={cn("relative h-full w-full overflow-hidden", className)}
+      style={{ backgroundColor: footerBackground, color: footerTextColor, containerType: "inline-size" }}
     >
       {/* ASCII hands */}
       <div
