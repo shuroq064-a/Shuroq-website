@@ -45,7 +45,3 @@ tsconfig.tsbuildinfo
 .agentation.log
 .baby-ui/
 .stitch/
-
-.vercel
-.vercel
-.env*
