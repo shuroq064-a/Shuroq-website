@@ -40,4 +40,10 @@ yarn-error.log*
 .server.log
 .server.err.log
 
+# local tooling / build artifacts
+tsconfig.tsbuildinfo
+.agentation.log
+.baby-ui/
+.stitch/
+
 .vercel

@@ -18,14 +18,15 @@ const nextConfig: NextConfig = {
     },
   },
   // Keep all legacy static pages reachable at their original clean URLs.
-  // These map clean paths (e.g. /about/) to the static files in public/.
+  // These map clean paths (e.g. /careers/) to the static files in public/.
   // Marked temporary so they can be removed as pages are migrated to Next.js routes.
+  // /about and /careers are now Next.js routes (app/about/page.tsx,
+  // app/careers/page.tsx) so they have no redirect.
+  // Keep their legacy .html URLs working as aliases to the new pages.
   async redirects() {
     return [
-      { source: "/about", destination: "/about/index.html", permanent: false },
-      { source: "/about/", destination: "/about/index.html", permanent: false },
-      { source: "/careers", destination: "/careers/index.html", permanent: false },
-      { source: "/careers/", destination: "/careers/index.html", permanent: false },
+      { source: "/about/index.html", destination: "/about", permanent: false },
+      { source: "/careers/index.html", destination: "/careers", permanent: false },
       { source: "/shuroq-way", destination: "/shuroq-way/index.html", permanent: false },
       { source: "/shuroq-way/", destination: "/shuroq-way/index.html", permanent: false },
       { source: "/contact", destination: "/contact/index.html", permanent: false },

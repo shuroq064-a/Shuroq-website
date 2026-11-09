@@ -686,6 +686,16 @@ html[data-theme-motion="rise"]::view-transition-new(root) { animation-name: them
 @keyframes theme-split { 0% { clip-path: inset(50% 0); } to { clip-path: inset(0); } }
 @keyframes theme-rise { 0% { clip-path: inset(100% 0 0); } to { clip-path: inset(0); } }
 
+/* Accordion (components/ui/accordion.tsx) open/close height transition. */
+@keyframes accordion-down {
+  from { height: 0; }
+  to { height: var(--radix-accordion-content-height); }
+}
+@keyframes accordion-up {
+  from { height: var(--radix-accordion-content-height); }
+  to { height: 0; }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html[data-theme-motion]::view-transition-old(root) { animation-duration: 0.01ms !important; }
   html[data-theme-motion]::view-transition-new(root) { animation-duration: 0.01ms !important; }
