@@ -1,93 +1,426 @@
-# Design System — Shuroq Website
+---
+version: alpha
+name: Shuroq
+description: Monochrome, editorial design system for the Shuroq technology-services marketing site — ink on paper, warm paper surfaces, refracted glass, ASCII/canvas art, and one ember glow.
+---
+
+# Shuroq Design System
 
 _Last updated: 2026-11-09_
 
-This is the complete design reference for the Shuroq marketing site: the visual
-language, every token, every layout rule, every component, and — importantly —
-**where each pre-existing component came from** and what its licence requires.
+This document is the **source of truth** for the Shuroq site. It states **how the
+design should be** — if the code disagrees with this file, the code is wrong.
 
-Read this before changing any page. Most regressions on this site come from
-"improving" a token, a radius, or a section rhythm that another page already
-depends on.
+It follows the DESIGN.md open format (`google-labs-code/design.md`), so the
+tokens below are machine-readable YAML and the prose is the human rationale.
 
 ---
 
-## 0. Rules that override everything else
+## Overview
+
+Shuroq is a technology-services and digital-engineering company. The site has to
+read as **engineering competence, stated quietly** — editorial, technical, calm,
+and expensive-looking. Not playful, not "startup-y", not a template.
+
+The visual model is a printed technical journal:
+
+- **Ink on paper.** Almost everything is `#000000` on `#ffffff`, or the reverse.
+- **Band rhythm.** Pages alternate three surfaces — paper, warm paper, inverted
+  ink — so long pages read as chapters rather than a scroll of cards.
+- **One accent of warmth.** A single ember radial glow behind the hero ASCII
+  word. Nothing else is coloured except photography and customer marks.
+- **Typography carries the brand.** 64–86px display headlines at low weight with
+  tight tracking, then deliberately quiet 16–20px body copy at 55% ink.
+- **Motion is slow and physical.** Spring-driven, single-purpose, never looping
+  for decoration except the ASCII footer and the integration beam pulses.
+
+Audience: enterprise buyers and engineering leaders evaluating a partner.
+Emotional target: *"these people are precise."*
+
+### Rules that override everything else
 
 1. **One visual language across every route.** Home, `/about` and `/careers`
-   must look like the same site. Never introduce a new section style on one page.
-2. **Never name a component library, registry, author, or source file in any
-   user-facing copy.** The credits live in code comments and in this document —
+   must look like the same site. Never introduce a section style on one page.
+2. **Never name a component library, registry, author or source file in any
+   user-facing copy.** Credits live in code comments and in §Component sources —
    not on the site.
 3. **Change only what was asked.** No opportunistic restyling.
-4. **Keep the carousel card size and radius** (square card, 48px radius, inset
-   hairline). It was explicitly approved in that shape.
-5. **Reduced motion is a first-class path.** Every animation must degrade to a
-   static state when `prefers-reduced-motion: reduce` is set.
+4. **Keep the carousel card size and radius** — square, 48px, inset hairline.
+5. **Reduced motion is a first-class path.** Every animation degrades to a
+   static state under `prefers-reduced-motion: reduce`.
 6. **Light and dark are both real.** Nothing may be hard-coded to one theme
    except the black hero band and the inverted footer, which are black in both.
 
 ---
 
-## 1. How the site should look — the approved spec
+## Colors
 
-This section is **prescriptive**: it states what the design must be. If the code
-does not match this, the code is wrong.
+The palette is rooted in high-contrast neutrals with a single warm accent. The
+whole site runs on five colours; every other value is alpha or a derived mix.
 
-### 1.1 Direction
+- **Primary — Ink `#000000`.** Text, inverted bands, primary buttons, and the
+  hero background. Permanence and maximum readability.
+- **Secondary — Paper `#ffffff`.** The page itself, cards, and text on ink.
+- **Neutral — Warm paper `#f0eee9`.** The organic card surface and the poster
+  paper tone. Softer than pure white, which is what makes photography sit well.
+- **Surface (dark) — Charcoal `#0a0a0a` / `#111111`.** Dark-theme page and the
+  elevated surface above it.
+- **Tertiary — Ember `#ff7e2b` at 5–12% alpha.** The *only* warm accent: a
+  blurred radial glow behind the hero ASCII word. It is **not** available for
+  buttons, text, borders or charts.
+- **Error `#dc2626`, Success `oklch(73.29% 0.1935 150.81)`, Warning `#eab308`.**
+  Status only; never decorative.
 
-| Attribute | It should be |
-| --- | --- |
-| Feel | Editorial, technical, calm. Confident, never playful or "startup-y". |
-| Typography | Huge, tight, low-contrast display headlines. Small, quiet body copy. |
-| Colour | Monochrome UI. Ink on paper, paper on ink. Colour only in photography, brand marks and the ember hero glow. |
-| Shapes | Pills for all controls. 8px for inputs and panels. 48px for the poster carousel. Organic SVG cutouts for feature cards. |
-| Motion | Slow, spring-driven, one purpose per animation. Nothing loops except the ASCII footer and the beam pulses. |
-| Texture | Refracted glass, warm paper, and ASCII/canvas art. No gradients on text. No neon. |
+Supporting greys are always alpha on ink or alpha on paper — never a flat grey:
+`55%` body copy, `40%` meta, `12%` borders, `6%` soft borders, `8%` press wash.
 
-### 1.2 Must — every page
+There is **no brand blue, no gradient text, no coloured button.**
 
-1. Open with the **black hero band** and the floating ASCII word.
-2. Alternate exactly three bands: paper → warm surface → inverted ink.
-3. Use `.section` for vertical rhythm (96px). Never invent a new padding value.
-4. Put every section inside `.container` (1920px max, 40px gutters).
-5. Use `.grid-2` (heading left, artefact right) for two-column sections.
-6. End with the inverted CTA band, then the animated footer, then the site footer.
-7. Use the real company logo (`logo.png`, 34×34) in the footer on **all** pages.
-8. Keep one `<h1>` per page, inside the hero.
-9. Keep every interactive element reachable by keyboard with a visible focus ring.
+```yaml
+colors:
+  primary: "#000000"
+  secondary: "#ffffff"
+  neutral: "#f0eee9"
+  surface: "#ffffff"
+  surface-warm: "#f0eee9"
+  surface-dark: "#111111"
+  background-dark: "#0a0a0a"
+  on-surface: "#000000"
+  on-surface-dark: "#ffffff"
+  muted: "rgba(0, 0, 0, 0.55)"
+  muted-dark: "rgba(255, 255, 255, 0.60)"
+  meta: "rgba(0, 0, 0, 0.40)"
+  meta-dark: "rgba(255, 255, 255, 0.45)"
+  border: "rgba(0, 0, 0, 0.12)"
+  border-dark: "rgba(255, 255, 255, 0.12)"
+  border-soft: "rgba(0, 0, 0, 0.06)"
+  tertiary: "#ff7e2b"
+  ember-glow: "rgba(255, 126, 43, 0.12)"
+  error: "#dc2626"
+  error-dark: "#f87171"
+  success: "oklch(73.29% 0.1935 150.81)"
+  warning: "#eab308"
+  glass-bg: "oklch(100% 0 0 / 0.55)"
+  glass-bg-dark: "oklch(17% 0.002 265 / 0.55)"
+  glass-border: "oklch(15% 0 0 / 0.08)"
+```
 
-### 1.3 Never
+**Usage rules**
 
-1. Never name a library, registry, author or file in on-page copy.
-2. Never add a colour outside the palette in §2.0.
-3. Never use a gradient on text, a coloured button, or a neon glow.
-4. Never change the carousel card's square shape, 48px radius or inset hairline.
-5. Never open the Application Process accordion by default — all closed, click `+`.
-6. Never let the nav exceed **900px** or stop being optically centred.
-7. Never hard-code light-only or dark-only colours outside the hero and footer.
-8. Never restyle a section on one page only.
-9. Never remove an attribution comment from a vendored component.
-10. Never enable an animation that ignores `prefers-reduced-motion`.
+- Body copy is **never pure black** — use `muted`.
+- Borders are `12%`; dividers inside cards use `6%`.
+- The ember glow may only appear in the hero, as an `rgba()` radial gradient
+  blurred ~18px behind the ASCII word.
+- A new colour must be added as a token in `:root` **and** `.dark`, documented
+  here, and approved — never inlined into a component.
 
-### 1.4 Element-by-element, as it should be
+---
 
-| Element | Spec |
-| --- | --- |
-| Nav | Floating glass pill, 48px tall, max 900px wide, centred, sticky at 16px from the top. Menu optically centred. |
-| Hero | Black in both themes. ASCII word right of centre, ember radial glow behind it. Handwritten headline, two pill buttons. |
-| Section heading | `.section-title` — 64px, weight ~460, tracking −1.4px, line-height 1.10. |
-| Lead paragraph | `.body-lg` — 20px, weight 330, 55% ink, max ~72 characters. |
-| Body copy | 16px, 55% ink. Never pure black. |
-| Primary button | `.btn-pill.btn-black` — 50px radius, ink fill, paper text. Inverts to white on the black hero. |
-| Secondary button | `.btn-pill.btn-glass-dark` — translucent, 1px light border, blur. |
-| Card | 8px radius, 1px `--border`, flat, no drop shadow. |
-| Poster carousel | Square slides, 48px radius, 1.5px inset hairline, neighbours at 55% opacity, soft faded edges, dots below. |
-| Accordion | Filled rows, 8px radius, `+` indicator that rotates to ×, closed by default. |
-| Divider | 220px centred hairline, 14% ink, 24px above and below. |
-| Footer | Black surface, white text, logo + wordmark, three link columns, legal + socials. |
+## Typography
 
-### 1.5 Review checklist before shipping a visual change
+The typography strategy pairs one geometric display face with the Figma-exported
+UI face, plus a handwritten face reserved for the hero.
+
+- **Display — Manrope Variable** (`--font-display`), with `figmaSans` → SF Pro
+  Display → system-ui as fallback. Used for every headline.
+- **Body — figmaSans** (`--font-body`) with SF Pro Display fallback. Used for
+  UI and body copy.
+- **Mono — figmaMono** (`--font-mono`) for technical strings.
+- **Handwritten — Caveat Variable**, used *only* for the typed hero headline.
+
+Voice: big, tight, low-contrast. Weights stay between **330 and 540** across the
+site; 700+ appears only inside poster artwork and `.feature-title`. Tracking
+tightens as size grows (−2.6px at 86px, −1.4px at 64px) so the type reads as one
+block, not as letters.
+
+```yaml
+typography:
+  display:
+    fontFamily: "Manrope Variable"
+    fontSize: 86px
+    fontWeight: 520
+    lineHeight: 1.02
+    letterSpacing: -2.6px
+  headline:
+    fontFamily: "Manrope Variable"
+    fontSize: 64px
+    fontWeight: 460
+    lineHeight: 1.10
+    letterSpacing: -1.4px
+  subheading:
+    fontFamily: "Manrope Variable"
+    fontSize: 26px
+    fontWeight: 540
+    lineHeight: 1.35
+    letterSpacing: -0.26px
+  body-lg:
+    fontFamily: "figmaSans"
+    fontSize: 20px
+    fontWeight: 330
+    lineHeight: 1.40
+    letterSpacing: -0.14px
+  body:
+    fontFamily: "figmaSans"
+    fontSize: 16px
+    fontWeight: 400
+    lineHeight: 1.40
+    letterSpacing: -0.14px
+  label:
+    fontFamily: "figmaSans"
+    fontSize: 12px
+    fontWeight: 600
+    lineHeight: 1.10
+    letterSpacing: 0.04em
+  meta:
+    fontFamily: "figmaSans"
+    fontSize: 14px
+    fontWeight: 400
+    lineHeight: 1.30
+    letterSpacing: -0.10px
+  handwritten:
+    fontFamily: "Caveat Variable"
+    fontSize: 86px
+    fontWeight: 500
+    lineHeight: 1.00
+    letterSpacing: -1px
+```
+
+**Rules**
+
+- One `<h1>` per page, inside the hero.
+- Section headings use `headline` — never a smaller variant for a new section.
+- Lead paragraphs use `body-lg`, capped at ~72 characters per line.
+- Captions and overlines use `label` (uppercase) or `meta` — never `body`.
+
+---
+
+## Layout
+
+Layout is a **fixed-max-width fluid container** with a strict 8px-derived
+spacing scale and three section bands.
+
+- **Container:** max `1920px`, centred, `40px` gutters on desktop, `24px` on
+  tablet, `16px` on phone.
+- **Two-column block:** `.grid-2` = `1fr 1fr`, `24px` gap. Heading and lead on
+  the left, the artefact (accordion, card, carousel) on the right. Sticky
+  columns pin at `top: 96px`.
+- **Section rhythm:** every section uses `.section` = `96px` top and bottom
+  (64 tablet / 40 phone). A section that sits directly above another opts out
+  with `padding-bottom: 0`.
+- **Bands:** paper (default) → warm surface → inverted ink. Never two inverted
+  bands in a row.
+- **Page ending (always the same):** inverted CTA band → animated ASCII footer
+  → site footer.
+
+```yaml
+spacing:
+  xs: 4px
+  sm: 8px
+  md: 12px
+  lg: 16px
+  xl: 20px
+  2xl: 24px
+  3xl: 32px
+  4xl: 48px
+  section: 96px
+  section-tablet: 64px
+  section-phone: 40px
+  gutter: 40px
+  gutter-phone: 16px
+  container-max: 1920px
+  grid-gap: 24px
+  sticky-offset: 96px
+```
+
+---
+
+## Elevation & Depth
+
+Hierarchy comes from **tonal bands and hairlines**, not shadows. Sections are
+flat; a surface is separated from the page by its background tone or a 1px
+border.
+
+Depth is used in exactly four places:
+
+1. **The floating nav** — refracted glass (a real SVG displacement filter feeding
+   `backdrop-filter`), an 8% white pane, a 1px rim. No drop shadow.
+2. **The sticky card deck** — a `0 4px 16px rgba(0,0,0,.08)` rest state and a
+   3-layer surface shadow in light mode; in dark mode the shadow collapses to an
+   inset rim.
+3. **Floating panels** (menu dropdown, popovers) — `--overlay-shadow`: 1px rim
+   plus soft drops; dark mode swaps to an inset white rim.
+4. **The organic card** — a `drop-shadow` chain so the shadow follows the
+   *painted* silhouette rather than the border box.
+
+Depth values are listed with the other component tokens under §Components
+(`elevation-*`), so the document keeps a single machine-readable token tree.
+
+> Shadows never decorate. If a section looks "flat", fix it with space or a
+> band, not with a shadow.
+
+---
+
+## Shapes
+
+The shape language is **soft industrial**: pills for anything you press, an 8px
+radius for anything you read, and two deliberate exceptions.
+
+- **Pills (9999px / 50px)** — nav bar, all buttons, tags, status.
+- **8px** — cards, inputs, panels, accordion rows, dropdowns.
+- **48px** — the poster carousel slides. This is the "cute" shape and it was
+  explicitly approved; do not change it.
+- **Organic** — the feature card's bottom-left corner is cut by an animated SVG
+  path, so it has no `border-radius` at all.
+- **Hairlines** — 1.5px inset rim on carousel slides, 1px borders elsewhere.
+  Section dividers are a 220px centred rule at 14% ink.
+
+```yaml
+rounded:
+  none: 0px
+  sm: 8px
+  md: 8px
+  lg: 8px
+  carousel: 48px
+  pill-button: 50px
+  full: 9999px
+```
+
+---
+
+## Components
+
+### Navigation
+
+Floating glass pill, sticky at `16px` from the top. **48px tall, max 900px wide,
+optically centred** — empty left spacer, menu in the middle, theme switch right.
+Links: About Us · Services · Solutions · Resources, each opening a spring-driven
+dropdown with a layout-animated highlight. Auto-detects backdrop tone and flips
+to white text over the black hero. Below `md` it collapses to a plain stacked
+list.
+
+### Buttons
+
+Pill shape, 50px radius, `8px 18px 10px` padding. Primary is ink fill with paper
+text; secondary is a translucent glass pane with a 1px light border. On the black
+hero both invert automatically. Press state is a `0.98` scale.
+
+### Cards
+
+8px radius, 1px `border`, flat. The organic card is the exception: SVG cutout,
+`drop-shadow` silhouette, animated path on hover, and a `cta` label under the
+meta row.
+
+### Poster carousel
+
+Square slides (1:1) at 48px radius, `overflow: hidden`, with a 1.5px inset
+hairline at 30% ink. Coverflow with `rotate: 0`, `depth: 100`, `modifier: 2.5`,
+no slide shadows. Slides per view 1.1 → 1.35 (≥640) → 1.55 (≥1024), 12px gap.
+Neighbours sit at 55% opacity. The viewport's hard clip is dissolved by a
+horizontal mask (opaque 6%→94%), so no sharp vertical line ever appears beside
+the card. Dots sit 50px below.
+
+### Accordion
+
+Filled rows, 8px radius, `+` indicator that rotates to `×`. Multiple items may be
+open at once, but **everything starts closed** — the user clicks `+`.
+
+### Dividers
+
+220px centred hairline, `color-mix(in srgb, var(--fg) 14%, transparent)`, 24px
+above and below. Never after the hero.
+
+### Footer
+
+Black surface, white text, in both themes. Brand mark is the real company logo
+(`logo.png`, 34×34) beside the `Shuroq` wordmark on **every** page. Three link
+columns (Services, Solutions, Company), then legal (Privacy, Terms) and socials
+(Instagram, LinkedIn).
+
+```yaml
+components:
+  elevation-flat:
+    boxShadow: none
+  elevation-ring:
+    boxShadow: "0 0 0 1px rgba(0, 0, 0, 0.12)"
+  elevation-raised:
+    boxShadow: "0 4px 16px rgba(0, 0, 0, 0.08)"
+  elevation-overlay:
+    boxShadow: "0 0 0 1px rgba(0,0,0,0.06), 0 2px 8px rgba(0,0,0,0.06), 0 14px 28px rgba(0,0,0,0.08)"
+  elevation-focus:
+    boxShadow: "0 0 0 2px rgba(0, 0, 0, 0.8)"
+  nav:
+    backgroundColor: "{colors.glass-bg}"
+    textColor: "{colors.on-surface}"
+    height: 48px
+    width: 900px
+    rounded: "{rounded.full}"
+    padding: 16px
+  button-primary:
+    backgroundColor: "{colors.primary}"
+    textColor: "{colors.secondary}"
+    typography: "{typography.body}"
+    rounded: "{rounded.pill-button}"
+    padding: 10px
+  button-primary-hover:
+    backgroundColor: "rgba(0, 0, 0, 0.85)"
+  button-secondary:
+    backgroundColor: "rgba(255, 255, 255, 0.08)"
+    textColor: "{colors.secondary}"
+    rounded: "{rounded.pill-button}"
+    padding: 10px
+  card:
+    backgroundColor: "{colors.surface}"
+    textColor: "{colors.on-surface}"
+    rounded: "{rounded.md}"
+    padding: 24px
+  carousel-slide:
+    backgroundColor: "{colors.surface}"
+    rounded: "{rounded.carousel}"
+  accordion-item:
+    backgroundColor: "{colors.surface}"
+    textColor: "{colors.on-surface}"
+    typography: "{typography.body}"
+    rounded: "{rounded.md}"
+    padding: 16px
+  footer:
+    backgroundColor: "{colors.primary}"
+    textColor: "{colors.secondary}"
+    typography: "{typography.body}"
+    padding: 40px
+```
+
+---
+
+## Do's and Don'ts
+
+**Do**
+
+- Do keep one visual language across home, about and careers.
+- Do open every page with the black hero band and the ASCII word.
+- Do alternate paper → warm → inverted bands.
+- Do use `.section` (96px) for vertical rhythm and `.container` for width.
+- Do use the ink/paper tokens; never a raw hex in a component.
+- Do keep `muted` body copy at 55% ink for hierarchy.
+- Do keep the carousel square with a 48px radius and an inset hairline.
+- Do keep the accordion closed until the user presses `+`.
+- Do give every interactive element a visible focus ring.
+- Do honour `prefers-reduced-motion` in every animation.
+- Do check both themes before shipping.
+
+**Don't**
+
+- Don't name a library, registry, author or source file in on-page copy.
+- Don't add a colour outside this palette.
+- Don't put a gradient on text, colour a button, or add neon.
+- Don't change the carousel card's shape, radius or edge line.
+- Don't let the nav exceed 900px or stop being optically centred.
+- Don't hard-code light-only or dark-only colours outside the hero and footer.
+- Don't restyle one page's section differently from the others.
+- Don't stack two inverted bands without a paper band between them.
+- Don't remove an attribution comment from a vendored component.
+- Don't ship a visual change without `npm run build` passing.
+
+**Review checklist**
 
 - [ ] Same visual language as the other two routes
 - [ ] No new colour, radius, spacing or font size
@@ -99,297 +432,24 @@ does not match this, the code is wrong.
 
 ---
 
-## 2. Tokens
+## Page blueprints
 
-All tokens live in `app/globals.css` under `:root` (light) and `.dark`.
-Never hard-code a hex value in a component when a token exists.
+Section-by-section, band by band.
 
-### 2.0 Current palette at a glance
+### `/` — Home
 
-The whole site runs on **five colours**. Everything else is derived from them.
-
-| Swatch | Colour | Hex / value | Role |
+| # | Section | Band | Component |
 | --- | --- | --- | --- |
-| ⬛ | Ink | `#000000` | Text, inverted bands, buttons, hero background |
-| ⬜ | Paper | `#ffffff` | Page background, cards, text on ink |
-| ▫️ | Warm surface | `#f0eee9` | Organic card surface, poster paper tone |
-| 🌑 | Charcoal | `#0a0a0a` / `#111111` | Dark-mode page and surface |
-| 🟠 | Ember (glow only) | `#ff7e2b` @ 5–12% alpha | The single warm accent — the soft radial glow behind the ASCII hero word. **Not a token**; it lives in `.hero-ascii-word::before` as an `rgba()` radial gradient, blurred 18px. |
-
-Supporting greys (all alpha-on-ink or alpha-on-paper, never flat grey):
-
-`--muted` 55% · `--meta` 40% · `--border` 12% · `--border-soft` 6% ·
-`--accent-active` 8%.
-
-That is the entire palette. There is **no brand blue, no gradient text, no
-coloured buttons**. Colour enters the site only through:
-
-1. the ember hero glow above,
-2. the poster artwork in `public/images/careers/` (peach, sage, pink, cream),
-3. customer brand marks in the integration diagram.
-
-> If a new colour is ever needed, it must be added as a token in `:root` **and**
-> `.dark`, documented here, and approved — never inlined into a component.
-
-### 2.1 Colour — semantic (theme-aware)
-
-| Token | Light | Dark | Used for |
-| --- | --- | --- | --- |
-| `--bg` | `#ffffff` | `#0a0a0a` | Page background |
-| `--surface` | `#ffffff` | `#111111` | Cards, nested panels |
-| `--surface-warm` | `#ffffff` | `#111111` | Alternate section band |
-| `--fg` | `#000000` | `#ffffff` | Text, and inverted section background |
-| `--fg-2` | `#000000` | `#ffffff` | Secondary strong text |
-| `--muted` | `rgba(0,0,0,.55)` | `rgba(255,255,255,.6)` | Body copy under headings |
-| `--meta` | `rgba(0,0,0,.40)` | `rgba(255,255,255,.45)` | Captions, meta rows |
-| `--border` | `rgba(0,0,0,.12)` | `rgba(255,255,255,.12)` | Hairlines, card edges |
-| `--border-soft` | `rgba(0,0,0,.06)` | `rgba(255,255,255,.08)` | Dividers inside cards |
-| `--accent` | `#000000` | `#ffffff` | Primary action |
-| `--accent-on` | `#ffffff` | `#000000` | Text on accent |
-| `--accent-hover` | `rgba(0,0,0,.85)` | `rgba(255,255,255,.85)` | Hover state |
-| `--accent-active` | `rgba(0,0,0,.08)` | `rgba(255,255,255,.10)` | Pressed / selected wash |
-| `--success` | `oklch(73.29% 0.1935 150.81)` | same | Status dot |
-| `--warn` | `#eab308` | `#facc15` | Warning |
-| `--danger` | `#dc2626` | `#f87171` | Error |
-
-### 2.2 Colour — shadcn bridge
-
-Motion components (menu, footer, accordion, buttons) read the shadcn-style
-aliases, which is why they automatically theme correctly:
-
-`--background`, `--foreground`, `--card`, `--card-foreground`, `--popover`,
-`--primary`, `--primary-foreground`, `--secondary`, `--muted-foreground`,
-`--accent-foreground`, `--destructive`, `--border`, `--input`, `--ring`,
-`--radius` (8px), `--segment`.
-
-Do not edit these independently — they mirror the semantic tokens above.
-
-### 2.3 Colour — glass and gradients
-
-| Token | Light | Dark |
-| --- | --- | --- |
-| `--glass-bg` | `oklch(100% 0 0 / .55)` | `oklch(17% 0.002 265 / .55)` |
-| `--glass-border` | `oklch(15% 0 0 / .08)` | `rgb(255 255 255 / .08)` |
-| `--gradient-bg` | white → `oklch(96% 0.008 210)` | `oklch(17%…)` → `oklch(21%…)` |
-| `--gradient-accent` | cyan → violet | cyan → violet |
-
-The nav's glass surface is **not** built from `--glass-bg`; it uses the
-`LiquidGlass` component's own 8% white pane plus a real SVG refraction filter.
-
-### 2.4 Typography
-
-| Token | Value |
-| --- | --- |
-| `--font-display` | `"Manrope Variable"`, `figmaSans`, SF Pro Display, system-ui… |
-| `--font-body` | `figmaSans` (Figma export), SF Pro Display, system-ui… |
-| `--font-mono` | `figmaMono`, SF Mono, Menlo, ui-monospace… |
-| Handwritten | `"Caveat Variable"` (hero headline only) |
-
-Loaded in `app/globals.css`:
-
-```css
-@import "@fontsource-variable/manrope/index.css";
-@import "@fontsource-variable/caveat/index.css";
-```
-
-Type scale:
-
-| Token | Size | Notes |
-| --- | --- | --- |
-| `--text-xs` | 12px | Overlines, legal |
-| `--text-sm` | 16px | UI text |
-| `--text-base` | 16px | Body |
-| `--text-lg` | 20px | Lead paragraphs (`.body-lg`) |
-| `--text-xl` / `--text-2xl` | 26px | Subheads |
-| `--text-3xl` | 64px | `.section-title` |
-| `--text-4xl` | 86px | Display / hero |
-
-Rules:
-
-- Display sizes use **tight tracking** (`-2.6px` at 86px, `-1.4px` at 64px)
-  and `line-height: 1.02 / 1.10`.
-- Weights are deliberately **low**: 330–540. The site never uses 700+ except
-  inside poster artwork (`career-*.png`) and `.feature-title` (700).
-- Body copy is never pure black: use `--muted`.
-
-### 2.5 Spacing
-
-`--space-1…12` = 4, 8, 12, 16, 20, 24, 32, 48 px.
-
-Section rhythm:
-
-| Token | Value |
-| --- | --- |
-| `--section-y-desktop` | 96px |
-| `--section-y-tablet` | 64px |
-| `--section-y-phone` | 40px |
-
-`.section { padding: var(--section-y-desktop) 0; }` — sections that sit directly
-above another section opt out with `paddingBottom: 0`.
-
-### 2.6 Radius
-
-| Token | Value | Where |
-| --- | --- | --- |
-| `--radius-sm` | **50px** | `.btn-pill` (any pill button) |
-| `--radius-pill` | 9999px | Nav bar, tags, status pills |
-| `--radius-md` / `--radius-lg` / `--radius` | 8px | Cards, inputs, panels |
-| — | 48px | Poster carousel slides (literal, in `skiper47.tsx`) |
-| — | organic | `OrganicCardSmall` — SVG cutout shape, no border-radius |
-
-> `--radius-sm: 50px` looks wrong in the name but is intentional: it is the pill
-> button radius. Do not "fix" it to 4px.
-
-### 2.7 Elevation
-
-| Token | Value |
-| --- | --- |
-| `--elev-flat` | `none` |
-| `--elev-ring` | `0 0 0 1px var(--border)` |
-| `--elev-raised` | `0 4px 16px rgba(0,0,0,.08)` |
-| `--surface-shadow` | 3-layer soft shadow (light) / `none` (dark) |
-| `--overlay-shadow` | floating panels (light) / inset rim + drop (dark) |
-| `--focus-ring` | `0 0 0 2px rgba(0,0,0,.8)` |
-
-Shadows are used sparingly: the sticky card deck, the glass rim, and the
-organic card's silhouette. Sections themselves are flat.
-
-### 2.8 Motion
-
-| Token | Value |
-| --- | --- |
-| `--motion-fast` | 150ms |
-| `--motion-base` | 200ms |
-| `--ease-standard` | `cubic-bezier(0.2, 0, 0, 1)` |
-| `--ease-ui-out` | `cubic-bezier(0.16, 1, 0.3, 1)` |
-| `--ease-spring` | `cubic-bezier(0.34, 1.56, 0.64, 1)` |
-| `--ease-spring-snappy` | `linear(...)` spring approximation |
-| `--duration-spring-snappy` | 400ms |
-| `--duration-spring-bouncy` | 600ms |
-| `--stagger-step` | 45ms |
-| `--press-scale` | 0.98 |
-
-Arc-family components read the mirrored JS tokens in
-`components/arc/lib/motion-tokens.ts` (springs, durations, easings) so CSS and
-JS animation share one curve set.
-
-Global scroll: **Lenis**, mounted once in `app/layout.tsx` via
-`components/smooth-scroll.tsx` — `duration: 3`, `smoothWheel`, `touchMultiplier: 2`,
-skipped entirely under reduced motion.
-
----
-
-## 3. Layout system
-
-### 3.1 Container
-
-```css
-.container { max-width: 1920px; margin: 0 auto; padding: 0 40px; }
-```
-
-| Breakpoint | Gutter |
-| --- | --- |
-| Desktop (≥1024px) | 40px |
-| Tablet | 24px |
-| Phone | 16px |
-
-### 3.2 Grid
-
-`.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }`
-
-The two-column block is the default section layout: heading + lead on the left,
-the artefact (accordion, card, carousel) on the right. Sticky columns use
-`position: sticky; top: 96px`.
-
-### 3.3 Section backgrounds
-
-The site alternates exactly three bands:
-
-1. **Paper** — default (`--bg`), no styling.
-2. **Warm** — `background: var(--surface-warm)`, for secondary sections.
-3. **Inverted** — `background: var(--fg); color: var(--bg)`, for emphasis bands
-   and the closing CTA. Inverted sections must set the text colour on the
-   section (not on each child).
-
-The **hero is always black** (`hero-gradient-bg`, `#000`), in both themes.
-
-### 3.4 Section order (every page ends the same way)
-
-```
-… content …
-Inverted CTA band
-AnimatedFooter       (full-bleed ASCII art footer)
-SiteFooter           (columns, brand, legal, socials)
-```
-
----
-
-## 4. Global chrome
-
-### 4.1 Nav — `components/nav/site-nav.tsx`
-
-| Property | Value |
-| --- | --- |
-| Position | `sticky; top: 16px; z-index: 50` |
-| Shape | floating pill, `border-radius: 9999px` |
-| Height | 48px (`h-12`) |
-| Width | `calc(100vw - 32px)`, capped at **900px**, centred |
-| Padding | `0 16px` |
-| Surface | `LiquidGlass` @ `blur={6}`, `bg-white/[0.08]` |
-| Layout | empty left spacer · **menu centred** · theme switch right |
-| Items | About Us · Services · Solutions · Resources (dropdowns) |
-| Tone | auto-detected from the backdrop (`useBackdropTone`), flips to white text over the black hero |
-
-Rules:
-
-- The menu group must stay **optically centred**: left spacer and right cluster
-  both take `flex: 1`.
-- Never let the bar go full-bleed. 900px is the agreed maximum.
-- The mobile menu (`< md`) is a plain stacked list of `<details>` sections; it
-  is not the glass pill.
-
-### 4.2 Footer — `components/arc/blocks/site-footer/site-footer.tsx`
-
-Used on all three pages with `variant="columns"` and
-`className="site-footer-inverted"` (black surface, white text).
-
-| Slot | Value |
-| --- | --- |
-| Brand mark | `public/logo.png` — 34×34, transparent PNG (the real company logo) |
-| Brand name | `Shuroq`, links to `/` |
-| Tagline | "Technology Services & Digital Engineering Company. Empowering businesses with cutting-edge technology solutions." |
-| Columns | Services · Solutions · Company |
-| Legal | Privacy · Terms |
-| Socials | Instagram · LinkedIn (external, arrow icon) |
-| Status | none on this site |
-
-> The brand mark is **always the PNG logo** on home, about and careers. The
-> built-in arch placeholder SVG must never render.
-
-### 4.3 Animated footer — `components/unlumen-ui/animated-footer.tsx`
-
-Full-bleed black band above the SiteFooter: two source images redrawn as ASCII
-on `<canvas>`, cursor-cluster lighting, parallax, and character-by-character
-unmasking of the display headings. The render loop pauses when off-screen.
-
----
-
-## 5. Page blueprints
-
-### 5.1 `/` — Home (`app/page.tsx`)
-
-| # | Section | Band | Key component |
-| --- | --- | --- | --- |
-| 1 | Hero — floating ASCII "Shuroq", handwritten rotating headline, CTAs | Black | `FloatingAsciiWord`, `HeroHeadline` |
-| 2 | "Intelligent Automation for the Modern Core" + integration diagram | Paper | `ConnectedTools` |
+| 1 | Hero — ASCII "Shuroq", handwritten rotating headline, CTAs | Black | ASCII word, headline |
+| 2 | "Intelligent Automation for the Modern Core" + integration diagram | Paper | Beam diagram |
 | 3 | "Accelerate Your Digital Velocity" | Inverted | copy + CTA |
-| 4 | "Our Services" — orbital image wheel | Paper | `OrbitalImageWheel` |
-| 5 | "Where we make an impact" — expanding industry rows | Warm | `HoverExpand` |
-| 6 | Engagement — sticky card deck (GSAP pin + scale) | Paper | `StickyCardStack` |
+| 4 | "Our Services" — orbital image wheel | Paper | Orbit wheel |
+| 5 | "Where we make an impact" — expanding industry rows | Warm | Expanding rows |
+| 6 | Engagement — sticky card deck (pin + scale) | Paper | Sticky deck |
 | 7 | CTA "From vision to execution…" | Inverted | — |
-| 8 | Animated + Site footer | Black | `AnimatedFooter`, `SiteFooter` |
+| 8 | Animated ASCII footer + site footer | Black | — |
 
-### 5.2 `/about` (`app/about/page.tsx`)
+### `/about`
 
 | # | Section | Band |
 | --- | --- | --- |
@@ -400,109 +460,88 @@ unmasking of the display headings. The render loop pauses when off-screen.
 | 5 | Operational Challenges We Solve | Warm |
 | 6 | Results / outcomes | Paper |
 | 7 | CTA | Inverted |
-| 8 | Animated + Site footer | Black |
+| 8 | Animated ASCII footer + site footer | Black |
 
-### 5.3 `/careers` (`app/careers/page.tsx`)
+### `/careers`
 
 | # | Section | Band | Notes |
 | --- | --- | --- | --- |
-| 1 | Hero — ASCII "Careers", headline, *Apply now* + *About Shuroq* | Black | `hero-gradient-bg` |
-| 2 | "Why Work With Shuroq" + poster carousel | Paper | `grid-2`, carousel on the right |
-| 3 | Application Process — 4-step accordion | Warm | **all items closed by default** |
-| 4 | How to Apply — organic card with team photo | Paper | `OrganicCardSmall` |
+| 1 | Hero — ASCII "Careers", headline, *Apply now* / *About Shuroq* | Black | — |
+| 2 | "Why Work With Shuroq" + poster carousel | Paper | `grid-2`, carousel right |
+| 3 | Application Process — 4-step accordion | Warm | all closed |
+| 4 | How to Apply — organic card with team photo | Paper | — |
 | 5 | CTA "Ready to Start Your Journey" | Inverted | — |
-| 6 | Animated + Site footer | Black | — |
-
-Hairline dividers: a 220px centred `<hr>` sits between major sections
-(`SectionDivider`), `padding: 24px 0`, colour
-`color-mix(in srgb, var(--fg) 14%, transparent)`. Not after the hero.
+| 6 | Animated ASCII footer + site footer | Black | — |
 
 ---
 
-## 6. Component specs
+## Motion
 
-### 6.1 Poster carousel — `components/skiper/skiper47.tsx`
+Motion is slow and physical: one purpose per animation, springs over tweens,
+nothing loops except the ASCII footer and the beam pulses.
 
-| Property | Value |
+| Token | Value |
 | --- | --- |
-| Engine | Swiper, `effect="coverflow"` |
-| Effect | `rotate: 0`, `depth: 100`, `modifier: 2.5`, `stretch: 0`, `slideShadows: false` |
-| Slides per view | 1.1 → 1.35 (≥640) → 1.55 (≥1024) |
-| Gap | `spaceBetween={12}` on careers |
-| Card | square (`aspect-ratio: 1/1`), **48px radius**, `overflow: hidden` |
-| Edge line | `inset 0 0 0 1.5px color-mix(in srgb, var(--fg) 30%, transparent)` |
-| Neighbour opacity | 0.55, `0.35s ease` |
-| Pagination | dots, centred, 50px above the bottom of the block |
-| Autoplay | 1500ms, disabled on interaction |
+| `--motion-fast` | 150ms |
+| `--motion-base` | 200ms |
+| `--ease-standard` | `cubic-bezier(0.2, 0, 0, 1)` |
+| `--ease-ui-out` | `cubic-bezier(0.16, 1, 0.3, 1)` |
+| `--ease-spring` | `cubic-bezier(0.34, 1.56, 0.64, 1)` |
+| `--duration-spring-snappy` | 400ms |
+| `--duration-spring-bouncy` | 600ms |
+| `--stagger-step` | 45ms |
+| `--press-scale` | 0.98 |
 
-Two hard-won details:
-
-1. **Client-mount guard.** Swiper reads the clock while rendering, which Next 16
-   rejects during prerender (`blocking-prerender-current-time-client`). The
-   component therefore mounts Swiper only after `useEffect` has run. Removing
-   that guard breaks `npm run build`.
-2. **Edge fade.** The viewport clips neighbouring slides with a hard vertical
-   edge. A horizontal `mask-image` (`transparent 0 → opaque 6% … 94% →
-   transparent`) dissolves that cut so no sharp line appears beside the card.
-   Keep the mask if the carousel is touched.
-
-### 6.2 Accordion — `components/ui/accordion.tsx`
-
-| Property | Careers page |
-| --- | --- |
-| Type | `multiple` |
-| Variant | `filled` |
-| Indicator | `plus` (rotates to × when open) |
-| Default | **none — every item closed** |
-| Trigger content | step number (`.subheading`) + title |
-
-### 6.3 Organic card — `components/ui/organic-card-small.tsx`
-
-Image card whose bottom-left corner is cut by an animated SVG path; the two
-paths (`PATH_IDLE` / `PATH_HOVER`) morph on hover. Shadow is a `drop-shadow`
-chain so it follows the painted silhouette. Local extension: a `cta` prop that
-renders the action label under the meta row.
-
-### 6.4 Buttons
-
-| Class | Shape | Use |
-| --- | --- | --- |
-| `.btn .btn-pill .btn-black` | 50px radius, black fill | Primary |
-| `.btn-pill .btn-glass-dark` | translucent, 1px light border | Secondary on dark |
-| `.btn-pill .btn-white` | white fill | Secondary on black |
-
-On the black hero these invert automatically (white fill / glass).
-
-### 6.5 Icons
-
-`lucide-react` for UI glyphs (stroke 1.5–2). Brand marks for the integration
-diagram are vendored locally into `public/icons` so the page never waits on a
-CDN. Font Awesome is loaded in `<head>` for the legacy static pages only.
+Scroll is **Lenis**, mounted once in the root layout: `duration: 3`,
+`smoothWheel`, `touchMultiplier: 2`, skipped entirely under reduced motion.
 
 ---
 
-## 7. Pre-existing component sources
+## Accessibility
+
+- Landmarks: one `<nav>`, one `<main>`, one `<footer>`; decorative art is
+  `aria-hidden`.
+- Focus: `.btn:focus { outline: 2px dashed var(--fg); outline-offset: 2px; }`
+  plus `--focus-ring` for custom controls. Never remove an outline without a
+  replacement.
+- Contrast: `muted` text passes AA at the sizes used; headings are full contrast.
+- Motion: every animated component checks `useReducedMotion()` or `matchMedia`.
+- Images: poster slides carry `alt`; decorative art is `aria-hidden`.
+
+---
+
+## Performance
+
+- Off-screen animation loops pause (ASCII footer, beam pulses).
+- GSAP `ScrollTrigger` is registered once at module scope.
+- The carousel mounts Swiper on the client only, so `/careers` still prerenders
+  statically — removing that guard breaks the build.
+- Hero art is canvas-rendered ASCII, not a bitmap.
+
+---
+
+## Component sources
 
 Everything below was **vendored into this repo** and then adapted. Keep the
 in-file credit comments intact — several licences require attribution.
 
-| Component (local path) | Upstream source | Link | Licence / attribution |
+| Local path | Upstream source | Link | Licence |
 | --- | --- | --- | --- |
-| `components/ui/liquid-glass.tsx` — glass pill surface | **glasscn** by kostyniuk | https://github.com/kostyniuk/glasscn-components | MIT. Header comment must stay. |
-| `components/unlumen-ui/motion-navigation-menu.tsx` — dropdown menu | **unlumen UI** — "Motion Navigation Menu" | https://ui.unlumen.com/components/motion-navigation-menu | Free component tier; no licence stated upstream. |
-| `components/unlumen-ui/primitives/highlight.tsx` | Ships with the unlumen menu | — | Same as above. |
-| `components/unlumen-ui/orbital-image-wheel.tsx` — services wheel | **unlumen UI** — "Orbital Image Wheel" | https://ui.unlumen.com/components/orbital-image-wheel | Free component tier. |
-| `components/unlumen-ui/hover-expand.tsx` — industry rows | **unlumen UI** — "Hover Expand" | https://ui.unlumen.com/components/hover-expand | Free component tier. |
-| `components/unlumen-ui/motion-subtitle.tsx` — per-character reveal | unlumen UI family (folder) | — | No in-file credit recorded. |
-| `components/unlumen-ui/sticky-card-stack.tsx` — engagement deck | **Skiper UI** — `StickyCard002`, adapted | https://skiper-ui.com | Skiper free licence requires attribution; comment at line ~32. |
-| `components/unlumen-ui/animated-footer.tsx` — ASCII footer | **VengeanceUI** — "Animated Footer", adapted | https://www.vengeanceui.com | Credit is in the file JSDoc; keep it. |
-| `components/skiper/skiper47.tsx` — poster carousel | **Skiper UI** — `skiper47` by @gurvinder-singh02 (gxuri.me) | https://skiper-ui.com | Free for commercial use **with attribution** to Skiper UI. Full credit block at the top of the file. |
-| `components/hero/floating-ascii-word.tsx` — hero ASCII word | **stackedlol/ascii-sharks** | https://github.com/stackedlol/ascii-sharks | MIT. Credited at line ~12. |
-| `components/ui/accordion.tsx` | **shadcn/ui** (new-york) + **Spectrum UI** filled variant | https://ui.shadcn.com | MIT + additive props (`variant`, `indicator`). |
-| `components/ui/organic-card-small.tsx` | **cult-ui** Organic Card (registry `@cult-ui`) | https://cult-ui.com | Extended locally with the `cta` prop. |
-| `components/arc/**` — SiteFooter, Button, ThemeSwitch, SegmentedControl, motion tokens | **Arc UI** registry | https://uiarc.dev | Sourced through the registry declared in `components.json`. |
-| `components/animated/animated-beam/**` + `components/showcase/connected-tools.tsx` | In-house beam/geometry implementation with vendored brand icons (`npx @thesvg/cli add`) | — | No upstream file vendored. |
-| `components/smooth-scroll.tsx` | **Lenis** (`lenis`) | https://github.com/darkroomengineering/lenis | MIT / package dependency. |
+| `components/ui/liquid-glass.tsx` | glasscn by kostyniuk | https://github.com/kostyniuk/glasscn-components | MIT (header comment required) |
+| `components/unlumen-ui/motion-navigation-menu.tsx` | unlumen UI — Motion Navigation Menu | https://ui.unlumen.com/components/motion-navigation-menu | Free tier |
+| `components/unlumen-ui/primitives/highlight.tsx` | Ships with the unlumen menu | — | Same as above |
+| `components/unlumen-ui/orbital-image-wheel.tsx` | unlumen UI — Orbital Image Wheel | https://ui.unlumen.com/components/orbital-image-wheel | Free tier |
+| `components/unlumen-ui/hover-expand.tsx` | unlumen UI — Hover Expand | https://ui.unlumen.com/components/hover-expand | Free tier |
+| `components/unlumen-ui/motion-subtitle.tsx` | unlumen UI family | — | No in-file credit recorded |
+| `components/unlumen-ui/sticky-card-stack.tsx` | Skiper UI — StickyCard002 (adapted) | https://skiper-ui.com | Attribution required |
+| `components/unlumen-ui/animated-footer.tsx` | VengeanceUI — Animated Footer (adapted) | https://www.vengeanceui.com | Credit in file JSDoc |
+| `components/skiper/skiper47.tsx` | Skiper UI — skiper47 by @gurvinder-singh02 (gxuri.me) | https://skiper-ui.com | Attribution required |
+| `components/hero/floating-ascii-word.tsx` | stackedlol/ascii-sharks | https://github.com/stackedlol/ascii-sharks | MIT |
+| `components/ui/accordion.tsx` | shadcn/ui (new-york) + Spectrum UI filled variant | https://ui.shadcn.com | MIT |
+| `components/ui/organic-card-small.tsx` | cult-ui — Organic Card | https://cult-ui.com | Extended with `cta` |
+| `components/arc/**` | Arc UI registry — SiteFooter, Button, ThemeSwitch, SegmentedControl, motion tokens | https://uiarc.dev | Registry source |
+| `components/animated/animated-beam/**`, `components/showcase/connected-tools.tsx` | In-house beam engine + vendored brand icons (`npx @thesvg/cli add`) | — | No upstream file |
+| `components/smooth-scroll.tsx` | Lenis | https://github.com/darkroomengineering/lenis | MIT |
 
 Registry configuration (`components.json`):
 
@@ -514,41 +553,13 @@ Registry configuration (`components.json`):
 }
 ```
 
-**Attribution obligations to remember:** Skiper UI (carousel + sticky deck),
-glasscn (MIT header), ascii-sharks (MIT header), VengeanceUI (JSDoc credit).
-Never delete those comments during refactors.
+> **Attribution obligations:** Skiper UI (carousel + sticky deck), glasscn (MIT
+> header), ascii-sharks (MIT header), VengeanceUI (JSDoc credit). Never delete
+> those comments during a refactor.
 
 ---
 
-## 8. Accessibility
-
-- Landmarks: one `<nav>`, one `<main>`, footer `<footer>`; the ASCII hero and
-  decorative art are `aria-hidden`.
-- Focus: `.btn:focus { outline: 2px dashed var(--fg); outline-offset: 2px; }`
-  and `--focus-ring` for custom controls. Never remove an outline without a
-  replacement.
-- Contrast: body copy at `--muted` (55% / 60%) on paper or black passes AA at
-  the sizes used; headings are full-contrast.
-- Motion: `useReducedMotion()` / `matchMedia` guards in the carousel, footer,
-  nav transitions, theme switch, beam and Lenis.
-- Images: poster slides and decorative art use descriptive `alt` or
-  `aria-hidden` when purely decorative.
-
----
-
-## 9. Performance rules
-
-- Sections that animate on scroll **pause when off-screen** (ASCII footer,
-  beam pulses).
-- GSAP `ScrollTrigger` is used for the deck and the wheel; register plugins once
-  at module scope.
-- The carousel is client-mounted, so `/careers` still prerenders statically.
-- Images ship from `public/images/**`; hero art is canvas-rendered ASCII, not a
-  bitmap.
-
----
-
-## 10. File map
+## File map
 
 ```
 app/
@@ -559,30 +570,31 @@ app/
   globals.css           every token + layout primitive
 components/
   nav/site-nav.tsx      floating glass nav
-  hero/                 floating-ascii-word, headline
-  ui/                   liquid-glass, accordion, organic-card-small
+  hero/                 ascii word, headline
+  ui/                   liquid glass, accordion, organic card
   arc/                  footer block, button, theme switch, segmented control
-  unlumen-ui/           menu, wheel, hover expand, sticky deck, ascii footer
+  unlumen-ui/           menu, orbit wheel, hover expand, sticky deck, ascii footer
   skiper/skiper47.tsx   poster carousel
   animated/             beam engine
-  showcase/             integration diagram + media query hook
+  showcase/             integration diagram
   smooth-scroll.tsx     Lenis
 public/
   logo.png              company logo (footer mark)
-  images/careers/       9 poster images + how-to-apply.png
+  images/careers/       9 posters + how-to-apply.png
   icons/                vendored brand marks
 ```
 
 ---
 
-## 11. Change log (design decisions that are now law)
+## Change log
 
 | Date | Decision |
 | --- | --- |
-| 2026-11 | Careers rebuilt to match home about/ careers parity: nav, ASCII hero, accordion, organic card, dividers, footers. |
-| 2026-11 | Footer brand mark switched from the arch placeholder SVG to `logo.png` on **home, about and careers**. |
+| 2026-11 | Careers rebuilt for parity with home: nav, ASCII hero, accordion, organic card, dividers, footers. |
+| 2026-11 | Footer brand mark switched to `logo.png` on home, about and careers. |
 | 2026-11 | Site-wide Lenis smooth scroll mounted once in the root layout. |
 | 2026-11 | Carousel mounts Swiper on the client so `/careers` prerenders. |
-| 2026-11 | Carousel edge clipping replaced with a soft horizontal mask — no hard vertical line beside the card. |
-| 2026-11 | Application Process accordion opens **closed**; users click `+`. |
-| 2026-11 | Nav bar widened from a 520px pill to a **900px centred** bar, menu optically centred. |
+| 2026-11 | Carousel edge clipping replaced with a soft horizontal mask — no hard vertical line. |
+| 2026-11 | Application Process accordion closed by default. |
+| 2026-11 | Nav widened from a 520px pill to a 900px centred bar, menu optically centred. |
+| 2026-11 | Document restructured to the DESIGN.md open format (YAML tokens + required sections). |
