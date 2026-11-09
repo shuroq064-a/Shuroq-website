@@ -47,3 +47,5 @@ tsconfig.tsbuildinfo
 .stitch/
 
 .vercel
+.vercel
+.env*

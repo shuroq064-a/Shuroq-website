@@ -65,17 +65,28 @@ git config user.email
 | Item | Value |
 | --- | --- |
 | CLI user | `honeyrao189-7273` |
-| Project name | `shuroq-static-website` |
+| Scope / team | `vuppala-akshays-projects` (personal scope) |
+| Project name | `shuroq` |
 | Project ID | `prj_ProhlhwdsNwrbtk6kpS9r0YmglXG` |
-| Org / Team ID | `team_tGHCjE3WvdxIaZuX6CoGGDLA` |
-| Dashboard | https://vercel.com/honeyrao189-7273/shuroq-static-website |
+| Production domain | https://shuroq.vercel.app |
+| Dashboard | https://vercel.com/vuppala-akshays-projects/shuroq |
+| Framework preset | Next.js (`npm run build`, Next default output) |
 
 Project link is stored locally in `.vercel/project.json` (git-ignored).
 
 ```bash
 vercel whoami
-vercel link      # re-link if the project/machine changes
+vercel link --project shuroq   # re-link if the project/machine changes
+vercel project inspect shuroq  # framework / node settings
 ```
+
+> **Git auto-deploy is not connected.** Pushes to `Shuroq-website` do **not**
+> build on Vercel yet — production is deployed with `vercel --prod` from a local
+> clone. `vercel git connect` fails with HTTP 400 because the GitHub identity
+> linked to the Vercel account (`honeyrao189-7273`) does not have admin/write on
+> `shuroq064-a/Shuroq-website`. To enable auto-deploy, sign in to Vercel with the
+> GitHub account that owns the repo (or install the Vercel GitHub App on it),
+> then run `vercel git connect https://github.com/shuroq064-a/Shuroq-website`.
 
 ---
 
@@ -119,19 +130,38 @@ git ls-remote --heads shuroq-website
 
 ## 6. Deploying
 
-**Automatic (normal path)** — Vercel builds every push to the connected
-production branch (`main`).
-
-**Manual**
+**Current setup — manual only.** The Vercel project (`shuroq`, scope
+`vuppala-akshays-projects`) is **not** connected to the GitHub repo yet, so a
+`git push` does not trigger a build. Deploy from a local clone:
 
 ```bash
 vercel          # preview deployment
-vercel --prod   # production deployment
+vercel --prod   # production deployment → https://shuroq.vercel.app
 ```
 
-If deployments stop after the repo move, open the Vercel project →
-Settings → Git and point it at `shuroq064-a/Shuroq-website`, production branch
-`main`.
+**Enable auto-deploy later** (needs the Vercel account to have write access to
+the repo):
+
+```bash
+vercel git connect https://github.com/shuroq064-a/Shuroq-website
+```
+
+Production branch `main`. After that, every push to `main` builds automatically.
+
+### Build gotcha
+
+Swiper reads the clock during render (autoplay), which Next 16 rejects while
+prerendering (`blocking-prerender-current-time-client`). `Carousel_001` mounts
+Swiper only after the first client render, so `/careers` builds statically —
+keep that guard if the carousel is edited.
+
+### Verifying production
+
+```bash
+curl -I https://shuroq.vercel.app/                 # 200
+curl -I https://shuroq.vercel.app/careers          # 200
+curl -I https://shuroq.vercel.app/careers/index.html  # 307 → /careers
+```
 
 ---
 

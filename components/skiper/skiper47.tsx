@@ -68,6 +68,11 @@ export function Carousel_001({
   autoplay?: boolean;
   spaceBetween?: number;
 }) {
+  // Swiper reads the clock while rendering (autoplay), which breaks static
+  // prerendering. Mount it only on the client.
+  const [mounted, setMounted] = React.useState(false);
+  React.useEffect(() => setMounted(true), []);
+
   return (
     <motion.div
       initial={{ opacity: 0, translateY: 20 }}
@@ -77,6 +82,7 @@ export function Carousel_001({
     >
       <style>{PERSPECTIVE_CSS}</style>
 
+      {mounted && (
       <Swiper
         spaceBetween={spaceBetween}
         autoplay={
@@ -148,6 +154,7 @@ export function Carousel_001({
           </div>
         )}
       </Swiper>
+      )}
     </motion.div>
   );
 }
