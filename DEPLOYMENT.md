@@ -64,12 +64,14 @@ git config user.email
 
 | Item | Value |
 | --- | --- |
-| CLI user | `honeyrao189-7273` |
-| Scope / team | `vuppala-akshays-projects` (personal scope) |
+| CLI user | `shuroq064-5343` |
+| Login email | `shuroq064@gmail.com` |
+| Auth method | GitHub OAuth (signed in with the `shuroq064-a` GitHub account) |
+| Scope / team | `shuroq064-5343s-projects` (personal scope) |
 | Project name | `shuroq` |
-| Project ID | `prj_ProhlhwdsNwrbtk6kpS9r0YmglXG` |
-| Production domain | https://shuroq.vercel.app |
-| Dashboard | https://vercel.com/vuppala-akshays-projects/shuroq |
+| Project ID | see `.vercel/project.json` (git-ignored) |
+| Production domain | https://shuroq-sigma.vercel.app |
+| Dashboard | https://vercel.com/shuroq064-5343s-projects/shuroq |
 | Framework preset | Next.js (`npm run build`, Next default output) |
 
 Project link is stored locally in `.vercel/project.json` (git-ignored).
@@ -80,13 +82,23 @@ vercel link --project shuroq   # re-link if the project/machine changes
 vercel project inspect shuroq  # framework / node settings
 ```
 
-> **Git auto-deploy is not connected.** Pushes to `Shuroq-website` do **not**
-> build on Vercel yet — production is deployed with `vercel --prod` from a local
-> clone. `vercel git connect` fails with HTTP 400 because the GitHub identity
-> linked to the Vercel account (`honeyrao189-7273`) does not have admin/write on
-> `shuroq064-a/Shuroq-website`. To enable auto-deploy, sign in to Vercel with the
-> GitHub account that owns the repo (or install the Vercel GitHub App on it),
-> then run `vercel git connect https://github.com/shuroq064-a/Shuroq-website`.
+> **Previous Vercel account removed.** The old account `honeyrao189-7273`
+> (scope `vuppala-akshays-projects`, project `shuroq` on
+> `shuroq.vercel.app`) was logged out and its local link deleted. That old
+> deployment is still reachable but is no longer maintained.
+
+> **Git auto-deploy is not connected yet.** Pushes to `Shuroq-website` do **not**
+> build on Vercel — production is deployed with `vercel --prod` from a local
+> clone. `vercel git connect https://github.com/shuroq064-a/Shuroq-website`
+> fails because the **Vercel GitHub App is not installed** on that repository.
+> Fix once in the browser:
+>
+> 1. Open https://github.com/apps/vercel/installations/new
+> 2. Sign in as `shuroq064-a`
+> 3. Grant access to `Shuroq-website`
+> 4. Run `vercel git connect https://github.com/shuroq064-a/Shuroq-website`
+>
+> After that, every push to `main` deploys automatically.
 
 ---
 
@@ -131,16 +143,16 @@ git ls-remote --heads shuroq-website
 ## 6. Deploying
 
 **Current setup — manual only.** The Vercel project (`shuroq`, scope
-`vuppala-akshays-projects`) is **not** connected to the GitHub repo yet, so a
+`shuroq064-5343s-projects`) is **not** connected to the GitHub repo yet, so a
 `git push` does not trigger a build. Deploy from a local clone:
 
 ```bash
 vercel          # preview deployment
-vercel --prod   # production deployment → https://shuroq.vercel.app
+vercel --prod   # production deployment → https://shuroq-sigma.vercel.app
 ```
 
-**Enable auto-deploy later** (needs the Vercel account to have write access to
-the repo):
+**Enable auto-deploy later** (install the Vercel GitHub App on the repo first —
+see section 3):
 
 ```bash
 vercel git connect https://github.com/shuroq064-a/Shuroq-website
@@ -158,9 +170,10 @@ keep that guard if the carousel is edited.
 ### Verifying production
 
 ```bash
-curl -I https://shuroq.vercel.app/                 # 200
-curl -I https://shuroq.vercel.app/careers          # 200
-curl -I https://shuroq.vercel.app/careers/index.html  # 307 → /careers
+curl -I https://shuroq-sigma.vercel.app/                 # 200
+curl -I https://shuroq-sigma.vercel.app/careers          # 200
+curl -I https://shuroq-sigma.vercel.app/about            # 200
+curl -I https://shuroq-sigma.vercel.app/careers/index.html  # 307 → /careers
 ```
 
 ---
