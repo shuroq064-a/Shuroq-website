@@ -155,11 +155,14 @@ export default function SiteNav() {
         data-tone={tone ?? undefined}
         data-tone-ready={toneReady ? "true" : "false"}
         blur={6}
-        className="nav-container nav-glass flex items-center justify-between h-12 w-full max-w-[calc(100vw-32px)] md:max-w-[calc(100vw-80px)] mx-auto mb-3 rounded-full"
+        className="nav-container nav-glass flex items-center justify-between h-12 w-[calc(100vw-32px)] max-w-[900px] mx-auto mb-3 rounded-full"
         style={{ padding: "0 16px" }}
       >
+        {/* Left spacer keeps the menu optically centred in the bar */}
+        <div className="hidden md:block" style={{ flex: 1 }} aria-hidden="true" />
+
         {/* Desktop motion menu */}
-        <div className="hidden md:flex" style={{ flex: 1, justifyContent: "flex-start" }}>
+        <div className="hidden md:flex" style={{ justifyContent: "center" }}>
           <MotionNavigationMenu
             viewportClassName="border-none shadow-none"
             springStiffness={350}
@@ -235,7 +238,7 @@ export default function SiteNav() {
         </div>
 
         {/* Right side: social + theme + lang + mobile */}
-        <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+        <div style={{ display: "flex", alignItems: "center", gap: 10, flex: 1, justifyContent: "flex-end" }}>
           <span className="nav-theme-toggle">
             <ThemeSwitch
               theme={resolvedTheme === "dark" ? "dark" : "light"}
