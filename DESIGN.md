@@ -47,6 +47,33 @@ depends on.
 All tokens live in `app/globals.css` under `:root` (light) and `.dark`.
 Never hard-code a hex value in a component when a token exists.
 
+### 2.0 Current palette at a glance
+
+The whole site runs on **five colours**. Everything else is derived from them.
+
+| Swatch | Colour | Hex / value | Role |
+| --- | --- | --- | --- |
+| ⬛ | Ink | `#000000` | Text, inverted bands, buttons, hero background |
+| ⬜ | Paper | `#ffffff` | Page background, cards, text on ink |
+| ▫️ | Warm surface | `#f0eee9` | Organic card surface, poster paper tone |
+| 🌑 | Charcoal | `#0a0a0a` / `#111111` | Dark-mode page and surface |
+| 🟠 | Ember (glow only) | `#ff7e2b` @ 5–12% alpha | The single warm accent — the soft radial glow behind the ASCII hero word. **Not a token**; it lives in `.hero-ascii-word::before` as an `rgba()` radial gradient, blurred 18px. |
+
+Supporting greys (all alpha-on-ink or alpha-on-paper, never flat grey):
+
+`--muted` 55% · `--meta` 40% · `--border` 12% · `--border-soft` 6% ·
+`--accent-active` 8%.
+
+That is the entire palette. There is **no brand blue, no gradient text, no
+coloured buttons**. Colour enters the site only through:
+
+1. the ember hero glow above,
+2. the poster artwork in `public/images/careers/` (peach, sage, pink, cream),
+3. customer brand marks in the integration diagram.
+
+> If a new colour is ever needed, it must be added as a token in `:root` **and**
+> `.dark`, documented here, and approved — never inlined into a component.
+
 ### 2.1 Colour — semantic (theme-aware)
 
 | Token | Light | Dark | Used for |
