@@ -87,18 +87,11 @@ vercel project inspect shuroq  # framework / node settings
 > `shuroq.vercel.app`) was logged out and its local link deleted. That old
 > deployment is still reachable but is no longer maintained.
 
-> **Git auto-deploy is not connected yet.** Pushes to `Shuroq-website` do **not**
-> build on Vercel — production is deployed with `vercel --prod` from a local
-> clone. `vercel git connect https://github.com/shuroq064-a/Shuroq-website`
-> fails because the **Vercel GitHub App is not installed** on that repository.
-> Fix once in the browser:
->
-> 1. Open https://github.com/apps/vercel/installations/new
-> 2. Sign in as `shuroq064-a`
-> 3. Grant access to `Shuroq-website`
-> 4. Run `vercel git connect https://github.com/shuroq064-a/Shuroq-website`
->
-> After that, every push to `main` deploys automatically.
+> **Git auto-deploy is connected.** The Vercel GitHub App is installed on
+> `shuroq064-a/Shuroq-website`, so every push to `main` builds and promotes to
+> production automatically. If it ever stops, re-check the app install at
+> https://github.com/apps/vercel/installations and re-run
+> `vercel git connect https://github.com/shuroq064-a/Shuroq-website`.
 
 ---
 
@@ -142,23 +135,25 @@ git ls-remote --heads shuroq-website
 
 ## 6. Deploying
 
-**Current setup — manual only.** The Vercel project (`shuroq`, scope
-`shuroq064-5343s-projects`) is **not** connected to the GitHub repo yet, so a
-`git push` does not trigger a build. Deploy from a local clone:
+**Current setup — automatic.** Every push to the production branch `main` in
+`shuroq064-a/Shuroq-website` triggers a Vercel build and promotes it to
+production (`https://shuroq-sigma.vercel.app`). No manual step needed.
+
+Manual deploy is still available from a local clone:
 
 ```bash
 vercel          # preview deployment
 vercel --prod   # production deployment → https://shuroq-sigma.vercel.app
 ```
 
-**Enable auto-deploy later** (install the Vercel GitHub App on the repo first —
-see section 3):
+**Re-connect if auto-deploy ever breaks** (Vercel GitHub App must be installed on
+the repo — see section 3):
 
 ```bash
 vercel git connect https://github.com/shuroq064-a/Shuroq-website
 ```
 
-Production branch `main`. After that, every push to `main` builds automatically.
+Production branch `main`.
 
 ### Build gotcha
 
