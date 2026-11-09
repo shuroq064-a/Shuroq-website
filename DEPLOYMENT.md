@@ -70,7 +70,8 @@ git config user.email
 | Scope / team | `shuroq064-5343s-projects` (personal scope) |
 | Project name | `shuroq` |
 | Project ID | see `.vercel/project.json` (git-ignored) |
-| Production domain | https://shuroq-sigma.vercel.app |
+| Production domain | https://shuroq.vercel.app |
+| Extra alias | https://shuroq-sigma.vercel.app (same project) |
 | Dashboard | https://vercel.com/shuroq064-5343s-projects/shuroq |
 | Framework preset | Next.js (`npm run build`, Next default output) |
 
@@ -82,10 +83,12 @@ vercel link --project shuroq   # re-link if the project/machine changes
 vercel project inspect shuroq  # framework / node settings
 ```
 
-> **Previous Vercel account removed.** The old account `honeyrao189-7273`
-> (scope `vuppala-akshays-projects`, project `shuroq` on
-> `shuroq.vercel.app`) was logged out and its local link deleted. That old
-> deployment is still reachable but is no longer maintained.
+> **Old Vercel account removed — project deleted.** The old account
+> `honeyrao189-7273` (scope `vuppala-akshays-projects`) had its own project
+> `shuroq` on `shuroq.vercel.app`. That account was logged in, the project was
+> **deleted** (`vercel project rm shuroq --scope vuppala-akshays-projects`), and
+> the CLI was logged back out. `shuroq.vercel.app` is now attached to the new
+> project, so there is only one live site.
 
 > **Git auto-deploy is connected.** The Vercel GitHub App is installed on
 > `shuroq064-a/Shuroq-website`, so every push to `main` builds and promotes to
@@ -137,13 +140,13 @@ git ls-remote --heads shuroq-website
 
 **Current setup — automatic.** Every push to the production branch `main` in
 `shuroq064-a/Shuroq-website` triggers a Vercel build and promotes it to
-production (`https://shuroq-sigma.vercel.app`). No manual step needed.
+production (`https://shuroq.vercel.app`). No manual step needed.
 
 Manual deploy is still available from a local clone:
 
 ```bash
 vercel          # preview deployment
-vercel --prod   # production deployment → https://shuroq-sigma.vercel.app
+vercel --prod   # production deployment → https://shuroq.vercel.app
 ```
 
 **Re-connect if auto-deploy ever breaks** (Vercel GitHub App must be installed on
@@ -165,10 +168,10 @@ keep that guard if the carousel is edited.
 ### Verifying production
 
 ```bash
-curl -I https://shuroq-sigma.vercel.app/                 # 200
-curl -I https://shuroq-sigma.vercel.app/careers          # 200
-curl -I https://shuroq-sigma.vercel.app/about            # 200
-curl -I https://shuroq-sigma.vercel.app/careers/index.html  # 307 → /careers
+curl -I https://shuroq.vercel.app/                 # 200
+curl -I https://shuroq.vercel.app/careers          # 200
+curl -I https://shuroq.vercel.app/about            # 200
+curl -I https://shuroq.vercel.app/careers/index.html  # 307 → /careers
 ```
 
 ---
