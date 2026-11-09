@@ -477,30 +477,6 @@ Rules:
 
 ---
 
-## Forms & controls
-
-The marketing site has **no forms, modals, tabs or chips** — every call to action
-is a `mailto:` link or a route. That is deliberate; do not add an input to a
-marketing page without a reason.
-
-If a form is ever introduced, it must follow the existing system rather than a
-new one:
-
-| Control | Spec |
-| --- | --- |
-| Text input / select | 8px radius (`--radius-md`), 1px `--border`, 16px text, 12px padding, ink background, `--muted` placeholder |
-| Focus | `--focus-ring` (`0 0 0 2px rgba(0,0,0,.8)`), never removed |
-| Label | 12–14px, uppercase or semi-bold, 55% ink |
-| Helper / error | 14px; error uses the `error` token, never red-on-red |
-| Modal | 8px radius, `--overlay-shadow`, black scrim, close button top-right |
-| Chip / tag | pill (`9999px`), 12px text, ink or 8% ink wash — never a coloured chip |
-| Tabs | underline indicator in `--fg`, 2px, labels at `body` weight 500 |
-
-Buttons inside any future dialog follow §Components: primary ink, secondary
-glass, cancel ghost — right-aligned, 8px gap.
-
----
-
 ## Using this document with AI tools
 
 When an agent or a new developer touches this site:
@@ -688,4 +664,4 @@ public/
 | 2026-11 | Application Process accordion closed by default. |
 | 2026-11 | Nav widened from a 520px pill to a 900px centred bar, menu optically centred. |
 | 2026-11 | Document restructured to the DESIGN.md open format (YAML tokens + required sections). |
-| 2026-11 | Added Iconography, Responsive Design, Forms & controls and AI-usage sections to match the team's DESIGN_GUIDELINES coverage. |
+| 2026-11 | Added Iconography, Responsive Design and AI-usage sections to match the team's DESIGN_GUIDELINES coverage. |
