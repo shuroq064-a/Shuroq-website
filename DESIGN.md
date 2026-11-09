@@ -432,6 +432,96 @@ components:
 
 ---
 
+## Iconography
+
+Icons are functional marks, never decoration.
+
+- **Set:** `lucide-react` (outline), single family across the site.
+- **Size:** 13–16px inline with text (links, footer arrows, theme switch);
+  20–24px for standalone controls (carousel arrows, mobile menu).
+- **Stroke:** 1.5–2px. Never mix stroke weights in one view.
+- **Colour:** always `currentColor` so the icon inherits the text token — white
+  on the hero and footer, ink on paper. Icons are never filled or tinted.
+- **Decorative icons** carry `aria-hidden="true"`; icon-only buttons carry an
+  `aria-label`.
+- **Brand marks** (customer logos in the integration diagram) are vendored SVG
+  into `public/icons` — never hot-linked from a CDN.
+
+> There are no app-style status icons, no coloured icon badges, and no icon-only
+> chips on this site.
+
+---
+
+## Responsive Design
+
+Layout is fluid; nothing has a fixed pixel width.
+
+| Breakpoint | What changes |
+| --- | --- |
+| ≥1024px | Full layout. `.grid-2` two columns. Carousel 1.55 slides. Hero ASCII sits right of the copy. |
+| ≤1024px | Carousel 1.35 slides. Hero ASCII drops to the bottom of the hero at 50% opacity, full width. |
+| ≤900px | `.grid-2` stacks to one column. |
+| ≤768px | Nav collapses to the stacked mobile menu. Hero headline clamps to `clamp(23px, 6vw, 32px)`. |
+| ≤640px | Carousel 1.1 slides. |
+
+Gutters: **40px** desktop → **24px** tablet → **16px** phone.
+Section rhythm: **96px** → **64px** → **40px**.
+
+Rules:
+
+- Use `max-width` plus `%`, `rem` or `clamp()` — never a hard-coded width that
+  can exceed the viewport.
+- Test at 360, 768, 1024 and 1536 CSS pixels.
+- The nav is capped at 900px and `calc(100vw - 32px)` on small screens.
+- Text never drops below 16px for body copy.
+
+---
+
+## Forms & controls
+
+The marketing site has **no forms, modals, tabs or chips** — every call to action
+is a `mailto:` link or a route. That is deliberate; do not add an input to a
+marketing page without a reason.
+
+If a form is ever introduced, it must follow the existing system rather than a
+new one:
+
+| Control | Spec |
+| --- | --- |
+| Text input / select | 8px radius (`--radius-md`), 1px `--border`, 16px text, 12px padding, ink background, `--muted` placeholder |
+| Focus | `--focus-ring` (`0 0 0 2px rgba(0,0,0,.8)`), never removed |
+| Label | 12–14px, uppercase or semi-bold, 55% ink |
+| Helper / error | 14px; error uses the `error` token, never red-on-red |
+| Modal | 8px radius, `--overlay-shadow`, black scrim, close button top-right |
+| Chip / tag | pill (`9999px`), 12px text, ink or 8% ink wash — never a coloured chip |
+| Tabs | underline indicator in `--fg`, 2px, labels at `body` weight 500 |
+
+Buttons inside any future dialog follow §Components: primary ink, secondary
+glass, cancel ghost — right-aligned, 8px gap.
+
+---
+
+## Using this document with AI tools
+
+When an agent or a new developer touches this site:
+
+1. **Read the tokens first.** `colors`, `typography`, `spacing`, `rounded` and
+   `components` in this file are normative; prose is context.
+2. **Do not invent values.** If a value is not in the token blocks, it does not
+   exist on this site.
+3. **Match the nearest page.** `/careers` is the most complete reference for a
+   new page: hero → content bands → CTA → footers.
+4. **Never surface a source name.** No library, registry, author or file name may
+   appear in copy, alt text or metadata.
+5. **Change only what was asked.** No opportunistic restyling while fixing
+   something else.
+6. **Run the checklist** in §Do's and Don'ts before shipping.
+
+> Keep this file in sync. If a decision changes, update the Change log — the
+> document is the contract.
+
+---
+
 ## Page blueprints
 
 Section-by-section, band by band.
@@ -598,3 +688,4 @@ public/
 | 2026-11 | Application Process accordion closed by default. |
 | 2026-11 | Nav widened from a 520px pill to a 900px centred bar, menu optically centred. |
 | 2026-11 | Document restructured to the DESIGN.md open format (YAML tokens + required sections). |
+| 2026-11 | Added Iconography, Responsive Design, Forms & controls and AI-usage sections to match the team's DESIGN_GUIDELINES coverage. |
