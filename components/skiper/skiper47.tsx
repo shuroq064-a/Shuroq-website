@@ -42,6 +42,22 @@ export type CarouselSlide = {
 const PERSPECTIVE_CSS = `
   .Carousal_001 {
     padding-bottom: 50px !important;
+    /* The viewport clips the neighbouring slides. Fade those cut edges out so
+       they never show as a hard vertical line beside the card. */
+    -webkit-mask-image: linear-gradient(
+      to right,
+      transparent 0,
+      #000 6%,
+      #000 94%,
+      transparent 100%
+    );
+    mask-image: linear-gradient(
+      to right,
+      transparent 0,
+      #000 6%,
+      #000 94%,
+      transparent 100%
+    );
   }
   .Carousal_001 .swiper-slide {
     transition: opacity 0.35s ease;

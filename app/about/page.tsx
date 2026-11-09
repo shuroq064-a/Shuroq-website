@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import SiteNav from "@/components/nav/site-nav";
 import { FloatingAsciiWord } from "@/components/hero/floating-ascii-word";
 import { AnimatedFooter } from "@/components/unlumen-ui/animated-footer";
@@ -64,23 +65,16 @@ const footerSocials: SiteFooterLink[] = [
   },
 ];
 
+/** Shuroq company logo beside the footer wordmark. */
 const footerBrandMark = (
-  <svg
-    viewBox="0 0 48 48"
+  <Image
+    src="/logo.png"
+    alt=""
+    aria-hidden="true"
     width={34}
     height={34}
-    fill="none"
-    stroke="currentColor"
-    strokeWidth={3}
-    strokeLinecap="round"
-    strokeLinejoin="round"
-    aria-hidden="true"
-  >
-    <circle cx="24" cy="29" r="12.5" />
-    <path d="M24 6v5.5" />
-    <path d="M11.9 11.9l3.9 3.9" />
-    <path d="M36.1 11.9l-3.9 3.9" />
-  </svg>
+    style={{ display: "block", width: 34, height: 34 }}
+  />
 );
 
 const specializations = [

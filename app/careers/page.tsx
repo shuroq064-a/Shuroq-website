@@ -214,7 +214,6 @@ export default function CareersPage() {
             type="multiple"
             variant="filled"
             indicator="plus"
-            defaultValue={steps.map((_, i) => String(i))}
             className="w-full"
           >
             {steps.map((s, i) => (
