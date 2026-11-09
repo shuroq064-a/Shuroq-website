@@ -155,7 +155,7 @@ export default function SiteNav() {
         data-tone={tone ?? undefined}
         data-tone-ready={toneReady ? "true" : "false"}
         blur={6}
-        className="nav-container nav-glass flex items-center justify-between h-12 w-fit max-w-[calc(100vw-32px)] mx-auto mb-3 rounded-full"
+        className="nav-container nav-glass flex items-center justify-between h-12 w-full max-w-[calc(100vw-32px)] md:max-w-[calc(100vw-80px)] mx-auto mb-3 rounded-full"
         style={{ padding: "0 16px" }}
       >
         {/* Desktop motion menu */}
