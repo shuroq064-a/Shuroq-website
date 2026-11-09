@@ -46,10 +46,11 @@ git remote -v
 | Item | Value |
 | --- | --- |
 | Git author | Vuppala Akshay `<akshay.dunny08@gmail.com>` |
-| Active CLI account | `VUPPALA-AKSHAY` |
-| Secondary CLI account (inactive) | `Akshay392938` |
+| Active CLI account | `shuroq064-a` (repo owner, `admin` on both repos) |
+| Other CLI accounts | `VUPPALA-AKSHAY`, `Akshay392938` (read-only on these repos) |
 | Token scopes (active) | `repo`, `workflow`, `gist`, `read:org` |
 | Auth protocol | HTTPS |
+| Local branch tracking | `variation-1` → `shuroq-website/variation-1` |
 
 Check with:
 
@@ -154,14 +155,19 @@ Then confirm the routes respond:
 ## 8. Migration record — 2026-11-09
 
 1. Work on `shuroq-static-website` branch `variation-1` was pushed to
-   `Shuroq-website` as both `main` and `variation-1`.
-2. The pushed commits were verified on the remote.
-3. Branch `variation-1` was then deleted from `shuroq-static-website`
-   (`main` left intact as a fallback).
+   `Shuroq-website` as both `main` and `variation-1`
+   (commit `418ba07`, pushed as `8cf4170..418ba07`).
+2. Pushed commits verified on the remote (`git ls-remote --heads shuroq-website`
+   shows `418ba07` on both branches).
+3. Backup tag `backup-variation-1-pre-migration` (`8cf4170`) pushed to
+   `Shuroq-website` so the old branch tip stays reachable.
+4. Branch `variation-1` was then deleted from `shuroq-static-website`
+   (`main` and every other team branch left intact).
 
-Rollback: the same commit is still reachable from `Shuroq-website` (`main`,
-`variation-1`) and from the local clone, so the branch can be restored with:
+Rollback: the same commit is reachable from `Shuroq-website` (`main`,
+`variation-1`, tag `backup-variation-1-pre-migration`) and from the local
+clone. Restore the old branch with:
 
 ```bash
-git push origin <sha>:refs/heads/variation-1
+git push origin 8cf4170:refs/heads/variation-1
 ```
