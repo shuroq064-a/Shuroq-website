@@ -29,16 +29,73 @@ depends on.
 
 ---
 
-## 1. Visual direction
+## 1. How the site should look — the approved spec
 
-| Attribute | Direction |
+This section is **prescriptive**: it states what the design must be. If the code
+does not match this, the code is wrong.
+
+### 1.1 Direction
+
+| Attribute | It should be |
 | --- | --- |
-| Feel | Editorial, technical, calm. Black-and-white with warm paper surfaces. |
-| Typography | Large, tight, low-contrast display headlines; small quiet body text at 55% black. |
-| Colour | Monochrome UI. Colour appears only in photography and the ASCII hero glow. |
-| Shapes | Pills for controls, 8px for inputs/cards, 48px for the poster carousel, organic SVG cutouts for feature cards. |
-| Motion | Slow, spring-driven, single-purpose. Nothing loops for decoration except the ASCII footer and the beam pulses. |
-| Texture | Glass (refracted), paper (`--surface-warm`), and ASCII/canvas art. No gradients on text, no neon. |
+| Feel | Editorial, technical, calm. Confident, never playful or "startup-y". |
+| Typography | Huge, tight, low-contrast display headlines. Small, quiet body copy. |
+| Colour | Monochrome UI. Ink on paper, paper on ink. Colour only in photography, brand marks and the ember hero glow. |
+| Shapes | Pills for all controls. 8px for inputs and panels. 48px for the poster carousel. Organic SVG cutouts for feature cards. |
+| Motion | Slow, spring-driven, one purpose per animation. Nothing loops except the ASCII footer and the beam pulses. |
+| Texture | Refracted glass, warm paper, and ASCII/canvas art. No gradients on text. No neon. |
+
+### 1.2 Must — every page
+
+1. Open with the **black hero band** and the floating ASCII word.
+2. Alternate exactly three bands: paper → warm surface → inverted ink.
+3. Use `.section` for vertical rhythm (96px). Never invent a new padding value.
+4. Put every section inside `.container` (1920px max, 40px gutters).
+5. Use `.grid-2` (heading left, artefact right) for two-column sections.
+6. End with the inverted CTA band, then the animated footer, then the site footer.
+7. Use the real company logo (`logo.png`, 34×34) in the footer on **all** pages.
+8. Keep one `<h1>` per page, inside the hero.
+9. Keep every interactive element reachable by keyboard with a visible focus ring.
+
+### 1.3 Never
+
+1. Never name a library, registry, author or file in on-page copy.
+2. Never add a colour outside the palette in §2.0.
+3. Never use a gradient on text, a coloured button, or a neon glow.
+4. Never change the carousel card's square shape, 48px radius or inset hairline.
+5. Never open the Application Process accordion by default — all closed, click `+`.
+6. Never let the nav exceed **900px** or stop being optically centred.
+7. Never hard-code light-only or dark-only colours outside the hero and footer.
+8. Never restyle a section on one page only.
+9. Never remove an attribution comment from a vendored component.
+10. Never enable an animation that ignores `prefers-reduced-motion`.
+
+### 1.4 Element-by-element, as it should be
+
+| Element | Spec |
+| --- | --- |
+| Nav | Floating glass pill, 48px tall, max 900px wide, centred, sticky at 16px from the top. Menu optically centred. |
+| Hero | Black in both themes. ASCII word right of centre, ember radial glow behind it. Handwritten headline, two pill buttons. |
+| Section heading | `.section-title` — 64px, weight ~460, tracking −1.4px, line-height 1.10. |
+| Lead paragraph | `.body-lg` — 20px, weight 330, 55% ink, max ~72 characters. |
+| Body copy | 16px, 55% ink. Never pure black. |
+| Primary button | `.btn-pill.btn-black` — 50px radius, ink fill, paper text. Inverts to white on the black hero. |
+| Secondary button | `.btn-pill.btn-glass-dark` — translucent, 1px light border, blur. |
+| Card | 8px radius, 1px `--border`, flat, no drop shadow. |
+| Poster carousel | Square slides, 48px radius, 1.5px inset hairline, neighbours at 55% opacity, soft faded edges, dots below. |
+| Accordion | Filled rows, 8px radius, `+` indicator that rotates to ×, closed by default. |
+| Divider | 220px centred hairline, 14% ink, 24px above and below. |
+| Footer | Black surface, white text, logo + wordmark, three link columns, legal + socials. |
+
+### 1.5 Review checklist before shipping a visual change
+
+- [ ] Same visual language as the other two routes
+- [ ] No new colour, radius, spacing or font size
+- [ ] Light **and** dark both checked
+- [ ] Reduced motion still works
+- [ ] Keyboard focus visible
+- [ ] No source/library names visible anywhere on the page
+- [ ] `npm run build` passes
 
 ---
 
