@@ -98,7 +98,7 @@ export function ContactFormSection() {
     <ContactSection
       variant="form"
       title="Tell us what you are building"
-      description="Modernising operations, automating workflows or replacing a system that no longer scales — a sentence is enough to start."
+      description="Modernising operations, automating workflows or replacing a system that no longer scales. A sentence is enough to start."
       topics={["New business", "Partnerships", "Support", "Careers"]}
       onSubmit={async (message: ContactMessage) => {
         const response = await fetch("/api/contact", {

@@ -127,7 +127,7 @@ export default function ContactPage() {
             }}
           >
             Modernising operations, automating workflows or replacing a system
-            that no longer scales — tell us what you are trying to move and we
+            that no longer scales. Tell us what you are trying to move and we
             will bring the engineering.
           </p>
           <div style={{ display: "flex", gap: 16, marginTop: 40, flexWrap: "wrap" }}>
