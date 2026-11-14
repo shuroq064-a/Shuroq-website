@@ -423,7 +423,7 @@ export const ContactSection = forwardRef<HTMLElement, ContactSectionProps>(funct
         <p className={styles.description}>{description ?? copy.description}</p>
         {variant === "form" && <ul className={styles.facts}>
           <li><Clock size={16} strokeWidth={1.75} aria-hidden="true" />Replies within one business day</li>
-          <li><Mail size={16} strokeWidth={1.75} aria-hidden="true" /><span>hello@example.com</span><CopyButton value="hello@example.com" label="Copy email" iconOnly variant="plain" /></li>
+          <li><Mail size={16} strokeWidth={1.75} aria-hidden="true" /><span>contact@shuroq.com</span><CopyButton value="contact@shuroq.com" label="Copy email" iconOnly variant="plain" /></li>
         </ul>}
       </div>
       {variant === "form" && <ContactForm topics={topics} onSubmit={onSubmit} reduced={reduced} />}
