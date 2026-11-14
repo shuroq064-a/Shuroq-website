@@ -1,11 +1,26 @@
 import type { NextConfig } from "next";
+import { wgslTurbopackRule } from "@vgpu/wgsl/next";
 
 const nextConfig: NextConfig = {
   /* config options here */
   cacheComponents: true,
   partialPrefetching: true,
+  // The card posters are swapped in place at the same file name, so they carry
+  // a version query (?v=2) to drop the browser's cached copy. next/image only
+  // allows query strings on local paths that match one of these patterns. Omit
+  // the search pattern so any version query is allowed (a specific value like
+  // "?v=2" would have to be bumped in lock-step with the URL).
+  images: {
+    // Allow any public asset (logo.png, images/**, animated-footer/*, ...).
+    // The card posters add a ?v=2 cache-busting query, which requires an
+    // entry; allowing "/**" keeps the default permissive behaviour.
+    localPatterns: [{ pathname: "/**" }],
+  },
   turbopack: {
     rules: {
+      // The hero word flare is a WebGPU pipeline, so the WGSL shaders are
+      // compiled into shader sources at build time.
+      "*.wgsl": wgslTurbopackRule(),
       // Tailwind v4 has no PostCSS config here, so global stylesheets go through
       // its Turbopack loader. `.module.css` files are plain scoped CSS, so they
       // use Turbopack's built-in CSS-module type instead — routing them through
@@ -20,17 +35,16 @@ const nextConfig: NextConfig = {
   // Keep all legacy static pages reachable at their original clean URLs.
   // These map clean paths (e.g. /careers/) to the static files in public/.
   // Marked temporary so they can be removed as pages are migrated to Next.js routes.
-  // /about and /careers are now Next.js routes (app/about/page.tsx,
-  // app/careers/page.tsx) so they have no redirect.
+  // /about, /careers, /shuroq-way and /contact are now Next.js routes
+  // (app/about/page.tsx, app/careers/page.tsx, app/shuroq-way/page.tsx,
+  // app/contact/page.tsx) so they have no redirect.
   // Keep their legacy .html URLs working as aliases to the new pages.
   async redirects() {
     return [
       { source: "/about/index.html", destination: "/about", permanent: false },
       { source: "/careers/index.html", destination: "/careers", permanent: false },
-      { source: "/shuroq-way", destination: "/shuroq-way/index.html", permanent: false },
-      { source: "/shuroq-way/", destination: "/shuroq-way/index.html", permanent: false },
-      { source: "/contact", destination: "/contact/index.html", permanent: false },
-      { source: "/contact/", destination: "/contact/index.html", permanent: false },
+      { source: "/shuroq-way/index.html", destination: "/shuroq-way", permanent: false },
+      { source: "/contact/index.html", destination: "/contact", permanent: false },
       { source: "/services", destination: "/services/index.html", permanent: false },
       { source: "/services/", destination: "/services/index.html", permanent: false },
       { source: "/cutting-edge", destination: "/cutting-edge/index.html", permanent: false },

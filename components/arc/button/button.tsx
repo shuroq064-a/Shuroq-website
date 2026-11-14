@@ -27,9 +27,9 @@ const pressVariants: Variants = {
 const rest: TargetAndTransition = { opacity: 1, y: 0, scale: 1 };
 /** One clean crossfade: the new label rises 2px as it fades in, the outgoing one fades out faster. No blur. */
 const textIn: TargetAndTransition = { opacity: 0, y: 2 };
-const textOut: TargetAndTransition = { opacity: 0, transition: { duration: .1, ease: [...motionTokens.ease.standard] } };
+const textOut: TargetAndTransition = { opacity: 0, transition: { duration: motionTokens.duration.instant, ease: [...motionTokens.ease.standard] } };
 const iconIn: TargetAndTransition = { opacity: 0, scale: .85 };
-const iconOut: TargetAndTransition = { opacity: 0, transition: { duration: .1, ease: [...motionTokens.ease.standard] } };
+const iconOut: TargetAndTransition = { opacity: 0, transition: { duration: motionTokens.duration.instant, ease: [...motionTokens.ease.standard] } };
 const fadeIn: TargetAndTransition = { ...rest, opacity: 0 };
 const fadeOut: TargetAndTransition = { opacity: 0, transition: { duration: motionTokens.duration.instant } };
 /** Scale rides the spring; opacity tweens. */
@@ -114,7 +114,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button
       onClick={loading ? event => event.preventDefault() : onClick}
     >
       <AnimatePresence initial={false}>
-        {loading ? <motion.span key="loader" className={styles.loader} aria-hidden="true" initial={reduceMotion ? { opacity: 0 } : { opacity: 0, scale: .6 }} animate={{ opacity: 1, scale: 1 }} exit={reduceMotion ? fadeOut : { ...iconOut, scale: .8 }} transition={reduceMotion ? { duration: motionTokens.duration.instant } : iconEnter}><span className={styles.spinner} /></motion.span> : null}
+        {loading ? <motion.span key="loader" className={styles.loader} aria-hidden="true" initial={reduceMotion ? { opacity: 0 } : { opacity: 0, scale: .7 }} animate={{ opacity: 1, scale: 1 }} exit={reduceMotion ? fadeOut : { ...iconOut, scale: .8 }} transition={reduceMotion ? { duration: motionTokens.duration.instant } : iconEnter}><span className={styles.spinner} /></motion.span> : null}
       </AnimatePresence>
       <motion.span className={[styles.labelSlot, loading ? styles.loadingLabel : ""].filter(Boolean).join(" ")} style={{ width }}>
         <span ref={contentRef} className={styles.labelContent}>

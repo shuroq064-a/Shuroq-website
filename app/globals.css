@@ -255,6 +255,16 @@
   --violet: oklch(68% 0.22 295);
   --glass-bg: oklch(100% 0 0 / 0.55);
   --glass-border: oklch(15% 0 0 / 0.08);
+  /* Stamp arc cards: warm paper with a dashed ink rim on the light theme —
+     softer than pure white, which is what lets the poster sit well — and an
+     ink card with a dashed paper rim on the dark one. */
+  --stamp-card: #f0eee9;
+  --stamp-border: rgba(0, 0, 0, 0.28);
+  --stamp-rim: rgba(0, 0, 0, 0.75);
+  --stamp-fg: #000000;
+  --stamp-muted: rgba(0, 0, 0, 0.55);
+  --stamp-eyebrow: rgba(0, 0, 0, 0.45);
+  --stamp-rule: rgba(0, 0, 0, 0.12);
   --gradient-bg: linear-gradient(135deg, oklch(100% 0 0) 0%, oklch(96% 0.008 210) 100%);
   --gradient-accent: linear-gradient( to right, oklch(72% 0.18 195) 0%, oklch(68% 0.22 295) 100% );
 }
@@ -312,6 +322,13 @@
   --track: oklch(100% 0 0 / 0.145);
   --glass-bg: oklch(17% 0.002 265 / 0.55);
   --glass-border: rgb(255 255 255 / 0.08);
+  --stamp-card: #111111;
+  --stamp-border: rgba(255, 255, 255, 0.28);
+  --stamp-rim: rgba(255, 255, 255, 0.85);
+  --stamp-fg: #ffffff;
+  --stamp-muted: rgba(255, 255, 255, 0.55);
+  --stamp-eyebrow: rgba(255, 255, 255, 0.45);
+  --stamp-rule: rgba(255, 255, 255, 0.14);
   --gradient-bg: linear-gradient(135deg, oklch(17% 0.002 265) 0%, oklch(21% 0.008 210) 100%);
   --gradient-accent: linear-gradient( to right, oklch(80% 0.18 195) 0%, oklch(72% 0.18 295) 100% );
 }
@@ -482,29 +499,38 @@ img { max-width: 100%; display: block; }
   z-index: 3;
 }
 
-/* Floating ASCII "Shuroq": right half of the hero, behind the copy */
+/* WebGPU flare wordmark: right half of the hero. The flare canvas is opaque
+   black (upstream behaviour — in the demo the canvas IS the page), so here the
+   wrapper screen-blends into the hero's black panel: black contributes nothing
+   and only the light shows. A radial mask feathers the canvas edges so rays
+   and grain fade out instead of ending on a straight box line, and the word
+   spans ~72% of the box (pipeline fit) so the light has room around it. */
 .hero-ascii-word {
   position: absolute;
   z-index: 2;
-  top: 17%;
-  right: 3%;
-  width: 46%;
-  height: 60%;
+  top: 8%;
+  right: 0;
+  width: 58%;
+  height: 80%;
   pointer-events: none;
+  mix-blend-mode: screen;
+  -webkit-mask-image: radial-gradient(ellipse 50% 52% at 50% 50%, #000 72%, transparent 90%);
+  mask-image: radial-gradient(ellipse 50% 52% at 50% 50%, #000 72%, transparent 90%);
 }
-.hero-ascii-word::before {
-  content: "";
-  position: absolute;
-  inset: 8% 4%;
-  border-radius: 50%;
-  pointer-events: none;
-  background: radial-gradient(
-    closest-side,
-    rgba(255, 126, 43, 0.12) 0%,
-    rgba(255, 126, 43, 0.05) 45%,
-    rgba(255, 126, 43, 0) 72%
-  );
-  filter: blur(18px);
+
+/* The flare tracks the pointer exactly like the upstream example: hover the
+   word and the light follows the cursor, easing through followLight(), then
+   decays back to the autonomous sweep on leave. The wrapper stays
+   pointer-events: none so it never blocks the copy; only the canvas becomes a
+   target, above the hero container. Fine pointers only — touch devices keep
+   scrolling, and the renderer ignores pointerType "touch" anyway. */
+@media (hover: hover) and (pointer: fine) {
+  .hero-ascii-word {
+    z-index: 4;
+  }
+  .hero-ascii-word canvas {
+    pointer-events: auto;
+  }
 }
 
 /* Hero sits on black in every theme, so its controls invert */
@@ -553,6 +579,17 @@ img { max-width: 100%; display: block; }
   vertical-align: -0.06em;
   background: currentColor;
   animation: hero-caret 1.05s steps(1, end) infinite;
+}
+
+/* Desktop: the flare wordmark occupies the hero's right half (its ink starts
+   at ~50% of the hero width). Cap the headline so the longest cycling
+   sentences wrap before they reach the word, and reserve two lines so the
+   copy below never shifts while sentences cycle. */
+@media (min-width: 1025px) {
+  .hero-headline-text {
+    max-width: 44%;
+    min-height: 2.2em;
+  }
 }
 
 @media (max-width: 1024px) {
@@ -644,8 +681,7 @@ img { max-width: 100%; display: block; }
 /* Arc site footer on the inverted closing surface.
    The Arc block reads its own design tokens (--text-secondary, --surface, --radius-control, …).
    Remap them on the footer element instead of importing Arc's global foundation stylesheet, which
-   would overwrite this site's palette, fonts and `color-scheme`. */
-.site-footer-inverted {
+   would overwrite this site's palette, fonts and `color-scheme`. */.site-footer-inverted {
   --background: var(--fg);
   --foreground: var(--bg);
   --surface: color-mix(in srgb, var(--bg) 8%, transparent);
@@ -665,6 +701,59 @@ img { max-width: 100%; display: block; }
   --ease-enter: cubic-bezier(0.22, 1, 0.36, 1);
   --space-10: 40px;
   --space-16: 64px;
+}
+
+/* Arc contact section on the paper theme.
+   The block ships its own token names (--text-secondary, --radius-panel, …).
+   They are remapped onto this site's tokens so the section reads like the rest
+   of the site — ink on paper, hairlines instead of shadows, pills on buttons.
+   --background, --foreground and --surface already flip with the theme. */
+.arc-contact {
+  --surface-muted: color-mix(in srgb, var(--fg) 5%, transparent);
+  --text-secondary: color-mix(in srgb, var(--fg) 62%, transparent);
+  --text-muted: color-mix(in srgb, var(--fg) 45%, transparent);
+  --text-field: var(--text-base);
+  --border-subtle: var(--border-soft);
+  --border-strong: color-mix(in srgb, var(--fg) 20%, transparent);
+  --radius-panel: 8px;
+  --radius-control: 50px;
+  --tracking-body: -0.14px;
+  --leading-body: 1.4;
+  --leading-display: 1.02;
+  --space-10: 40px;
+  --space-20: 96px;
+  --control-height-sm: 38px;
+  --control-height-md: 44px;
+  --control-on: var(--fg);
+  --control-glyph: var(--bg);
+  --duration-standard: 200ms;
+  --ease-enter: cubic-bezier(0.22, 1, 0.36, 1);
+  --shadow-resting: none;
+}
+
+/* Fields read at the 8px panel radius; the buttons stay pills. */
+.arc-contact input,
+.arc-contact textarea {
+  border-radius: 8px;
+}
+
+/* A thin, theme-aware scrollbar on the long fields. */
+.arc-contact textarea {
+  scrollbar-width: thin;
+  scrollbar-color: color-mix(in srgb, var(--fg) 28%, transparent) transparent;
+}
+.arc-contact textarea::-webkit-scrollbar {
+  width: 6px;
+}
+.arc-contact textarea::-webkit-scrollbar-track {
+  background: transparent;
+}
+.arc-contact textarea::-webkit-scrollbar-thumb {
+  background: color-mix(in srgb, var(--fg) 28%, transparent);
+  border-radius: 999px;
+}
+.arc-contact textarea::-webkit-scrollbar-thumb:hover {
+  background: color-mix(in srgb, var(--fg) 45%, transparent);
 }
 
 /* Theme page motion (Arc theme-switch variants). The nav stamps the variant

@@ -103,6 +103,20 @@ colors:
   glass-bg: "oklch(100% 0 0 / 0.55)"
   glass-bg-dark: "oklch(17% 0.002 265 / 0.55)"
   glass-border: "oklch(15% 0 0 / 0.08)"
+  stamp-card: "#f0eee9"
+  stamp-card-dark: "#111111"
+  stamp-border: "rgba(0, 0, 0, 0.28)"
+  stamp-border-dark: "rgba(255, 255, 255, 0.28)"
+  stamp-rim: "rgba(0, 0, 0, 0.75)"
+  stamp-rim-dark: "rgba(255, 255, 255, 0.85)"
+  stamp-fg: "#000000"
+  stamp-fg-dark: "#ffffff"
+  stamp-muted: "rgba(0, 0, 0, 0.55)"
+  stamp-muted-dark: "rgba(255, 255, 255, 0.55)"
+  stamp-eyebrow: "rgba(0, 0, 0, 0.45)"
+  stamp-eyebrow-dark: "rgba(255, 255, 255, 0.45)"
+  stamp-rule: "rgba(0, 0, 0, 0.12)"
+  stamp-rule-dark: "rgba(255, 255, 255, 0.14)"
 ```
 
 **Usage rules**
@@ -539,6 +553,27 @@ Section-by-section, band by band.
 | 5 | CTA "Ready to Start Your Journey" | Inverted | — |
 | 6 | Animated ASCII footer + site footer | Black | — |
 
+### `/shuroq-way`
+
+| # | Section | Band | Notes |
+| --- | --- | --- | --- |
+| 1 | Hero — ASCII "Shuroq", "The Shuroq Way", *Partner With Shuroq* / *How We Work* | Black | — |
+| 2 | What Makes Us Different — stamp arc of five ink cards | Paper | hover fan, stacked list on phones |
+| 3 | How We Work — 4-step accordion | Warm | all closed |
+| 4 | Our Expertise — eight practice rows | Paper | lucide icons, hairline tops |
+| 5 | CTA "We build systems that scale with ambition." | Inverted | — |
+| 6 | Animated ASCII footer + site footer | Black | — |
+
+### `/contact`
+
+| # | Section | Band | Notes |
+| --- | --- | --- | --- |
+| 1 | Hero — ASCII "Contact", "Let's build what scales" | Black | mail CTA in the hero |
+| 2 | Contact form — validated form that morphs into a confirmation | Paper | Arc contact section, token remap |
+| 3 | Channels — email, phone, office, support hours | Warm | channel rail + detail panel |
+| 4 | CTA "Start with one conversation." | Inverted | — |
+| 5 | Animated ASCII footer + site footer | Black | — |
+
 ---
 
 ## Motion
@@ -602,12 +637,14 @@ in-file credit comments intact — several licences require attribution.
 | `components/unlumen-ui/sticky-card-stack.tsx` | Skiper UI — StickyCard002 (adapted) | https://skiper-ui.com | Attribution required |
 | `components/unlumen-ui/animated-footer.tsx` | VengeanceUI — Animated Footer (adapted) | https://www.vengeanceui.com | Credit in file JSDoc |
 | `components/skiper/skiper47.tsx` | Skiper UI — skiper47 by @gurvinder-singh02 (gxuri.me) | https://skiper-ui.com | Attribution required |
-| `components/hero/floating-ascii-word.tsx` | stackedlol/ascii-sharks | https://github.com/stackedlol/ascii-sharks | MIT |
 | `components/ui/accordion.tsx` | shadcn/ui (new-york) + Spectrum UI filled variant | https://ui.shadcn.com | MIT |
 | `components/ui/organic-card-small.tsx` | cult-ui — Organic Card | https://cult-ui.com | Extended with `cta` |
 | `components/arc/**` | Arc UI registry — SiteFooter, Button, ThemeSwitch, SegmentedControl, motion tokens | https://uiarc.dev | Registry source |
 | `components/animated/animated-beam/**`, `components/showcase/connected-tools.tsx` | In-house beam engine + vendored brand icons (`npx @thesvg/cli add`) | — | No upstream file |
 | `components/smooth-scroll.tsx` | Lenis | https://github.com/darkroomengineering/lenis | MIT |
+| `components/cards/CardStampArc.tsx` | Amicro — Card Stamp Arc | https://amicro.dev | MIT (header credit required) |
+| `components/hero/flare/**` | Vercel Labs vgpu — nextjs-flare example (WebGPU word flare) | https://github.com/vercel-labs/vgpu | MIT |
+| `components/arc/blocks/contact-section/contact-section.tsx` | Arc UI registry — Contact Section | https://uiarc.dev | Registry source |
 
 Registry configuration (`components.json`):
 
@@ -633,16 +670,21 @@ app/
   page.tsx              home
   about/page.tsx        about
   careers/page.tsx      careers
+  shuroq-way/page.tsx   the shuroq way
+  contact/page.tsx      contact
   globals.css           every token + layout primitive
 components/
   nav/site-nav.tsx      floating glass nav
   hero/                 ascii word, headline
+  hero/flare/           webgpu word flare (every page hero wordmark)
   ui/                   liquid glass, accordion, organic card
   arc/                  footer block, button, theme switch, segmented control
   unlumen-ui/           menu, orbit wheel, hover expand, sticky deck, ascii footer
   skiper/skiper47.tsx   poster carousel
   animated/             beam engine
   showcase/             integration diagram
+  cards/                stamp arc (amicro)
+  contact/              contact panels (arc contact section)
   smooth-scroll.tsx     Lenis
 public/
   logo.png              company logo (footer mark)
@@ -656,6 +698,15 @@ public/
 
 | Date | Decision |
 | --- | --- |
+| 2026-11 | Expertise flow on `/shuroq-way` expanded from 33 to 72 marks, now covering the full stack the site claims: frontend (Angular, Svelte, Astro, Tailwind CSS, Redux, Vite), backend (Node.js, Python, Go, Rust, PHP, Laravel, Django, FastAPI, NestJS, Spring Boot, .NET), databases (PostgreSQL, MongoDB, GraphQL), cloud (Microsoft Azure, Cloudflare, DigitalOcean, Firebase, Vercel), Kubernetes ecosystem (ArgoCD, Istio, Rancher) and AI/ML/NLP (Gemini, Anthropic, LangChain, PyTorch, TensorFlow, Keras, scikit-learn, Hugging Face, spaCy, NVIDIA, Ollama, MLflow). Marks fetched via the thesvg.org MCP and self-hosted in `public/icons`; white-ink brands (Go, Rust, PHP, Vercel) use light+dark file pairs, black-ink brands use the existing `invert` treatment. Marquee duration scaled 32s → 72s so the drift speed stays constant with the longer loop. |
+| 2026-11 | Home hero word rebuilt as a WebGPU flare, ported byte-for-byte from the Vercel Labs vgpu `nextjs-flare` example: identical shaders, constants and renderer loop (including pointer-tracked glow), and the same raster mechanism - SVG string → `Image` → `drawImage`. The SVG swaps the Next.js glyph paths for the "Shuroq" wordmark: stroked `<text>` (`fill="none" stroke-width="2"`, gradient fading only near the tails) with the site's own Manrope woff2 embedded as a data URI (`word-font.ts`, since SVG-in-Image can only see data URIs). Stroked outlines, never a fill - a fill blows out into a blob under the rim/scatter passes. |
+| 2026-11 | Flare presentation on the site: the demo's canvas is opaque and IS the whole page, so on the hero the wrapper **screen-blends** into the black panel and a radial mask feathers the canvas edges (rays/grain never end on a straight box line); the word spans ~72% of the flare box (pipeline fit, mask solid to 72% of the radius so the ink ends stay bright). The flare replaced the old ASCII hero word on **every** page (about, careers, contact, the-shuroq-way) and `floating-ascii-word.tsx` was removed. Nav: `Home` is now a standalone first item, before the `About Us` menu. |
+| 2026-11 | Integration diagram on the home page: satellites now orbit the hub once a minute, and the beams follow. |
+| 2026-11 | Nav gains a "Home" entry in the company menu, pointing at the site root. |
+| 2026-11 | Contact rebuilt as a Next.js route for parity with the other pages: black hero, Arc contact form on paper, channels on warm paper, inverted CTA, footers. Legacy static page retired to `public/.legacy`. |
+| 2026-11 | Stamp cards on `/shuroq-way` rebuilt as perforated stamps: 2px dashed rim, 24px radius, 260×380, a poster image between the rule and the copy, paper card on light and ink card on dark. |
+| 2026-11 | "What Makes Us Different" on `/shuroq-way` rebuilt as a stamp arc: five ink cards, one bold heading and one line each, fanned on hover and stacked on phones. |
+| 2026-11 | The Shuroq Way rebuilt as a Next.js route for parity with home, about and careers: nav, ASCII hero, hairline cards, accordion, dividers, footers. Legacy static page retired to `public/.legacy`. |
 | 2026-11 | Careers rebuilt for parity with home: nav, ASCII hero, accordion, organic card, dividers, footers. |
 | 2026-11 | Footer brand mark switched to `logo.png` on home, about and careers. |
 | 2026-11 | Site-wide Lenis smooth scroll mounted once in the root layout. |

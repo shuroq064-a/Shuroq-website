@@ -10,5 +10,9 @@
 .button:active, .button[aria-pressed="true"] { color: var(--foreground); }
 .selection { position: absolute; z-index: -1; inset: 0; border: 1px solid var(--border); border-radius: inherit; background: var(--surface); box-shadow: var(--shadow-resting); }
 .label { position: relative; z-index: 1; display: inline-flex; align-items: center; gap: 6px; }
+/* fullWidth: the frame fills its container and the segments share it equally. A segment never shrinks below its label, so a crowded row still scrolls. */
+.root[data-full-width] { display: flex; width: 100%; }
+.root[data-full-width] .track { flex: 1; }
+.root[data-full-width] .button { flex: 1 1 0; min-width: max-content; }
 @media (max-width: 380px) { .button { padding: 0 10px; } }
 @media (prefers-reduced-motion: reduce) { .button { transition: none; } }

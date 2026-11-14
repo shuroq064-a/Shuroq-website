@@ -4,7 +4,7 @@ import Script from "next/script";
 import Image from "next/image";
 import SiteNav from "@/components/nav/site-nav";
 import { HeroHeadline } from "@/components/hero/hero-intro";
-import { FloatingAsciiWord } from "@/components/hero/floating-ascii-word";
+import { FlareWord } from "@/components/hero/flare/flare-word";
 import { HoverExpand, type HoverExpandItem } from "@/components/unlumen-ui/hover-expand";
 import { OrbitalImageWheel, type OrbitalImageWheelImage } from "@/components/unlumen-ui/orbital-image-wheel";
 import { StickyCardStack, type StickyCardStackCard } from "@/components/unlumen-ui/sticky-card-stack";
@@ -200,7 +200,7 @@ export default function Home() {
           further down the screen, without filling the whole viewport. */}
       <section className="hero-gradient-bg" style={{ marginTop: -80, padding: "250px 0 160px" }}>
         <div className="hero-ascii-word" aria-hidden>
-          <FloatingAsciiWord word="Shuroq" />
+          <FlareWord />
         </div>
         <div className="container">
           <HeroHeadline />

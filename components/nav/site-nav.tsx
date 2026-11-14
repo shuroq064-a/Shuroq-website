@@ -22,11 +22,6 @@ export default function SiteNav() {
   const navRef = React.useRef<HTMLDivElement>(null);
   const { tone, ready: toneReady } = useBackdropTone(navRef, resolvedTheme === "dark" ? "dark" : "light");
   const [mobileOpen, setMobileOpen] = React.useState(false);
-  const [mounted, setMounted] = React.useState(false);
-  React.useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    setMounted(true);
-  }, []);
 
   // The switch only reports the change. Stamp the variant on <html> so the
   // matching snapshot animation in globals.css runs, then clear it.
@@ -57,13 +52,6 @@ export default function SiteNav() {
       delete root.dataset.themeMotion;
     };
     void transition.finished.then(clear, clear);
-  };
-
-  const changeLanguage = (lang: string) => {
-    if (typeof window !== "undefined") {
-      const w = window as unknown as { changeLanguage?: (l: string) => void };
-      if (w.changeLanguage) w.changeLanguage(lang);
-    }
   };
 
   const companyLinks = [
@@ -170,6 +158,16 @@ export default function SiteNav() {
             springBounce={0}
           >
             <MotionNavigationMenuList>
+              {/* Home — standalone link, kept separate from the About Us menu */}
+              <MotionNavigationMenuItem value="home">
+                <MotionNavigationMenuLink
+                  href="/"
+                  className="inline-flex h-9 items-center justify-center rounded-md px-4 py-2 text-sm font-medium text-neutral-900 hover:text-neutral-900 focus:text-neutral-900"
+                >
+                  Home
+                </MotionNavigationMenuLink>
+              </MotionNavigationMenuItem>
+
               {/* About Us */}
               <MotionNavigationMenuItem value="about">
                 <MotionNavigationMenuTrigger>About Us</MotionNavigationMenuTrigger>

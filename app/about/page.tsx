@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import SiteNav from "@/components/nav/site-nav";
-import { FloatingAsciiWord } from "@/components/hero/floating-ascii-word";
+import { FlareWord } from "@/components/hero/flare/flare-word";
 import { AnimatedFooter } from "@/components/unlumen-ui/animated-footer";
 import {
   SiteFooter,
@@ -135,7 +135,7 @@ export default function AboutPage() {
         style={{ marginTop: -80, padding: "250px 0 160px" }}
       >
         <div className="hero-ascii-word" aria-hidden>
-          <FloatingAsciiWord word="Shuroq" />
+          <FlareWord />
         </div>
         <div className="container">
           <h1 className="hero-headline">

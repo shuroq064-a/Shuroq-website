@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import SiteNav from "@/components/nav/site-nav";
-import { FloatingAsciiWord } from "@/components/hero/floating-ascii-word";
+import { FlareWord } from "@/components/hero/flare/flare-word";
 import { Carousel_001, type CarouselSlide } from "@/components/skiper/skiper47";
 import {
   Accordion,
@@ -145,7 +145,7 @@ export default function CareersPage() {
         style={{ marginTop: -80, padding: "250px 0 160px" }}
       >
         <div className="hero-ascii-word" aria-hidden>
-          <FloatingAsciiWord word="Careers" />
+          <FlareWord />
         </div>
         <div className="container">
           <h1 className="hero-headline">
