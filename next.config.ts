@@ -32,12 +32,10 @@ const nextConfig: NextConfig = {
       },
     },
   },
-  // Keep all legacy static pages reachable at their original clean URLs.
-  // These map clean paths (e.g. /careers/) to the static files in public/.
-  // Marked temporary so they can be removed as pages are migrated to Next.js routes.
-  // /about, /careers, /shuroq-way and /contact are now Next.js routes
-  // (app/about/page.tsx, app/careers/page.tsx, app/shuroq-way/page.tsx,
-  // app/contact/page.tsx) so they have no redirect.
+  // Keep legacy static pages reachable at clean URLs, while redirecting retired
+  // specialist pages to their consolidated core service destinations.
+  // /about, /careers, /shuroq-way, /contact and /services are now Next.js routes
+  // so they have no clean-path redirect.
   // Keep their legacy .html URLs working as aliases to the new pages.
   async redirects() {
     return [
@@ -45,22 +43,38 @@ const nextConfig: NextConfig = {
       { source: "/careers/index.html", destination: "/careers", permanent: false },
       { source: "/shuroq-way/index.html", destination: "/shuroq-way", permanent: false },
       { source: "/contact/index.html", destination: "/contact", permanent: false },
-      { source: "/services", destination: "/services/index.html", permanent: false },
-      { source: "/services/", destination: "/services/index.html", permanent: false },
-      { source: "/cutting-edge", destination: "/cutting-edge/index.html", permanent: false },
-      { source: "/cutting-edge/", destination: "/cutting-edge/index.html", permanent: false },
-      { source: "/assurance", destination: "/assurance/index.html", permanent: false },
-      { source: "/assurance/", destination: "/assurance/index.html", permanent: false },
-      { source: "/automate", destination: "/automate/index.html", permanent: false },
-      { source: "/automate/", destination: "/automate/index.html", permanent: false },
+      { source: "/services/index.html", destination: "/services", permanent: false },
+      { source: "/cutting-edge/index.html", destination: "/cutting-edge", permanent: false },
+      { source: "/assurance/index.html", destination: "/assurance", permanent: false },
+      { source: "/automate/index.html", destination: "/automate", permanent: false },
       {
         source: "/Data Analytics",
-        destination: "/Data Analytics/index.html",
+        destination: "/data-analytics",
         permanent: false,
       },
       {
         source: "/Data Analytics/",
-        destination: "/Data Analytics/index.html",
+        destination: "/data-analytics",
+        permanent: false,
+      },
+      {
+        source: "/Data Analytics/index.html",
+        destination: "/data-analytics",
+        permanent: false,
+      },
+      {
+        source: "/Data%20Analytics",
+        destination: "/data-analytics",
+        permanent: false,
+      },
+      {
+        source: "/Data%20Analytics/",
+        destination: "/data-analytics",
+        permanent: false,
+      },
+      {
+        source: "/Data%20Analytics/index.html",
+        destination: "/data-analytics",
         permanent: false,
       },
       { source: "/industries", destination: "/industries/index.html", permanent: false },
@@ -77,10 +91,12 @@ const nextConfig: NextConfig = {
       },
       { source: "/cloud-native", destination: "/cloud-native/index.html", permanent: false },
       { source: "/cloud-native/", destination: "/cloud-native/index.html", permanent: false },
-      { source: "/faas", destination: "/faas/index.html", permanent: false },
-      { source: "/faas/", destination: "/faas/index.html", permanent: false },
-      { source: "/monolith", destination: "/monolith/index.html", permanent: false },
-      { source: "/monolith/", destination: "/monolith/index.html", permanent: false },
+      { source: "/faas", destination: "/product-engineering/index.html", permanent: false },
+      { source: "/faas/", destination: "/product-engineering/index.html", permanent: false },
+      { source: "/faas/index.html", destination: "/product-engineering/index.html", permanent: false },
+      { source: "/monolith", destination: "/product-engineering/index.html", permanent: false },
+      { source: "/monolith/", destination: "/product-engineering/index.html", permanent: false },
+      { source: "/monolith/index.html", destination: "/product-engineering/index.html", permanent: false },
       {
         source: "/platformengineering",
         destination: "/platformengineering/index.html",
@@ -101,18 +117,24 @@ const nextConfig: NextConfig = {
         destination: "/platform-services/index.html",
         permanent: false,
       },
-      { source: "/backstage", destination: "/backstage/index.html", permanent: false },
-      { source: "/backstage/", destination: "/backstage/index.html", permanent: false },
+      { source: "/backstage", destination: "/platformengineering/index.html#backstage", permanent: false },
+      { source: "/backstage/", destination: "/platformengineering/index.html#backstage", permanent: false },
+      { source: "/backstage/index.html", destination: "/platformengineering/index.html#backstage", permanent: false },
       { source: "/ci-cd-dev", destination: "/ci-cd-dev/index.html", permanent: false },
       { source: "/ci-cd-dev/", destination: "/ci-cd-dev/index.html", permanent: false },
       {
         source: "/progressive-delivery",
-        destination: "/progressive-delivery/index.html",
+        destination: "/platformengineering/index.html#progressive-delivery",
         permanent: false,
       },
       {
         source: "/progressive-delivery/",
-        destination: "/progressive-delivery/index.html",
+        destination: "/platformengineering/index.html#progressive-delivery",
+        permanent: false,
+      },
+      {
+        source: "/progressive-delivery/index.html",
+        destination: "/platformengineering/index.html#progressive-delivery",
         permanent: false,
       },
       {
@@ -127,22 +149,26 @@ const nextConfig: NextConfig = {
       },
       { source: "/sre-consultancy", destination: "/sre-consultancy/index.html", permanent: false },
       { source: "/sre-consultancy/", destination: "/sre-consultancy/index.html", permanent: false },
-      { source: "/service-mesh", destination: "/service-mesh/index.html", permanent: false },
-      { source: "/service-mesh/", destination: "/service-mesh/index.html", permanent: false },
+      { source: "/service-mesh", destination: "/sre-consultancy/index.html", permanent: false },
+      { source: "/service-mesh/", destination: "/sre-consultancy/index.html", permanent: false },
+      { source: "/service-mesh/index.html", destination: "/sre-consultancy/index.html", permanent: false },
       {
         source: "/cloud-native-network",
-        destination: "/cloud-native-network/index.html",
+        destination: "/sre-consultancy/index.html",
         permanent: false,
       },
       {
         source: "/cloud-native-network/",
-        destination: "/cloud-native-network/index.html",
+        destination: "/sre-consultancy/index.html",
         permanent: false,
       },
-      { source: "/linkerd-services", destination: "/linkerd-services/index.html", permanent: false },
-      { source: "/linkerd-services/", destination: "/linkerd-services/index.html", permanent: false },
-      { source: "/terraform", destination: "/terraform/index.html", permanent: false },
-      { source: "/terraform/", destination: "/terraform/index.html", permanent: false },
+      { source: "/cloud-native-network/index.html", destination: "/sre-consultancy/index.html", permanent: false },
+      { source: "/linkerd-services", destination: "/sre-consultancy/index.html", permanent: false },
+      { source: "/linkerd-services/", destination: "/sre-consultancy/index.html", permanent: false },
+      { source: "/linkerd-services/index.html", destination: "/sre-consultancy/index.html", permanent: false },
+      { source: "/terraform", destination: "/sre-consultancy/index.html", permanent: false },
+      { source: "/terraform/", destination: "/sre-consultancy/index.html", permanent: false },
+      { source: "/terraform/index.html", destination: "/sre-consultancy/index.html", permanent: false },
       {
         source: "/observability_devsecops",
         destination: "/observability_devsecops.html",
@@ -165,10 +191,12 @@ const nextConfig: NextConfig = {
         destination: "/observability-consult/index.html",
         permanent: false,
       },
-      { source: "/grafana", destination: "/grafana/index.html", permanent: false },
-      { source: "/grafana/", destination: "/grafana/index.html", permanent: false },
-      { source: "/prometheus", destination: "/prometheus/index.html", permanent: false },
-      { source: "/prometheus/", destination: "/prometheus/index.html", permanent: false },
+      { source: "/grafana", destination: "/observability-consult/index.html", permanent: false },
+      { source: "/grafana/", destination: "/observability-consult/index.html", permanent: false },
+      { source: "/grafana/index.html", destination: "/observability-consult/index.html", permanent: false },
+      { source: "/prometheus", destination: "/observability-consult/index.html", permanent: false },
+      { source: "/prometheus/", destination: "/observability-consult/index.html", permanent: false },
+      { source: "/prometheus/index.html", destination: "/observability-consult/index.html", permanent: false },
       { source: "/fission", destination: "/fission/index.html", permanent: false },
       { source: "/fission/", destination: "/fission/index.html", permanent: false },
       { source: "/botkube", destination: "/botkube/index.html", permanent: false },

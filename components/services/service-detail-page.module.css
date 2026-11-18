@@ -1,0 +1,376 @@
+.page {
+  width: 100%;
+  overflow: clip;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-display);
+}
+
+.page :global(.site-footer-inverted),
+.page :global(.site-footer-inverted [class*="bottom"]) {
+  border-top: 0;
+}
+
+.hero {
+  margin-top: -80px;
+  padding: 174px 0 96px;
+  background: #000;
+  color: #fff;
+}
+
+.heroInner {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(350px, 0.78fr);
+  align-items: center;
+  gap: clamp(48px, 8vw, 120px);
+}
+
+.heroCopy {
+  max-width: 720px;
+}
+
+.backLink:hover {
+  color: #fff;
+}
+
+.heroCopy h1 {
+  max-width: 760px;
+  margin: 0;
+  font-size: clamp(48px, 6.3vw, 84px);
+  font-weight: 460;
+  line-height: 1;
+  letter-spacing: -0.052em;
+}
+
+.heroCopy > p {
+  max-width: 620px;
+  margin: 24px 0 0;
+  color: rgb(255 255 255 / 76%);
+  font-size: clamp(17px, 1.6vw, 20px);
+  line-height: 1.55;
+}
+
+.heroActions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 24px;
+  margin-top: 34px;
+}
+
+.heroActions a {
+  transition:
+    transform var(--duration-fast) var(--ease-ui-out),
+    color var(--duration-fast) var(--ease-ui-out);
+}
+
+.heroActions a:active {
+  transform: scale(var(--press-scale));
+}
+
+.backLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  color: rgb(255 255 255 / 78%);
+  font-size: 15px;
+  text-decoration: none;
+}
+
+.heroArtwork {
+  width: 100%;
+  max-width: 470px;
+  justify-self: end;
+  margin: 0;
+  padding: 10px;
+  overflow: hidden;
+  border-radius: 28px;
+  background: #171717;
+}
+
+.heroArtwork img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 20px;
+  object-fit: cover;
+}
+
+.capabilities,
+.approach {
+  padding: clamp(88px, 10vw, 144px) 0;
+}
+
+.capabilities {
+  background: var(--bg);
+}
+
+.sectionInner {
+  display: grid;
+  grid-template-columns: minmax(260px, 0.72fr) minmax(0, 1fr);
+  align-items: start;
+  gap: clamp(48px, 9vw, 140px);
+}
+
+.sectionHeading {
+  position: sticky;
+  top: 112px;
+  max-width: 500px;
+}
+
+.sectionHeading h2 {
+  margin: 0;
+  font-size: clamp(40px, 5vw, 64px);
+  font-weight: 450;
+  line-height: 1.04;
+  letter-spacing: -0.045em;
+}
+
+.sectionHeading p {
+  margin: 20px 0 0;
+  color: var(--muted);
+  font-size: 17px;
+  line-height: 1.55;
+}
+
+.capabilityList {
+  display: grid;
+  gap: 10px;
+}
+
+.capability {
+  display: grid;
+  grid-template-columns: 44px minmax(0, 1fr);
+  align-items: start;
+  gap: 20px;
+  padding: 25px 24px;
+  border-radius: 20px;
+  background: color-mix(in srgb, var(--fg) 4%, var(--bg));
+}
+
+.capabilityMark {
+  display: block;
+  width: 9px;
+  height: 9px;
+  margin: 9px 0 0 14px;
+  border-radius: 50%;
+  background: var(--fg);
+}
+
+.capability h3,
+.approachList h3 {
+  margin: 0;
+  font-size: clamp(19px, 2vw, 24px);
+  font-weight: 540;
+  line-height: 1.25;
+  letter-spacing: -0.025em;
+}
+
+.capability p,
+.approachList p {
+  margin: 8px 0 0;
+  color: var(--muted);
+  font-size: 16px;
+  line-height: 1.55;
+}
+
+.approach {
+  background: color-mix(in srgb, var(--fg) 3%, var(--bg));
+}
+
+.approachList {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: step;
+}
+
+.approachList li {
+  min-height: 190px;
+  padding: 26px;
+  border-radius: 20px;
+  background: color-mix(in srgb, var(--fg) 4%, var(--bg));
+  counter-increment: step;
+}
+
+.approachList li::before {
+  display: block;
+  margin-bottom: 24px;
+  color: var(--muted);
+  font-size: 14px;
+  font-variant-numeric: tabular-nums;
+  content: "0" counter(step);
+}
+
+.contactBand {
+  padding: 24px 0 96px;
+}
+
+.contactInner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+  padding: clamp(32px, 5vw, 64px);
+  border-radius: 28px;
+  background: var(--fg);
+  color: var(--bg);
+}
+
+.contactInner > div {
+  max-width: 720px;
+}
+
+.contactInner h2 {
+  margin: 0;
+  font-size: clamp(34px, 4.5vw, 56px);
+  font-weight: 460;
+  line-height: 1.04;
+  letter-spacing: -0.045em;
+}
+
+.contactInner p {
+  max-width: 580px;
+  margin: 16px 0 0;
+  color: color-mix(in srgb, var(--bg) 72%, transparent);
+  font-size: 17px;
+  line-height: 1.5;
+}
+
+.contactInner > a {
+  flex: 0 0 auto;
+  transition: transform var(--duration-fast) var(--ease-ui-out);
+}
+
+.contactInner > a:active {
+  transform: scale(var(--press-scale));
+}
+
+@media (max-width: 900px) {
+  .heroInner {
+    grid-template-columns: minmax(0, 1fr) minmax(270px, 0.72fr);
+    gap: 36px;
+  }
+
+  .sectionInner {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+
+  .sectionHeading {
+    position: static;
+    max-width: 680px;
+  }
+}
+
+@media (max-width: 640px) {
+  .hero {
+    padding: 146px 0 56px;
+  }
+
+  .heroInner {
+    grid-template-columns: 1fr;
+    gap: 34px;
+  }
+
+  .heroCopy h1 {
+    max-width: 560px;
+    font-size: clamp(44px, 12vw, 58px);
+    line-height: 1.02;
+  }
+
+  .heroCopy > p {
+    margin-top: 18px;
+    font-size: 17px;
+  }
+
+  .heroActions {
+    gap: 14px;
+    margin-top: 24px;
+  }
+
+  .heroArtwork {
+    width: min(100%, 360px);
+    justify-self: center;
+    padding: 7px;
+    border-radius: 22px;
+  }
+
+  .heroArtwork img {
+    border-radius: 16px;
+  }
+
+  .capabilities,
+  .approach {
+    padding: 72px 0;
+  }
+
+  .sectionHeading h2 {
+    font-size: clamp(38px, 10vw, 48px);
+  }
+
+  .sectionHeading p {
+    margin-top: 14px;
+    font-size: 16px;
+  }
+
+  .capabilityList {
+    gap: 8px;
+  }
+
+  .capability {
+    grid-template-columns: 36px minmax(0, 1fr);
+    gap: 14px;
+    padding: 20px 16px;
+    border-radius: 16px;
+  }
+
+  .capabilityMark {
+    margin-left: 12px;
+  }
+
+  .capability h3,
+  .approachList h3 {
+    font-size: 19px;
+  }
+
+  .capability p,
+  .approachList p {
+    font-size: 15px;
+  }
+
+  .approachList {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .approachList li {
+    min-height: 0;
+    padding: 22px;
+    border-radius: 16px;
+  }
+
+  .approachList li::before {
+    margin-bottom: 16px;
+  }
+
+  .contactBand {
+    padding: 8px 0 56px;
+  }
+
+  .contactInner {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 24px;
+    padding: 28px 22px;
+    border-radius: 22px;
+  }
+
+  .contactInner h2 {
+    font-size: clamp(34px, 9vw, 44px);
+  }
+}

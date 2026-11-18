@@ -23,7 +23,7 @@ const footerColumns: SiteFooterColumn[] = [
     title: "Services",
     links: [
       { label: "Automation", href: "/automate" },
-      { label: "Data & Analytics", href: "/Data%20Analytics/" },
+      { label: "Data & Analytics", href: "/data-analytics/" },
       { label: "Product Engineering", href: "/product-engineering/" },
       { label: "DevSecOps", href: "/devsec-ops/" },
       { label: "CI/CD & Dev Experience", href: "/ci-cd-dev/" },
@@ -37,8 +37,6 @@ const footerColumns: SiteFooterColumn[] = [
       { label: "Platform Engineering", href: "/platformengineering/" },
       { label: "Kubernetes Services", href: "/kubernetes-services/" },
       { label: "Observability", href: "/observability-consult/" },
-      { label: "Service Mesh", href: "/service-mesh/" },
-      { label: "Progressive Delivery", href: "/progressive-delivery/" },
     ],
   },
   {

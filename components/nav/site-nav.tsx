@@ -4,6 +4,7 @@ import * as React from "react";
 import { flushSync } from "react-dom";
 import Link from "next/link";
 import { useTheme } from "next-themes";
+import { Menu, X } from "lucide-react";
 
 import {
   MotionNavigationMenu,
@@ -20,7 +21,13 @@ import { useBackdropTone } from "@/hooks/use-backdrop-tone";
 export default function SiteNav() {
   const { resolvedTheme, setTheme } = useTheme();
   const navRef = React.useRef<HTMLDivElement>(null);
-  const { tone, ready: toneReady } = useBackdropTone(navRef, resolvedTheme === "dark" ? "dark" : "light");
+  // next-themes only knows the stored theme after hydration. Render the
+  // default (dark) on the server and on the first client frame so the switch
+  // icon never mismatches; the stored value applies on the next frame.
+  const [mounted, setMounted] = React.useState(false);
+  React.useEffect(() => setMounted(true), []);
+  const theme: "light" | "dark" = mounted && resolvedTheme === "light" ? "light" : "dark";
+  const { tone, ready: toneReady } = useBackdropTone(navRef, theme);
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
   // The switch only reports the change. Stamp the variant on <html> so the
@@ -69,7 +76,7 @@ export default function SiteNav() {
         { href: "/cutting-edge", label: "Cutting Edge" },
         { href: "/assurance/", label: "Assurance" },
         { href: "/automate", label: "Automate" },
-        { href: "/Data%20Analytics/", label: "Data Analytics" },
+        { href: "/data-analytics/", label: "Data Analytics" },
       ],
     },
     {
@@ -88,8 +95,6 @@ export default function SiteNav() {
       links: [
         { href: "/product-engineering/", label: "Product Engineering Services" },
         { href: "/cloud-native/", label: "Cloud Native Product Development" },
-        { href: "/faas/", label: "FaaS" },
-        { href: "/monolith/", label: "Monolith Microservice" },
       ],
     },
     {
@@ -97,28 +102,20 @@ export default function SiteNav() {
       links: [
         { href: "/platformengineering/", label: "Platform Engineering" },
         { href: "/platform-services/", label: "Platform Engineering Services" },
-        { href: "/backstage/", label: "Backstage Consulting" },
         { href: "/ci-cd-dev/", label: "CI/CD & Dev Experience" },
-        { href: "/progressive-delivery/", label: "Progressive Delivery" },
       ],
     },
     {
       title: "SITE RELIABILITY ENGINEERING",
       links: [
         { href: "/sre-consultancy/", label: "SRE Consultancy" },
-        { href: "/service-mesh/", label: "Service Mesh Consulting" },
-        { href: "/cloud-native-network/", label: "Cloud Native Network" },
-        { href: "/linkerd-services/", label: "Linkerd Consulting" },
-        { href: "/terraform/", label: "Terraform Consulting" },
       ],
     },
     {
       title: "OBSERVABILITY & DEVSECOPS",
       links: [
-        { href: "/devsec-ops/", label: "DevSecOps Consult" },
-        { href: "/observability-consult/", label: "Observability and Adoption" },
-        { href: "/grafana/", label: "Grafana Consulting" },
-        { href: "/prometheus/", label: "Prometheus Consulting" },
+        { href: "/devsec-ops/", label: "DevSecOps" },
+        { href: "/observability-consult/", label: "Observability" },
       ],
     },
   ];
@@ -239,15 +236,21 @@ export default function SiteNav() {
         <div style={{ display: "flex", alignItems: "center", gap: 10, flex: 1, justifyContent: "flex-end" }}>
           <span className="nav-theme-toggle">
             <ThemeSwitch
-              theme={resolvedTheme === "dark" ? "dark" : "light"}
+              theme={theme}
               iconOnly
               variant="rise"
               onThemeChange={changeTheme}
             />
           </span>
 
-          <button className="mobile-menu-btn md:hidden" onClick={() => setMobileOpen((o) => !o)} style={{ background: "transparent", border: "none", fontSize: 20, cursor: "pointer", color: "var(--nav-fg)" }}>
-            ☰
+          <button
+            className="mobile-menu-btn md:hidden"
+            onClick={() => setMobileOpen((o) => !o)}
+            aria-label={mobileOpen ? "Close menu" : "Open menu"}
+            aria-expanded={mobileOpen}
+            style={{ background: "transparent", border: "none", cursor: "pointer", color: "var(--nav-fg)" }}
+          >
+            {mobileOpen ? <X size={20} aria-hidden="true" /> : <Menu size={20} aria-hidden="true" />}
           </button>
         </div>
       </LiquidGlass>

@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="800" viewBox="0 0 640 800" role="img" aria-labelledby="title desc">
+  <title id="title">Software quality inspection</title>
+  <desc id="desc">A precision magnifier examining a circuit board with a highlighted test point.</desc>
+  <rect width="640" height="800" fill="#0a0a0a"/>
+
+  <g fill="none" stroke="#292c31" stroke-width="2">
+    <path d="M72 112h78m-78 0v78M568 112h-78m78 0v78M72 688h78m-78 0v-78M568 688h-78m78 0v-78"/>
+    <path d="M112 260h64v34h56m240-34h-54v42h-54M112 532h72v-38h40m304 38h-68v-42h-46"/>
+  </g>
+  <g fill="#969ba3">
+    <circle cx="176" cy="294" r="4"/><circle cx="472" cy="302" r="4"/>
+    <circle cx="184" cy="494" r="4"/><circle cx="478" cy="490" r="4"/>
+  </g>
+
+  <path d="M174 618 260 532l40 40-86 86z" fill="#292d33"/>
+  <path d="m187 618 74-74 13 13-74 74z" fill="#555b64"/>
+  <path d="m174 618 40 40 16-16-40-40z" fill="#777e88"/>
+
+  <g transform="rotate(-42 320 356)">
+    <rect x="294" y="370" width="52" height="198" rx="24" fill="#25292f"/>
+    <rect x="305" y="384" width="30" height="166" rx="14" fill="#aeb3ba"/>
+    <rect x="312" y="398" width="8" height="138" rx="4" fill="#e3e5e8"/>
+    <circle cx="320" cy="302" r="126" fill="#16191e" stroke="#aeb3ba" stroke-width="12"/>
+    <circle cx="320" cy="302" r="106" fill="#0d0f12" stroke="#4b5058" stroke-width="3"/>
+    <circle cx="320" cy="302" r="89" fill="#171a1f" stroke="#d2d5da" stroke-width="2"/>
+    <circle cx="320" cy="302" r="72" fill="#0d0f12" stroke="#525861" stroke-width="2"/>
+    <path d="M276 266a62 62 0 0 1 87-13" fill="none" stroke="#f0f1f3" stroke-width="5" stroke-linecap="round"/>
+    <circle cx="320" cy="302" r="9" fill="#f4f5f6"/>
+    <circle cx="320" cy="302" r="3" fill="#0a0a0a"/>
+  </g>
+
+  <g>
+    <path d="M156 490h94v-32h46v32h56v-54h48v54h83" fill="none" stroke="#858b94" stroke-width="3" stroke-linejoin="round"/>
+    <path d="M170 512h70v34h62v-30h70v30h94" fill="none" stroke="#4d535c" stroke-width="2" stroke-linejoin="round"/>
+    <path d="M188 466v-30h42v-26m226 56v-36h-44v-36" fill="none" stroke="#646a73" stroke-width="2"/>
+    <g fill="#bfc3c9">
+      <circle cx="156" cy="490" r="5"/><circle cx="250" cy="490" r="5"/>
+      <circle cx="296" cy="490" r="5"/><circle cx="352" cy="490" r="5"/>
+      <circle cx="400" cy="490" r="5"/><circle cx="483" cy="490" r="5"/>
+      <circle cx="188" cy="466" r="4"/><circle cx="230" cy="410" r="4"/>
+      <circle cx="444" cy="394" r="4"/>
+    </g>
+  </g>
+
+  <g>
+    <rect x="226" y="574" width="188" height="74" rx="8" fill="#1b1e23" stroke="#6b717a" stroke-width="2"/>
+    <rect x="238" y="586" width="164" height="48" rx="4" fill="#101216"/>
+    <path d="M250 610h28l12-14 14 26 14-20 12 8h58" fill="none" stroke="#d6d9de" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="304" cy="622" r="6" fill="#fff"/>
+    <circle cx="304" cy="622" r="15" fill="none" stroke="#aeb3ba" stroke-width="2" opacity=".7"/>
+  </g>
+
+  <g fill="#d8dbe0">
+    <rect x="244" y="666" width="152" height="4" rx="2" opacity=".7"/>
+    <circle cx="216" cy="688" r="3"/><circle cx="424" cy="688" r="3"/>
+    <circle cx="320" cy="706" r="4" opacity=".65"/>
+  </g>
+</svg>
