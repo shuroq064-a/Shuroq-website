@@ -49,6 +49,10 @@ export interface AnimatedFooterProps {
   hoverCharColor?: string;
   /** Number of columns each image is sampled to. Defaults to 80. */
   columns?: number;
+  /** Width of each hand image. Defaults to 32% of the footer width. */
+  handWidth?: string;
+  /** Bottom inset for the display heading. Defaults to 32px. */
+  headingBottomPadding?: string;
   /** Pixel size of each ASCII cell. Defaults to 20. */
   cellSize?: number;
   /** Font size (px) of the ASCII glyphs. Defaults to 18. */
@@ -193,6 +197,8 @@ export function AnimatedFooter({
   hoverCharColor,
   asciiChars = DEFAULT_ASCII_CHARS,
   columns = 80,
+  handWidth = "32%",
+  headingBottomPadding = "32px",
   cellSize = 20,
   fontSize = 18,
   parallaxStrength = 20,
@@ -496,11 +502,10 @@ export function AnimatedFooter({
             }
           }
         },
-        // Wait until the footer has climbed to the upper half of the viewport.
-        // At the old `threshold: 0.35` the hands were still half below the fold
-        // when the curtain opened, so they read as rising from the bottom; by
-        // then they are fully on screen and glide in from the sides.
-        { root: getScrollParent(root), rootMargin: "0px 0px -60% 0px", threshold: 0 },
+        // Trigger before the final scroll position. A very negative bottom
+        // margin can leave a short footer (or the page's maximum scroll offset)
+        // outside the observer root forever, keeping the hands off-canvas.
+        { root: getScrollParent(root), rootMargin: "0px 0px -35% 0px", threshold: 0 },
       );
       observer.observe(root);
     } else {
@@ -545,22 +550,25 @@ export function AnimatedFooter({
       >
         <div
           ref={leftWrapRef}
-          className="relative w-[32%] min-w-[200px] max-w-[560px] will-change-transform"
-          style={{ transform: `translateX(-${offEdge}%)` }}
+          className="relative min-w-[200px] max-w-[560px] will-change-transform"
+          style={{ width: handWidth, transform: `translateX(-${offEdge}%)` }}
         >
           <canvas ref={leftCanvasRef} className="block h-auto w-full" />
         </div>
         <div
           ref={rightWrapRef}
-          className="relative w-[32%] min-w-[200px] max-w-[560px] will-change-transform"
-          style={{ transform: `translateX(${offEdge}%)` }}
+          className="relative min-w-[200px] max-w-[560px] will-change-transform"
+          style={{ width: handWidth, transform: `translateX(${offEdge}%)` }}
         >
           <canvas ref={rightCanvasRef} className="block h-auto w-full" />
         </div>
       </div>
 
       {/* Display headings */}
-      <div className="absolute inset-x-0 bottom-0 flex items-end justify-center gap-4 p-8">
+      <div
+        className="absolute inset-x-0 bottom-0 flex items-end justify-center gap-4 p-8"
+        style={{ paddingBottom: headingBottomPadding }}
+      >
         {headingLines.map((word, wi) => (
           <h2
             key={`${word}-${wi}`}

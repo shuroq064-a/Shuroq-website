@@ -1,0 +1,13 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "mcp": {
+    "servers": {
+      "design-master": {
+        "type": "local",
+        "command": ["node", ".opencode/design-master-mcp.mjs"],
+        "cwd": ".",
+        "codemode": false
+      }
+    }
+  }
+}

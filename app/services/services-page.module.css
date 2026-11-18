@@ -1,5 +1,11 @@
 .page {
   --font-body: var(--font-display);
+  /* Service cards need a visible tone step in light mode as well as dark mode. */
+  --card: color-mix(in srgb, var(--fg) 10%, var(--bg));
+  --card-foreground: var(--fg);
+  --secondary: color-mix(in srgb, var(--fg) 12%, var(--bg));
+  --secondary-foreground: var(--fg);
+  --muted-foreground: color-mix(in srgb, var(--fg) 66%, var(--bg));
   width: 100%;
   overflow: clip;
   background: var(--bg);
@@ -13,6 +19,25 @@
 }
 
 .page :global(.site-footer-inverted) {
+  --background: #000;
+  --foreground: #fff;
+  --surface: rgb(255 255 255 / 8%);
+  --surface-raised: rgb(255 255 255 / 10%);
+  --surface-muted: rgb(255 255 255 / 12%);
+  --text-secondary: rgb(255 255 255 / 68%);
+  --text-muted: rgb(255 255 255 / 52%);
+  --border: rgb(255 255 255 / 16%);
+  --border-subtle: rgb(255 255 255 / 10%);
+  --border-strong: rgb(255 255 255 / 30%);
+  --warning: var(--warn);
+  --tracking-body: -0.01em;
+  --radius-control: 999px;
+  --control-height-md: 44px;
+  --duration-fast: 160ms;
+  --duration-standard: 240ms;
+  --ease-enter: cubic-bezier(0.22, 1, 0.36, 1);
+  --space-10: 40px;
+  --space-16: 64px;
   border-top: 0;
 }
 
@@ -66,6 +91,24 @@
     transform var(--duration-fast) var(--ease-ui-out),
     background-color var(--duration-fast) var(--ease-ui-out),
     color var(--duration-fast) var(--ease-ui-out);
+}
+
+.heroActions :global(.btn-black) {
+  background: #fff;
+  color: #111;
+  transition: background-color 180ms var(--ease-ui-out), color 180ms var(--ease-ui-out), transform 180ms var(--ease-ui-out), box-shadow 180ms var(--ease-ui-out);
+}
+
+.heroActions :global(.btn-black:hover) {
+  background: #e8e8e8;
+  color: #000;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgb(0 0 0 / 18%);
+}
+
+.heroActions :global(.btn-black:focus-visible) {
+  outline: 2px solid #fff;
+  outline-offset: 4px;
 }
 
 .heroActions a:active,
@@ -130,8 +173,8 @@
   align-items: center;
   padding: 0 12px;
   border-radius: 14px;
-  background: color-mix(in srgb, var(--fg) 4%, var(--bg));
-  color: var(--muted);
+  background: color-mix(in srgb, var(--fg) 8%, var(--bg));
+  color: var(--fg);
   font-size: 14px;
   line-height: 1.25;
   transition:
@@ -141,9 +184,77 @@
 }
 
 .serviceIndex a:hover {
-  color: var(--fg);
-  background: color-mix(in srgb, var(--fg) 8%, var(--bg));
+  background: color-mix(in srgb, var(--fg) 14%, var(--bg));
   transform: translateY(-2px);
+}
+
+.featuredServices {
+  padding: 36px 0 112px;
+}
+
+.featuredInner,
+.exploreInner {
+  display: grid;
+  grid-template-columns: minmax(230px, 0.68fr) minmax(0, 1fr);
+  align-items: start;
+  gap: clamp(40px, 7vw, 100px);
+}
+
+.featuredHeading,
+.exploreHeading {
+  position: sticky;
+  top: 112px;
+  max-width: 440px;
+}
+
+.sectionEyebrow {
+  display: inline-block;
+  margin-bottom: 18px;
+  color: var(--meta);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+}
+
+.featuredHeading h2,
+.exploreHeading h2 {
+  font-size: clamp(38px, 4.6vw, 58px);
+  line-height: 1.03;
+  letter-spacing: -0.045em;
+}
+
+.featuredHeading > p,
+.exploreHeading > p {
+  margin: 18px 0 0;
+  color: var(--muted);
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+.expandableServices {
+  min-width: 0;
+}
+
+.expandableServices :global(ul > li > button) {
+  background: var(--card);
+  color: var(--fg);
+  transition: background-color 180ms var(--ease-ui-out), transform 180ms var(--ease-ui-out), color 180ms var(--ease-ui-out);
+}
+
+.expandableServices :global(ul > li > button:hover) {
+  background: var(--secondary);
+  color: var(--fg);
+  transform: translateY(-2px);
+}
+
+.expandableServices :global(ul > li > button:focus-visible) {
+  outline: 2px solid var(--fg);
+  outline-offset: 3px;
+}
+
+.exploreServices {
+  padding: 104px 0 116px;
+  background: color-mix(in srgb, var(--fg) 5%, var(--bg));
 }
 
 .serviceSection {
@@ -164,11 +275,11 @@
   min-height: 610px;
   padding: clamp(28px, 4vw, 56px);
   border-radius: 28px;
-  background: color-mix(in srgb, var(--fg) 3%, var(--bg));
+  background: color-mix(in srgb, var(--fg) 8%, var(--bg));
 }
 
 .warmSection .serviceRow {
-  background: color-mix(in srgb, var(--fg) 5%, var(--bg));
+  background: color-mix(in srgb, var(--fg) 10%, var(--bg));
 }
 
 .reverse .serviceArtwork {
@@ -187,7 +298,7 @@
   padding: 10px;
   overflow: hidden;
   border-radius: 24px;
-  background: color-mix(in srgb, var(--fg) 5%, var(--bg));
+  background: color-mix(in srgb, var(--fg) 8%, var(--bg));
 }
 
 .serviceImage {
@@ -247,7 +358,7 @@
   align-items: center;
   padding: 10px 12px 10px 27px;
   border-radius: 12px;
-  background: color-mix(in srgb, var(--fg) 4%, var(--bg));
+  background: color-mix(in srgb, var(--fg) 7%, var(--bg));
   color: var(--fg);
   font-size: 14px;
   line-height: 1.35;
@@ -280,7 +391,7 @@
   min-height: 42px;
   padding: 0 12px;
   border-radius: 999px;
-  background: color-mix(in srgb, var(--fg) 5%, var(--bg));
+  background: color-mix(in srgb, var(--fg) 8%, var(--bg));
   color: var(--fg);
   font-size: 14px;
   font-weight: 540;
@@ -292,8 +403,8 @@
 }
 
 .serviceLinks a:hover {
-  background: color-mix(in srgb, var(--fg) 10%, var(--bg));
-  transform: translateY(-1px);
+  background: color-mix(in srgb, var(--fg) 14%, var(--bg));
+  transform: translateY(-2px);
 }
 
 .cta {
@@ -308,8 +419,8 @@
   gap: 40px;
   padding: clamp(32px, 5vw, 64px);
   border-radius: 28px;
-  background: var(--fg);
-  color: var(--bg);
+  background: #000;
+  color: #fff;
 }
 
 .ctaInner > div {
@@ -317,17 +428,34 @@
 }
 
 .ctaInner h2 {
-  color: var(--bg);
+  color: #fff;
 }
 
 .ctaInner p {
   max-width: 600px;
   margin: 14px 0 0;
-  color: color-mix(in srgb, var(--bg) 72%, transparent);
+  color: rgb(255 255 255 / 72%);
 }
 
 .ctaInner > a {
   flex: 0 0 auto;
+}
+
+.ctaInner > :global(.btn-white) {
+  background: #fff;
+  color: #000;
+  transition: background-color 180ms var(--ease-ui-out), color 180ms var(--ease-ui-out), transform 180ms var(--ease-ui-out);
+}
+
+.ctaInner > :global(.btn-white:hover) {
+  background: #e9e9e9;
+  color: #000;
+  transform: translateY(-2px);
+}
+
+.ctaInner > :global(.btn-white:focus-visible) {
+  outline: 2px solid #fff;
+  outline-offset: 4px;
 }
 
 .animatedFooter {
@@ -337,6 +465,7 @@
   min-height: 520px;
   overflow: hidden;
   border-radius: 28px 28px 0 0;
+  background: #000;
 }
 
 .reveal {
@@ -383,6 +512,26 @@
 
   .introInner h2 {
     font-size: clamp(38px, 7vw, 48px);
+  }
+
+  .featuredServices {
+    padding: 24px 0 82px;
+  }
+
+  .featuredInner,
+  .exploreInner {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+
+  .featuredHeading,
+  .exploreHeading {
+    position: static;
+    max-width: 680px;
+  }
+
+  .exploreServices {
+    padding: 76px 0 84px;
   }
 
   .serviceSection {
@@ -494,6 +643,17 @@
     padding: 0 10px;
     border-radius: 12px;
     font-size: 12px;
+  }
+
+  .featuredHeading h2,
+  .exploreHeading h2 {
+    font-size: clamp(36px, 10vw, 48px);
+  }
+
+  .featuredHeading > p,
+  .exploreHeading > p {
+    margin-top: 14px;
+    font-size: 15px;
   }
 
   .serviceSection {

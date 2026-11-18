@@ -703,6 +703,29 @@ img { max-width: 100%; display: block; }
   --space-16: 64px;
 }
 
+/* Service pages use an ink footer in both themes so it joins the hands close cleanly. */
+.service-page-footer {
+  --background: #000;
+  --foreground: #fff;
+  --surface: rgb(255 255 255 / 8%);
+  --surface-raised: rgb(255 255 255 / 10%);
+  --surface-muted: rgb(255 255 255 / 12%);
+  --text-secondary: rgb(255 255 255 / 68%);
+  --text-muted: rgb(255 255 255 / 52%);
+  --border: rgb(255 255 255 / 16%);
+  --border-subtle: rgb(255 255 255 / 10%);
+  --border-strong: rgb(255 255 255 / 30%);
+  --warning: var(--warn);
+  --tracking-body: -0.01em;
+  --radius-control: 999px;
+  --control-height-md: 44px;
+  --duration-fast: 160ms;
+  --duration-standard: 240ms;
+  --ease-enter: cubic-bezier(0.22, 1, 0.36, 1);
+  --space-10: 40px;
+  --space-16: 64px;
+}
+
 /* Arc contact section on the paper theme.
    The block ships its own token names (--text-secondary, --radius-panel, …).
    They are remapped onto this site's tokens so the section reads like the rest

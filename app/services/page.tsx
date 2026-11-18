@@ -4,6 +4,7 @@ import Link from "next/link";
 import SiteNav from "@/components/nav/site-nav";
 import { FlareWord } from "@/components/hero/flare/flare-word";
 import { AnimatedFooter } from "@/components/unlumen-ui/animated-footer";
+import { ExpandableCards } from "@/components/ui/expandable-cards";
 import {
   SiteFooter,
   type SiteFooterColumn,
@@ -77,7 +78,7 @@ const services = [
     subtitle: "Technology shaped around the way your business works.",
     description:
       "From early product thinking to dependable enterprise software, we build digital experiences and systems around real operational needs.",
-    capabilities: [
+  capabilities: [
       "ERP and enterprise applications",
       "Web and mobile products",
       "Digital innovation and cloud services",
@@ -179,6 +180,48 @@ const services = [
   },
 ];
 
+const primaryServiceIds = new Set([
+  "product-engineering",
+  "assurance",
+  "automation",
+  "data-analytics",
+]);
+
+const primaryServices = services.filter((service) =>
+  primaryServiceIds.has(service.id),
+);
+
+const detailRoutes: Record<string, string> = {
+  "product-engineering": "/cutting-edge/",
+  assurance: "/assurance/",
+  automation: "/automate/",
+  "data-analytics": "/data-analytics/",
+};
+
+const expandServiceCards = primaryServices.map((service) => ({
+  id: service.id,
+  title: service.title,
+  subtitle: service.subtitle,
+  image: service.image,
+  href: detailRoutes[service.id],
+  cta: "Explore service",
+  content: (
+    <div>
+      <p>{service.description}</p>
+      <ul className="mt-4 grid gap-2">
+        {service.capabilities.map((capability) => (
+          <li
+            key={capability}
+            className="rounded-xl border border-border bg-muted/50 px-3 py-2 text-foreground"
+          >
+            {capability}
+          </li>
+        ))}
+      </ul>
+    </div>
+  ),
+}));
+
 const footerBrandMark = (
   <Image
     src="/logo.png"
@@ -226,18 +269,43 @@ export default function ServicesPage() {
             our teams bring product, platform, data, and operations expertise
             together.
           </p>
-          <nav className={styles.serviceIndex} aria-label="Explore service areas">
+          <div className={styles.serviceIndex} aria-label="Explore service areas">
             {services.map((service) => (
-              <a key={service.id} href={`#${service.id}`}>
+              <a
+                key={service.id}
+                href={detailRoutes[service.id] ?? `#${service.id}`}
+              >
                 {service.title}
               </a>
             ))}
-          </nav>
+          </div>
+        </div>
+      </section>
+
+      <section className={styles.featuredServices} aria-labelledby="featured-services-title">
+        <div className={`container ${styles.featuredInner}`}>
+          <header className={styles.featuredHeading}>
+            <div>
+              <h2 id="featured-services-title" className="section-title">
+                Core services
+              </h2>
+            </div>
+            <p className="body-lg">
+              Choose a service to see how Shuroq can help with the systems,
+              quality, workflows, and data behind your next step.
+            </p>
+          </header>
+          <ExpandableCards
+            items={expandServiceCards}
+            radius={20}
+            bounce={0.12}
+            className={styles.expandableServices}
+          />
         </div>
       </section>
 
       <div id="service-catalog" className={styles.catalog}>
-        {services.map((service, index) => (
+        {services.filter((service) => !primaryServiceIds.has(service.id)).map((service, index) => (
           <section
             key={service.id}
             id={service.id}
@@ -304,7 +372,7 @@ export default function ServicesPage() {
       </section>
 
       <SiteFooter
-        className="site-footer-inverted"
+        className="site-footer-inverted service-page-footer"
         brand={{ name: "Shuroq", href: "/", mark: footerBrandMark }}
         tagline="Technology Services & Digital Engineering Company. Focused on dependable digital systems."
         columns={footerColumns}
@@ -320,6 +388,8 @@ export default function ServicesPage() {
           headingLines={["Shuroq"]}
           leftImage="/animated-footer/hand-left.jpg"
           rightImage="/animated-footer/hand-right.jpg"
+          background="#000"
+          textColor="#fff"
           columns={80}
           cellSize={20}
           fontSize={18}
