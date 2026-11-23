@@ -574,6 +574,31 @@ Section-by-section, band by band.
 | 4 | CTA "Start with one conversation." | Inverted | — |
 | 5 | Animated ASCII footer + site footer | Black | — |
 
+### `/industries`
+
+| # | Section | Band | Component |
+| --- | --- | --- | --- |
+| 1 | Hero — flare word, "Deep engineering, applied where it matters" | Black | FlareWord |
+| 2 | "One standard, many contexts" — two-column statement | Paper | `grid-2` |
+| 3 | "Where we work" — five expanding industry rows | Warm | HoverExpand |
+| 4 | "How we approach an industry" — three hairline cards | Paper | — |
+| 5 | CTA "Your sector, our engineering" | Inverted | — |
+| 6 | Animated ASCII footer + site footer | Black | — |
+
+### `/industries/<slug>` — telecom, automotive, bfsi, healthcare, finance
+
+Each industry is a separate, fully static route sharing one template.
+
+| # | Section | Band | Component |
+| --- | --- | --- | --- |
+| 1 | Hero — flare word, eyebrow, industry headline, overview / contact CTAs | Black | FlareWord |
+| 2 | Industry overview — sticky heading, lead, one hairline image | Paper | `grid-2`, Image |
+| 3 | Key solutions — four numbered rows, closed by default | Warm | Accordion |
+| 4 | Industry impact — four count-up numbers in a hairline grid | Paper | IndustryStats |
+| 5 | Explore other industries — hairline index of the other four | Warm | — |
+| 6 | CTA | Inverted | — |
+| 7 | Animated ASCII footer + site footer | Black | — |
+
 ---
 
 ## Motion
@@ -643,8 +668,13 @@ in-file credit comments intact — several licences require attribution.
 | `components/animated/animated-beam/**`, `components/showcase/connected-tools.tsx` | In-house beam engine + vendored brand icons (`npx @thesvg/cli add`) | — | No upstream file |
 | `components/smooth-scroll.tsx` | Lenis | https://github.com/darkroomengineering/lenis | MIT |
 | `components/cards/CardStampArc.tsx` | Amicro — Card Stamp Arc | https://amicro.dev | MIT (header credit required) |
+| `components/industry/**` | In-house — industry data, shared page template, stats band | — | No upstream file |
 | `components/hero/flare/**` | Vercel Labs vgpu — nextjs-flare example (WebGPU word flare) | https://github.com/vercel-labs/vgpu | MIT |
 | `components/arc/blocks/contact-section/contact-section.tsx` | Arc UI registry — Contact Section | https://uiarc.dev | Registry source |
+| `components/industry/industry-stats.tsx` | Arc UI registry — Stats Band (pattern adapted to site tokens) | https://uiarc.dev | Registry source |
+| `components/arc/blocks/logo-marquee/**` | Arc UI registry — Logo Marquee (vendored, mono tone, tokens remapped; visible pause control omitted) | https://uiarc.dev | Registry source |
+| `components/arc/expandable-text/**` | Arc UI registry — Expandable Text (vendored, tokens remapped) | https://uiarc.dev | Registry source |
+| `components/arc/accordion/**` | Arc UI registry — Accordion (vendored, numbered and remapped to site tokens) | https://uiarc.dev | Registry source |
 
 Registry configuration (`components.json`):
 
@@ -672,6 +702,8 @@ app/
   careers/page.tsx      careers
   shuroq-way/page.tsx   the shuroq way
   contact/page.tsx      contact
+  industries/page.tsx   industries overview
+  industries/<slug>/     five static industry pages
   globals.css           every token + layout primitive
 components/
   nav/site-nav.tsx      floating glass nav
@@ -698,6 +730,9 @@ public/
 
 | Date | Decision |
 | --- | --- |
+| 2026-11 | Industries gained three vendored design-master components, retrieved and reviewed via the MCP: an Arc logo marquee (mono tone, hover-pause, reduced-motion wrap; visible pause control omitted by request) showing each sector's platform marks from `public/icons`; an Arc expandable-text clamp on the long overview/intro copy; and an Arc accordion for the numbered solutions, with keyboard disclosure semantics and reduced-motion behavior. The components are re-themed through `.arc-industry-tokens` and their own scoped styles — no new colour, radius, spacing or font size. Candidates that broke the token contract (heavy-shadow cards, mount-only text reveals) were reviewed and rejected. |
+| 2026-11 | Industries overview and detail pages now use the homepage's `site-footer-inverted` mapping for the site footer, so the footer surface and text flip correctly with light/dark theme. Their animated ASCII closing section continues to use the same theme-aware `AnimatedFooter` component as the homepage. |
+| 2026-11 | Industries rebuilt for parity with the rest of the site: a static `/industries` overview plus five fully static industry routes (telecom, automotive, bfsi, healthcare, finance) sharing one template. The legacy `public/industries/index.html` was retired to `public/.legacy`. The impact stats band follows the design-master Arc pattern but uses this site's tokens only — no new colours, radii or spacing. Nav links in both the Next.js and legacy navs now point at the new routes, and the old `/industries` redirects were removed. |
 | 2026-11 | Expertise flow on `/shuroq-way` expanded from 33 to 72 marks, now covering the full stack the site claims: frontend (Angular, Svelte, Astro, Tailwind CSS, Redux, Vite), backend (Node.js, Python, Go, Rust, PHP, Laravel, Django, FastAPI, NestJS, Spring Boot, .NET), databases (PostgreSQL, MongoDB, GraphQL), cloud (Microsoft Azure, Cloudflare, DigitalOcean, Firebase, Vercel), Kubernetes ecosystem (ArgoCD, Istio, Rancher) and AI/ML/NLP (Gemini, Anthropic, LangChain, PyTorch, TensorFlow, Keras, scikit-learn, Hugging Face, spaCy, NVIDIA, Ollama, MLflow). Marks fetched via the thesvg.org MCP and self-hosted in `public/icons`; white-ink brands (Go, Rust, PHP, Vercel) use light+dark file pairs, black-ink brands use the existing `invert` treatment. Marquee duration scaled 32s → 72s so the drift speed stays constant with the longer loop. |
 | 2026-11 | Home hero word rebuilt as a WebGPU flare, ported byte-for-byte from the Vercel Labs vgpu `nextjs-flare` example: identical shaders, constants and renderer loop (including pointer-tracked glow), and the same raster mechanism - SVG string → `Image` → `drawImage`. The SVG swaps the Next.js glyph paths for the "Shuroq" wordmark: stroked `<text>` (`fill="none" stroke-width="2"`, gradient fading only near the tails) with the site's own Manrope woff2 embedded as a data URI (`word-font.ts`, since SVG-in-Image can only see data URIs). Stroked outlines, never a fill - a fill blows out into a blob under the rim/scatter passes. |
 | 2026-11 | Flare presentation on the site: the demo's canvas is opaque and IS the whole page, so on the hero the wrapper **screen-blends** into the black panel and a radial mask feathers the canvas edges (rays/grain never end on a straight box line); the word spans ~72% of the flare box (pipeline fit, mask solid to 72% of the radius so the ink ends stay bright). The flare replaced the old ASCII hero word on **every** page (about, careers, contact, the-shuroq-way) and `floating-ascii-word.tsx` was removed. Nav: `Home` is now a standalone first item, before the `About Us` menu. |

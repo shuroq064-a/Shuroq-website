@@ -77,8 +77,6 @@ const nextConfig: NextConfig = {
         destination: "/data-analytics",
         permanent: false,
       },
-      { source: "/industries", destination: "/industries/index.html", permanent: false },
-      { source: "/industries/", destination: "/industries/index.html", permanent: false },
       {
         source: "/product-engineering",
         destination: "/product-engineering/index.html",

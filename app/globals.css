@@ -726,6 +726,49 @@ img { max-width: 100%; display: block; }
   --space-16: 64px;
 }
 
+/* Vendored Arc blocks used on the industries routes (logo marquee, expandable
+   text and accordion). They ship their own token names; remap them onto this site's palette,
+   type and spacing so the blocks read like the rest of the site — ink on paper,
+   hairlines instead of shadows, 8px panels. No new colour, radius or size. */
+.arc-industry-tokens {
+  --background: var(--bg);
+  --foreground: var(--fg);
+  --surface: var(--bg);
+  --text-secondary: var(--muted);
+  --text-muted: color-mix(in srgb, var(--fg) 45%, transparent);
+  --border-subtle: var(--border-soft);
+  --radius-surface: 8px;
+  --text-sm: 16px;
+  --text-base: 16px;
+  --text-lg: 20px;
+  --text-2xl: 26px;
+  --text-3xl: 64px;
+  --font-body: "figmaSans", "figmaSans Fallback", "SF Pro Display", system-ui, sans-serif;
+  --font-display: "Manrope Variable", "figmaSans", "SF Pro Display", system-ui, sans-serif;
+  --tracking-body: -0.14px;
+  --tracking-display: -1.4px;
+  --leading-body: 1.4;
+  --leading-display: 1.1;
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-12: 48px;
+  --control-height-lg: 50px;
+  --duration-fast: 150ms;
+  --duration-standard: 200ms;
+  --duration-considered: 360ms;
+  --ease-standard: cubic-bezier(0.2, 0, 0, 1);
+  --ease-enter: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* The vendored toggle / pause controls keep a visible focus ring. */
+.arc-industry-tokens button:focus-visible {
+  outline: 2px dashed var(--fg);
+  outline-offset: 2px;
+}
+
 /* Arc contact section on the paper theme.
    The block ships its own token names (--text-secondary, --radius-panel, …).
    They are remapped onto this site's tokens so the section reads like the rest

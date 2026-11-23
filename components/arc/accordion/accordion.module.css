@@ -1,0 +1,81 @@
+/* Arc UI accordion pattern, adapted to the Shuroq ink/paper token system. */
+.accordion {
+  width: 100%;
+  border-top: 1px solid var(--border);
+  color: var(--fg);
+  font-family: var(--font-body);
+}
+
+.item { border-bottom: 1px solid var(--border); }
+.header { margin: 0; }
+
+.trigger {
+  display: flex;
+  width: 100%;
+  min-height: 64px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 16px 0;
+  border: 0;
+  background: transparent;
+  color: var(--fg);
+  font: inherit;
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 1.35;
+  text-align: left;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: color 150ms cubic-bezier(0.2, 0, 0, 1);
+}
+
+.triggerLabel {
+  display: flex;
+  min-width: 0;
+  align-items: baseline;
+  gap: 16px;
+}
+
+.index {
+  flex: none;
+  color: var(--muted);
+  font-size: 12px;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.04em;
+}
+
+.icon {
+  display: inline-flex;
+  flex: 0 0 auto;
+  color: var(--muted);
+  transition: color 150ms cubic-bezier(0.2, 0, 0, 1);
+}
+
+.trigger[data-state="open"] .icon { color: var(--fg); }
+.panel { overflow: hidden; color: var(--muted); font-size: 16px; line-height: 1.5; }
+.panelInner { max-width: 62ch; overflow-wrap: anywhere; padding: 0 48px 24px 28px; }
+
+.lg .trigger { min-height: 76px; }
+.lg .panel { line-height: 1.65; }
+
+@media (hover: hover) and (pointer: fine) {
+  .trigger:hover { color: var(--muted); }
+  .trigger:hover .icon { color: var(--fg); }
+}
+
+.trigger:focus-visible {
+  outline: 2px dashed var(--fg);
+  outline-offset: 3px;
+}
+
+@media (max-width: 520px) {
+  .trigger { min-height: 60px; font-size: 16px; }
+  .triggerLabel { gap: 12px; }
+  .panelInner { padding-right: 24px; padding-left: 24px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .trigger,
+  .icon { transition: none; }
+}

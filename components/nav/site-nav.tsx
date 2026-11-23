@@ -83,11 +83,11 @@ export default function SiteNav() {
       title: "INDUSTRIES",
       links: [
         { href: "/industries/", label: "Industries" },
-        { href: "/industries/#telecom", label: "Telecom" },
-        { href: "/industries/#automotive", label: "Automotive" },
-        { href: "/industries/#bfsi", label: "BFSI" },
-        { href: "/industries/#healthcare", label: "Healthcare" },
-        { href: "/industries/#finance", label: "Finance" },
+        { href: "/industries/telecom/", label: "Telecom" },
+        { href: "/industries/automotive/", label: "Automotive" },
+        { href: "/industries/bfsi/", label: "BFSI" },
+        { href: "/industries/healthcare/", label: "Healthcare" },
+        { href: "/industries/finance/", label: "Finance" },
       ],
     },
     {
