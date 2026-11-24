@@ -675,6 +675,8 @@ in-file credit comments intact — several licences require attribution.
 | `components/arc/blocks/logo-marquee/**` | Arc UI registry — Logo Marquee (vendored, mono tone, tokens remapped; visible pause control omitted) | https://uiarc.dev | Registry source |
 | `components/arc/expandable-text/**` | Arc UI registry — Expandable Text (vendored, tokens remapped) | https://uiarc.dev | Registry source |
 | `components/arc/accordion/**` | Arc UI registry — Accordion (vendored, numbered and remapped to site tokens) | https://uiarc.dev | Registry source |
+| `components/arc/expandable-card/**` | Arc UI registry — Expandable Card (vendored via design-master, tokens remapped; service pages) | https://uiarc.dev | Registry source |
+| `components/services/**` | In-house — separate page layouts and copy for the two product-engineering routes; only the hero and closing bands are shared | — | No upstream file |
 
 Registry configuration (`components.json`):
 
@@ -698,6 +700,8 @@ Registry configuration (`components.json`):
 app/
   layout.tsx            theme provider, Lenis, Agentation (dev only)
   page.tsx              home
+  product-engineering/  product engineering services
+  cloud-native/         cloud native product development
   about/page.tsx        about
   careers/page.tsx      careers
   shuroq-way/page.tsx   the shuroq way
@@ -710,7 +714,8 @@ components/
   hero/                 ascii word, headline
   hero/flare/           webgpu word flare (every page hero wordmark)
   ui/                   liquid glass, accordion, organic card
-  arc/                  footer block, button, theme switch, segmented control
+  arc/                  footer block, button, theme switch, expandable card
+  services/             two distinct page layouts, shell + route copy
   unlumen-ui/           menu, orbit wheel, hover expand, sticky deck, ascii footer
   skiper/skiper47.tsx   poster carousel
   animated/             beam engine
@@ -730,6 +735,7 @@ public/
 
 | Date | Decision |
 | --- | --- |
+| 2026-11 | Product Engineering Services and Cloud Native Product Development became Next.js routes with deliberately different layouts. `/product-engineering` is an editorial service index: a bento-style card grid plus the vendored Arc accordion for the four-step process and a ruled commitments list. `/cloud-native` is a platform page: vendored Arc Expandable Cards (closed by default, spring-driven) for capabilities, the vendored Arc segmented control for three starting points, a typographic platform-layer diagram and ruled use cases. Both use the site-wide hero/closing bands and the mono Arc logo marquee; tokens for the vendored blocks are remapped through `.arc-industry-tokens` / `.arc-service-tokens`. Legacy static pages moved to `public/.legacy`. No new colour, radius, spacing or font size. |
 | 2026-11 | Industries gained three vendored design-master components, retrieved and reviewed via the MCP: an Arc logo marquee (mono tone, hover-pause, reduced-motion wrap; visible pause control omitted by request) showing each sector's platform marks from `public/icons`; an Arc expandable-text clamp on the long overview/intro copy; and an Arc accordion for the numbered solutions, with keyboard disclosure semantics and reduced-motion behavior. The components are re-themed through `.arc-industry-tokens` and their own scoped styles — no new colour, radius, spacing or font size. Candidates that broke the token contract (heavy-shadow cards, mount-only text reveals) were reviewed and rejected. |
 | 2026-11 | Industries overview and detail pages now use the homepage's `site-footer-inverted` mapping for the site footer, so the footer surface and text flip correctly with light/dark theme. Their animated ASCII closing section continues to use the same theme-aware `AnimatedFooter` component as the homepage. |
 | 2026-11 | Industries rebuilt for parity with the rest of the site: a static `/industries` overview plus five fully static industry routes (telecom, automotive, bfsi, healthcare, finance) sharing one template. The legacy `public/industries/index.html` was retired to `public/.legacy`. The impact stats band follows the design-master Arc pattern but uses this site's tokens only — no new colours, radii or spacing. Nav links in both the Next.js and legacy navs now point at the new routes, and the old `/industries` redirects were removed. |

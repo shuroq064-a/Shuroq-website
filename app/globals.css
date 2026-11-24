@@ -769,6 +769,18 @@ img { max-width: 100%; display: block; }
   outline-offset: 2px;
 }
 
+/* Extra Arc tokens used by the vendored Expandable Card on the service pages.
+   Hairlines and tonal fills only — no new colour, radius, spacing or shadow. */
+.arc-service-tokens {
+  --surface-muted: color-mix(in srgb, var(--fg) 5%, transparent);
+  --border-strong: var(--border);
+  --radius-panel: 8px;
+  --radius-control: 50px;
+  --control-height-sm: 38px;
+  --shadow-resting: none;
+  --duration-instant: 100ms;
+}
+
 /* Arc contact section on the paper theme.
    The block ships its own token names (--text-secondary, --radius-panel, …).
    They are remapped onto this site's tokens so the section reads like the rest
