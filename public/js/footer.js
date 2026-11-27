@@ -18,9 +18,9 @@ const footerData = {
         { text: 'Data Analytics', href: '/Data Analytics', icon: 'fas fa-chart-line' }
     ],
     resources: [
-        { text: 'Blogs', href: '/blogs/blogs.html', icon: 'fas fa-newspaper' },
-        { text: 'Events', href: '/events/', icon: 'fas fa-calendar-days' },
-        { text: 'Skill Rubrics', href: '/skill-rubrics/', icon: 'fas fa-chart-column' },
+        { text: 'Blogs', href: '/blogs', icon: 'fas fa-newspaper' },
+        { text: 'Events', href: '/events', icon: 'fas fa-calendar-days' },
+        { text: 'Skill Rubrics', href: '/skill-rubrics', icon: 'fas fa-chart-column' },
         // { text: 'Webinars', href: '#', icon: 'fas fa-video' }
     ],
     contact: [

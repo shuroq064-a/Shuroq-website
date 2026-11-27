@@ -120,15 +120,15 @@ export default function SiteNav() {
   ];
 
   const marketplaceLinks = [
-    { href: "/botkube/", label: "Botkube Enterprise" },
-    { href: "/kubernetes-services/", label: "Managed Services for Kubernetes" },
-    { href: "/fission/", label: "Fission" },
+    { href: "/botkube", label: "Botkube Enterprise" },
+    { href: "/kubernetes-services", label: "Managed Services for Kubernetes" },
+    { href: "/fission", label: "Fission" },
   ];
 
   const resourcesLinks = [
-    { href: "/blogs/blogs.html", label: "Blogs" },
-    { href: "/events/", label: "Events" },
-    { href: "/skill-rubrics/", label: "Skill Rubrics" },
+    { href: "/blogs", label: "Blogs" },
+    { href: "/events", label: "Events" },
+    { href: "/skill-rubrics", label: "Skill Rubrics" },
   ];
 
   return (

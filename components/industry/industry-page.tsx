@@ -35,7 +35,7 @@ export const footerColumns: SiteFooterColumn[] = [
     links: [
       { label: "Cloud Native", href: "/cloud-native/" },
       { label: "Platform Engineering", href: "/platformengineering/" },
-      { label: "Kubernetes Services", href: "/kubernetes-services/" },
+      { label: "Kubernetes Services", href: "/kubernetes-services" },
       { label: "Observability", href: "/observability-consult/" },
     ],
   },
@@ -46,7 +46,7 @@ export const footerColumns: SiteFooterColumn[] = [
       { label: "Careers", href: "/careers/" },
       { label: "The Shuroq Way", href: "/shuroq-way/" },
       { label: "Industries", href: "/industries/" },
-      { label: "Resources", href: "/resources/" },
+      { label: "Blogs", href: "/blogs" },
       { label: "Contact Us", href: "/contact/" },
     ],
   },

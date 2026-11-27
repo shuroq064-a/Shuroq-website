@@ -1,0 +1,405 @@
+.page {
+  width: 100%;
+  overflow: clip;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-display);
+  --muted: color-mix(in srgb, var(--fg) 68%, var(--bg));
+  --border: color-mix(in srgb, var(--fg) 14%, var(--bg));
+}
+
+.page :global(.service-page-footer) {
+  --background: #000;
+  --foreground: #fff;
+  --surface: rgb(255 255 255 / 8%);
+  --surface-muted: rgb(255 255 255 / 12%);
+  --text-secondary: rgb(255 255 255 / 68%);
+  --text-muted: rgb(255 255 255 / 52%);
+  --border: rgb(255 255 255 / 16%);
+  --border-subtle: rgb(255 255 255 / 10%);
+  --border-strong: rgb(255 255 255 / 30%);
+}
+
+/* -------------------------------------------------------------------- hero */
+/* A two-tone panel: the invitation on ink, the clock on paper. */
+
+.hero {
+  margin-top: -80px;
+  padding: 176px 0 88px;
+  background: var(--bg);
+}
+
+.heroPanel {
+  display: grid;
+  grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  overflow: hidden;
+}
+
+.heroCopy {
+  display: grid;
+  align-content: center;
+  gap: 4px;
+  padding: clamp(30px, 4vw, 60px);
+  background: #000;
+  color: #fff;
+}
+
+.eyebrow {
+  margin: 0 0 18px;
+  color: rgb(255 255 255 / 52%);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.heroCopy h1 {
+  margin: 0;
+  font-size: clamp(34px, 4.2vw, 58px);
+  font-weight: 450;
+  line-height: 1.04;
+  letter-spacing: -0.045em;
+}
+
+.heroLead {
+  margin: 20px 0 0;
+  color: rgb(255 255 255 / 72%);
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+.heroActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 30px;
+}
+
+.heroActions :global(.btn-black) {
+  background: #fff;
+  color: #0a0a0a;
+}
+
+.heroActions :global(.btn-glass-light) {
+  background: rgb(255 255 255 / 14%);
+  color: #fff;
+}
+
+.heroClock {
+  display: grid;
+  align-content: center;
+  gap: 22px;
+  padding: clamp(30px, 4vw, 60px);
+  background: color-mix(in srgb, var(--fg) 4%, var(--bg));
+}
+
+.clockLabel {
+  margin: 0;
+  color: var(--muted);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.clockEvent h2 {
+  margin: 10px 0 0;
+  font-size: clamp(24px, 2.6vw, 34px);
+  font-weight: 500;
+  line-height: 1.15;
+  letter-spacing: -0.035em;
+}
+
+.clockFacts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.clockFacts li {
+  padding: 6px 12px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+/* ---------------------------------------------------------------- schedule */
+
+.schedule {
+  padding: clamp(80px, 9vw, 136px) 0;
+  background: color-mix(in srgb, var(--fg) 3%, var(--bg));
+}
+
+.lead {
+  max-width: 640px;
+}
+
+.lead h2 {
+  margin: 0;
+  font-size: clamp(34px, 4.4vw, 56px);
+  font-weight: 450;
+  line-height: 1.06;
+  letter-spacing: -0.045em;
+}
+
+.lead p {
+  margin: 18px 0 0;
+  color: var(--muted);
+  font-size: 17px;
+  line-height: 1.6;
+}
+
+/* The sessions read as a schedule: a date on the left, the session on the
+   right, and the time it starts beside it. */
+.scheduleList {
+  margin: clamp(40px, 5vw, 68px) 0 0;
+  border-top: 1px solid var(--border);
+}
+
+.scheduleRow {
+  display: grid;
+  grid-template-columns: 190px minmax(0, 1fr) 150px;
+  align-items: center;
+  gap: clamp(20px, 3vw, 48px);
+  padding: clamp(26px, 3vw, 38px) 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.scheduleDate span {
+  display: block;
+  color: var(--muted);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.scheduleDate strong {
+  display: block;
+  margin-top: 8px;
+  font-size: 17px;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+}
+
+.scheduleCopy h3 {
+  margin: 0;
+  font-size: clamp(21px, 2vw, 27px);
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: -0.035em;
+}
+
+.scheduleCopy p {
+  margin: 12px 0 0;
+  color: var(--muted);
+  font-size: 16px;
+  line-height: 1.55;
+}
+
+.scheduleMeta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.scheduleMeta span {
+  padding: 5px 11px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  color: var(--muted);
+  font-size: 12.5px;
+}
+
+.scheduleClock {
+  justify-self: end;
+  text-align: right;
+}
+
+/* --------------------------------------------------------------- calendar */
+
+.calendar {
+  padding: clamp(80px, 9vw, 136px) 0;
+  background: var(--bg);
+}
+
+.calendarInner {
+  display: grid;
+  grid-template-columns: minmax(0, 0.72fr) minmax(300px, 1fr);
+  align-items: start;
+  gap: clamp(40px, 6vw, 88px);
+  margin-top: clamp(36px, 4.5vw, 60px);
+}
+
+.calendarPanel {
+  min-width: 0;
+  padding: clamp(20px, 2.4vw, 30px);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: color-mix(in srgb, var(--fg) 3%, var(--bg));
+}
+
+.calendarNote {
+  margin: 0;
+  color: var(--muted);
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+.calendarList {
+  display: grid;
+  gap: 0;
+  margin: 28px 0 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--border);
+}
+
+.calendarList li {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--border-subtle);
+  font-size: 15px;
+}
+
+.calendarList span {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+/* --------------------------------------------------------------- benefits */
+
+.benefits {
+  padding: clamp(80px, 9vw, 136px) 0;
+  background: color-mix(in srgb, var(--fg) 3%, var(--bg));
+}
+
+.benefitGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(24px, 3vw, 48px);
+  margin-top: clamp(40px, 5vw, 68px);
+}
+
+.benefit {
+  display: grid;
+  align-content: start;
+  gap: 12px;
+}
+
+.benefitIcon {
+  display: grid;
+  width: 40px;
+  height: 40px;
+  place-items: center;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+}
+
+.benefit h3 {
+  margin: 4px 0 0;
+  font-size: clamp(19px, 1.8vw, 23px);
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: -0.03em;
+}
+
+.benefit p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.55;
+}
+
+/* -------------------------------------------------------------------- cta */
+
+.cta {
+  padding: clamp(80px, 9vw, 136px) 0;
+  background: #000;
+  color: #fff;
+}
+
+.ctaInner {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(280px, 0.44fr);
+  align-items: center;
+  gap: clamp(32px, 5vw, 72px);
+}
+
+.cta h2 {
+  margin: 0;
+  font-size: clamp(32px, 4.2vw, 56px);
+  font-weight: 440;
+  line-height: 1.04;
+  letter-spacing: -0.05em;
+}
+
+.cta p {
+  max-width: 540px;
+  margin: 20px 0 0;
+  color: rgb(255 255 255 / 70%);
+  font-size: 17px;
+  line-height: 1.55;
+}
+
+.ctaActions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.ctaActions a {
+  justify-content: center;
+}
+
+.ctaActions :global(.btn-black) {
+  background: #fff;
+  color: #0a0a0a;
+}
+
+/* --------------------------------------------------------------- footer */
+
+.animatedFooter {
+  width: 100%;
+  height: clamp(420px, 58vh, 720px);
+  min-height: 420px;
+  overflow: hidden;
+  background: #000;
+}
+
+/* ------------------------------------------------------------ responsive */
+
+@media (max-width: 900px) {
+  .heroPanel,
+  .scheduleRow,
+  .calendarInner,
+  .ctaInner {
+    grid-template-columns: 1fr;
+    gap: 26px;
+  }
+
+  .scheduleClock {
+    justify-self: start;
+    text-align: left;
+  }
+
+  .benefitGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .hero {
+    padding: 146px 0 60px;
+  }
+}

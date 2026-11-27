@@ -624,13 +624,13 @@ function showSolutionsSubmenu() {
                 <h3>Marketplace</h3>
             </div>
             <div class="submenu-items">
-                <a href="/botkube/" class="submenu-item">
+                <a href="/botkube" class="submenu-item">
                     <i class="fas fa-robot"></i> Botkube Enterprise
                 </a>
-                <a href="/kubernetes-services/" class="submenu-item">
+                <a href="/kubernetes-services" class="submenu-item">
                     <i class="fas fa-dharmachakra"></i> Managed Services for Kubernetes
                 </a>
-                <a href="/fission/" class="submenu-item">
+                <a href="/fission" class="submenu-item">
                     <i class="fas fa-atom"></i> Fission
                 </a>
             </div>
@@ -729,13 +729,13 @@ function showResourcesSubmenu() {
                 <h3>Resources</h3>
             </div>
             <div class="submenu-items">
-                <a href="/blogs/blogs.html" class="submenu-item">
+                <a href="/blogs" class="submenu-item">
                     <i class="fas fa-newspaper"></i> Blogs
                 </a>
-                <a href="/events/" class="submenu-item">
+                <a href="/events" class="submenu-item">
                     <i class="fas fa-calendar-days"></i> Events
                 </a>
-                <a href="/skill-rubrics/" class="submenu-item">
+                <a href="/skill-rubrics" class="submenu-item">
                     <i class="fas fa-chart-column"></i> Skill Rubrics
                 </a>
             </div>

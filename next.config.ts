@@ -171,28 +171,38 @@ const nextConfig: NextConfig = {
       { source: "/prometheus", destination: "/observability-consult", permanent: false },
       { source: "/prometheus/", destination: "/observability-consult", permanent: false },
       { source: "/prometheus/index.html", destination: "/observability-consult", permanent: false },
-      { source: "/fission", destination: "/fission/index.html", permanent: false },
-      { source: "/fission/", destination: "/fission/index.html", permanent: false },
-      { source: "/botkube", destination: "/botkube/index.html", permanent: false },
-      { source: "/botkube/", destination: "/botkube/index.html", permanent: false },
+      // The Marketplace and Resources pages are now Next.js routes. The old
+      // static URLs stay reachable as aliases of the new pages.
+      { source: "/botkube/index.html", destination: "/botkube", permanent: false },
+      { source: "/botkube/", destination: "/botkube", permanent: false },
       {
-        source: "/kubernetes-services",
-        destination: "/kubernetes-services/index.html",
+        source: "/kubernetes-services/index.html",
+        destination: "/kubernetes-services",
         permanent: false,
       },
       {
         source: "/kubernetes-services/",
-        destination: "/kubernetes-services/index.html",
+        destination: "/kubernetes-services",
         permanent: false,
       },
-      { source: "/resources", destination: "/resources/index.html", permanent: false },
-      { source: "/resources/", destination: "/resources/index.html", permanent: false },
-      { source: "/blogs/blogs", destination: "/blogs/blogs.html", permanent: false },
-      { source: "/blogs/blogs.html", destination: "/blogs/blogs.html", permanent: false },
-      { source: "/events", destination: "/events/index.html", permanent: false },
-      { source: "/events/", destination: "/events/index.html", permanent: false },
-      { source: "/skill-rubrics", destination: "/skill-rubrics/index.html", permanent: false },
-      { source: "/skill-rubrics/", destination: "/skill-rubrics/index.html", permanent: false },
+      { source: "/fission/index.html", destination: "/fission", permanent: false },
+      { source: "/fission/", destination: "/fission", permanent: false },
+      { source: "/blogs/blogs", destination: "/blogs", permanent: false },
+      { source: "/blogs/blogs.html", destination: "/blogs", permanent: false },
+      { source: "/blogs/blog.html", destination: "/blogs", permanent: false },
+      { source: "/events/index.html", destination: "/events", permanent: false },
+      { source: "/events/", destination: "/events", permanent: false },
+      {
+        source: "/skill-rubrics/index.html",
+        destination: "/skill-rubrics",
+        permanent: false,
+      },
+      { source: "/skill-rubrics/", destination: "/skill-rubrics", permanent: false },
+      // The old Resources hub folded into the three resources routes; the
+      // journal is the closest successor.
+      { source: "/resources", destination: "/blogs", permanent: false },
+      { source: "/resources/", destination: "/blogs", permanent: false },
+      { source: "/resources/index.html", destination: "/blogs", permanent: false },
 
     ];
   },

@@ -107,7 +107,7 @@ const footerColumns: SiteFooterColumn[] = [
     links: [
       { label: "Cloud Native", href: "/cloud-native/" },
       { label: "Platform Engineering", href: "/platformengineering/" },
-      { label: "Kubernetes Services", href: "/kubernetes-services/" },
+      { label: "Kubernetes Services", href: "/kubernetes-services" },
       { label: "Observability", href: "/observability-consult/" },
     ],
   },
@@ -117,8 +117,9 @@ const footerColumns: SiteFooterColumn[] = [
       { label: "About Us", href: "/about/" },
       { label: "Careers", href: "/careers/" },
       { label: "The Shuroq Way", href: "/shuroq-way/" },
-      { label: "Resources", href: "/resources/" },
-      { label: "Events", href: "/events/" },
+      { label: "Blogs", href: "/blogs" },
+      { label: "Events", href: "/events" },
+      { label: "Skill Rubrics", href: "/skill-rubrics" },
       { label: "Contact Us", href: "/contact/" },
     ],
   },
@@ -207,7 +208,7 @@ export default function Home() {
           </p>
           <div style={{ display: "flex", gap: 16, marginTop: 40, flexWrap: "wrap" }}>
             <a href="/contact/" className="btn btn-pill btn-black">Get Started</a>
-            <a href="/fission/" className="btn btn-pill btn-glass-dark">Learn More</a>
+            <a href="/fission" className="btn btn-pill btn-glass-dark">Learn More</a>
           </div>
 
           <div style={{ marginTop: 64, display: "flex", gap: 32, flexWrap: "wrap" }} />
@@ -225,7 +226,7 @@ export default function Home() {
             </p>
             <div style={{ display: "flex", gap: 16, marginTop: 32, flexWrap: "wrap" }}>
               <a href="/contact" className="btn btn-pill btn-black">Get Started</a>
-              <a href="/fission/" className="btn btn-pill btn-glass-dark">Learn More</a>
+              <a href="/fission" className="btn btn-pill btn-glass-dark">Learn More</a>
             </div>
           </div>
           <ConnectedTools />

@@ -1,0 +1,475 @@
+.page {
+  width: 100%;
+  overflow: clip;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-display);
+  --card: color-mix(in srgb, var(--fg) 10%, var(--bg));
+  --muted: color-mix(in srgb, var(--fg) 68%, var(--bg));
+  --border: color-mix(in srgb, var(--fg) 14%, var(--bg));
+}
+
+.page :global(.service-page-footer) {
+  --background: #000;
+  --foreground: #fff;
+  --surface: rgb(255 255 255 / 8%);
+  --surface-muted: rgb(255 255 255 / 12%);
+  --text-secondary: rgb(255 255 255 / 68%);
+  --text-muted: rgb(255 255 255 / 52%);
+  --border: rgb(255 255 255 / 16%);
+  --border-subtle: rgb(255 255 255 / 10%);
+  --border-strong: rgb(255 255 255 / 30%);
+}
+
+/* -------------------------------------------------------------------- hero */
+
+.hero {
+  margin-top: -80px;
+  padding: 172px 0 96px;
+  background: #000;
+  color: #fff;
+}
+
+.heroGrid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(280px, 0.62fr);
+  align-items: start;
+  gap: clamp(40px, 6vw, 96px);
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 0 22px;
+  color: rgb(255 255 255 / 55%);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.eyebrow::before {
+  width: 28px;
+  height: 1px;
+  background: rgb(255 255 255 / 40%);
+  content: "";
+}
+
+.heroCopy h1 {
+  max-width: 760px;
+  margin: 0;
+  font-size: clamp(44px, 5.6vw, 76px);
+  font-weight: 460;
+  line-height: 1.02;
+  letter-spacing: -0.05em;
+}
+
+.heroLead {
+  max-width: 580px;
+  margin: 26px 0 0;
+  color: rgb(255 255 255 / 74%);
+  font-size: clamp(17px, 1.5vw, 19px);
+  line-height: 1.58;
+}
+
+.heroActions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 20px;
+  margin-top: 36px;
+}
+
+.heroActions :global(.btn-black) {
+  background: #fff;
+  color: #0a0a0a;
+}
+
+.heroActions :global(.btn-black:hover) {
+  background: #e8e8e8;
+}
+
+.heroActions :global(.btn-glass-light) {
+  background: rgb(255 255 255 / 12%);
+  color: #fff;
+}
+
+.anchorLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  color: rgb(255 255 255 / 72%);
+  font-size: 15px;
+  transition: color 140ms var(--ease-ui-out);
+}
+
+.anchorLink:hover {
+  color: #fff;
+}
+
+/* The product card on the right of the hero: a short, plain statement of what
+   the product covers, set as rows rather than a list of features. */
+.heroPanel {
+  padding: 28px 26px;
+  border: 1px solid rgb(255 255 255 / 16%);
+  border-radius: 14px;
+  background: rgb(255 255 255 / 4%);
+}
+
+.heroPanel h2 {
+  margin: 0 0 18px;
+  color: rgb(255 255 255 / 50%);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.heroPanel dl {
+  display: grid;
+  gap: 0;
+  margin: 0;
+}
+
+.heroPanel dt {
+  color: rgb(255 255 255 / 52%);
+  font-size: 13px;
+  letter-spacing: 0.02em;
+}
+
+.heroPanel dd {
+  margin: 4px 0 0;
+  padding-bottom: 16px;
+  font-size: 16px;
+  line-height: 1.45;
+}
+
+.heroPanel dl > div {
+  padding-bottom: 16px;
+  border-bottom: 1px solid rgb(255 255 255 / 12%);
+}
+
+.heroPanel dl > div:last-child {
+  padding-bottom: 0;
+  border-bottom: 0;
+}
+
+/* ------------------------------------------------------------------ shared */
+
+.lead {
+  max-width: 640px;
+}
+
+.lead h2 {
+  margin: 0;
+  font-size: clamp(34px, 4.4vw, 56px);
+  font-weight: 450;
+  line-height: 1.06;
+  letter-spacing: -0.045em;
+}
+
+.lead p {
+  margin: 18px 0 0;
+  color: var(--muted);
+  font-size: 17px;
+  line-height: 1.6;
+}
+
+/* ------------------------------------------------------------------- chat */
+
+.chatops {
+  padding: clamp(80px, 9vw, 136px) 0;
+  background: var(--bg);
+}
+
+.chatopsHead {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(240px, 0.5fr);
+  align-items: end;
+  gap: clamp(24px, 4vw, 64px);
+  margin-bottom: clamp(32px, 4vw, 56px);
+}
+
+.chatopsNote {
+  margin: 0;
+  padding-left: 18px;
+  border-left: 1px solid var(--border);
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.55;
+}
+
+.threadFrame {
+  height: 560px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  background: var(--bg);
+  box-shadow: 0 24px 70px rgb(0 0 0 / 0.09);
+}
+
+/* ------------------------------------------------------------ capabilities */
+
+.capabilities {
+  padding: clamp(80px, 9vw, 136px) 0;
+  background: color-mix(in srgb, var(--fg) 3%, var(--bg));
+}
+
+.capabilityGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1px;
+  margin-top: clamp(40px, 5vw, 68px);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  overflow: hidden;
+  background: var(--border);
+}
+
+.capability {
+  padding: clamp(26px, 3vw, 40px);
+  background: var(--bg);
+}
+
+.capabilityIndex {
+  display: block;
+  color: var(--muted);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.12em;
+}
+
+.capability h3 {
+  margin: 14px 0 0;
+  font-size: clamp(21px, 2vw, 26px);
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: -0.03em;
+}
+
+.capability p {
+  margin: 12px 0 0;
+  color: var(--muted);
+  font-size: 16px;
+  line-height: 1.55;
+}
+
+/* -------------------------------------------------------------- use cases */
+
+.useCases {
+  padding: clamp(80px, 9vw, 136px) 0;
+  background: var(--bg);
+}
+
+.useCaseGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(28px, 4vw, 56px);
+  margin-top: clamp(40px, 5vw, 68px);
+}
+
+.useCase {
+  padding-top: 24px;
+  border-top: 1px solid var(--border);
+}
+
+.useCase h3 {
+  margin: 0;
+  font-size: clamp(20px, 1.9vw, 25px);
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: -0.035em;
+}
+
+.useCase ul {
+  display: grid;
+  gap: 12px;
+  margin: 20px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.useCase li {
+  position: relative;
+  padding-left: 22px;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+.useCase li::before {
+  position: absolute;
+  top: 0.62em;
+  left: 0;
+  width: 8px;
+  height: 1px;
+  background: var(--fg);
+  content: "";
+}
+
+/* --------------------------------------------------------------- delivery */
+
+.delivery {
+  padding: clamp(80px, 9vw, 136px) 0;
+  background: color-mix(in srgb, var(--fg) 3%, var(--bg));
+}
+
+.deliveryRail {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1px;
+  margin-top: clamp(40px, 5vw, 68px);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  overflow: hidden;
+  background: var(--border);
+}
+
+.deliveryStep {
+  padding: clamp(24px, 2.6vw, 34px);
+  background: var(--bg);
+}
+
+.deliveryStep span {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  color: var(--muted);
+}
+
+.deliveryStep h3 {
+  margin: 12px 0 0;
+  font-size: 19px;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+}
+
+.deliveryStep p {
+  margin: 10px 0 0;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.55;
+}
+
+/* ----------------------------------------------------------------- record */
+
+.record {
+  padding: clamp(80px, 9vw, 136px) 0;
+  background: var(--bg);
+}
+
+.recordInner {
+  display: grid;
+  grid-template-columns: minmax(260px, 0.62fr) minmax(0, 1fr);
+  gap: clamp(40px, 6vw, 88px);
+  margin-top: clamp(40px, 5vw, 68px);
+  align-items: start;
+}
+
+.recordFrame {
+  min-width: 0;
+  padding: clamp(18px, 2vw, 26px);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: var(--bg);
+}
+
+/* -------------------------------------------------------------------- cta */
+
+.cta {
+  padding: clamp(80px, 9vw, 136px) 0;
+  background: #000;
+  color: #fff;
+}
+
+.ctaInner {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(240px, 0.42fr);
+  align-items: center;
+  gap: clamp(32px, 5vw, 72px);
+}
+
+.cta h2 {
+  margin: 0;
+  font-size: clamp(32px, 4vw, 54px);
+  font-weight: 450;
+  line-height: 1.06;
+  letter-spacing: -0.045em;
+}
+
+.cta p {
+  max-width: 560px;
+  margin: 20px 0 0;
+  color: rgb(255 255 255 / 70%);
+  font-size: 17px;
+  line-height: 1.55;
+}
+
+.ctaActions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.ctaActions a {
+  justify-content: center;
+}
+
+.ctaActions :global(.btn-black) {
+  background: #fff;
+  color: #0a0a0a;
+}
+
+/* --------------------------------------------------------------- footer */
+
+.animatedFooter {
+  width: 100%;
+  height: clamp(420px, 58vh, 720px);
+  min-height: 420px;
+  overflow: hidden;
+  background: #000;
+}
+
+/* ------------------------------------------------------------ responsive */
+
+@media (max-width: 900px) {
+  .heroGrid,
+  .chatopsHead,
+  .recordInner,
+  .ctaInner {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .capabilityGrid,
+  .deliveryRail {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .useCaseGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .hero {
+    padding: 142px 0 56px;
+  }
+
+  .heroCopy h1 {
+    font-size: clamp(40px, 11vw, 52px);
+  }
+
+  .capabilityGrid,
+  .deliveryRail {
+    grid-template-columns: 1fr;
+  }
+
+  .threadFrame {
+    height: 480px;
+  }
+}
