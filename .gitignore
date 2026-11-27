@@ -45,3 +45,7 @@ tsconfig.tsbuildinfo
 .agentation.log
 .baby-ui/
 .stitch/
+
+# agent tooling: holds live credentials, never commit
+opencode.json
+DEEPAI-OPENCODE-INTEGRATION.md

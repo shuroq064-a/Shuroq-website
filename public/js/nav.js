@@ -306,9 +306,6 @@ function showServicesSubmenu() {
                         <a href="/platformengineering/" class="submenu-item">
                             <i class="fas fa-server"></i> Platform Engineering
                         </a>
-                        <a href="/platform-services/" class="submenu-item">
-                            <i class="fas fa-server"></i> Platform Engineering Services
-                        </a>
                         <a href="/backstage/" class="submenu-item">
                             <i class="fas fa-comments"></i> Backstage Consulting
                         </a>
@@ -624,17 +621,17 @@ function showSolutionsSubmenu() {
                 <button class="back-btn" id="solutions-back-btn">
                     <i class="fas fa-arrow-left"></i> Back
                 </button>
-                <h3>Solutions</h3>
+                <h3>Marketplace</h3>
             </div>
             <div class="submenu-items">
-                <a href="/fission/" class="submenu-item">
-                    <i class="fas fa-atom"></i> AI Marketplace
-                </a>
                 <a href="/botkube/" class="submenu-item">
                     <i class="fas fa-robot"></i> Botkube Enterprise
                 </a>
                 <a href="/kubernetes-services/" class="submenu-item">
                     <i class="fas fa-dharmachakra"></i> Managed Services for Kubernetes
+                </a>
+                <a href="/fission/" class="submenu-item">
+                    <i class="fas fa-atom"></i> Fission
                 </a>
             </div>
         </div>
@@ -732,9 +729,6 @@ function showResourcesSubmenu() {
                 <h3>Resources</h3>
             </div>
             <div class="submenu-items">
-                <a href="/resources/" class="submenu-item">
-                    <i class="fas fa-folder"></i> Resources
-                </a>
                 <a href="/blogs/blogs.html" class="submenu-item">
                     <i class="fas fa-newspaper"></i> Blogs
                 </a>

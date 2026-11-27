@@ -148,7 +148,11 @@
   --space-5: 20px;
   --space-6: 24px;
   --space-8: 32px;
+  --space-10: 40px;
   --space-12: 48px;
+  --space-16: 64px;
+  --space-20: 80px;
+  --space-24: 96px;
 
   --section-y-desktop: 96px;
   --section-y-tablet: 64px;
@@ -186,7 +190,9 @@
   --secondary: #f4f4f5;
   --secondary-foreground: #000000;
   --muted-foreground: rgba(0, 0, 0, 0.55);
-  --accent-foreground: #000000;
+  /* The accent is the theme's contrast colour (ink on paper, paper on ink), so
+     anything sitting on it needs the opposite one. --accent-on already holds it. */
+  --accent-foreground: var(--accent-on);
   --destructive: #dc2626;
   --destructive-foreground: #ffffff;
   --border: rgba(0, 0, 0, 0.12);
@@ -267,6 +273,48 @@
   --stamp-rule: rgba(0, 0, 0, 0.12);
   --gradient-bg: linear-gradient(135deg, oklch(100% 0 0) 0%, oklch(96% 0.008 210) 100%);
   --gradient-accent: linear-gradient( to right, oklch(72% 0.18 195) 0%, oklch(68% 0.22 295) 100% );
+
+  /* Arc bridge tokens.
+     The vendored Arc blocks read their own token names — --surface-raised,
+     --text-secondary, --radius-surface, --control-track and friends — instead of
+     the site's. They are mapped onto this site's monochrome palette once, here, so
+     every Arc block resolves the same way. Doing it at the root also covers the
+     blocks Radix portals outside the page tree, which no page-scoped token block
+     can reach. Scoped blocks (.arc-industry-tokens, .arc-contact, the inverted
+     footer) still override these where they need their own surface. */
+  --surface-raised: var(--surface);
+  --surface-muted: color-mix(in srgb, var(--fg) 6%, transparent);
+  --text-secondary: color-mix(in srgb, var(--fg) 62%, transparent);
+  --text-muted: color-mix(in srgb, var(--fg) 45%, transparent);
+  --border-subtle: var(--border-soft);
+  --radius-panel: 8px;
+  --radius-surface: 8px;
+  --radius-control: 50px;
+  --control-height-sm: 38px;
+  --control-height-md: 44px;
+  /* Switch controls: an ink track when on, a hairline track when off. */
+  --control-on: var(--fg);
+  --control-glyph: var(--bg);
+  --control-track: color-mix(in srgb, var(--fg) 16%, transparent);
+  --control-track-hover: color-mix(in srgb, var(--fg) 26%, transparent);
+  --control-thumb: var(--fg);
+  --control-thumb-on: var(--bg);
+  --control-thumb-shadow: 0 1px 3px rgb(0 0 0 / 0.24);
+  /* Emphasis tones: the accent family, softened to fit an ink-on-paper page. */
+  --accent-strong: var(--fg);
+  --accent-subtle: color-mix(in srgb, var(--fg) 18%, transparent);
+  --focus-outline: color-mix(in srgb, var(--fg) 55%, transparent);
+  /* Chart series ramp. The charts read --series-1..4 for their palette and
+     fall back to neutral steps after that, so the ramp is a descending set of
+     ink weights rather than coloured hues — the house stays monochrome while
+     each segment still reads as its own value. */
+  --series-1: var(--fg);
+  --series-2: color-mix(in srgb, var(--fg) 66%, transparent);
+  --series-3: color-mix(in srgb, var(--fg) 44%, transparent);
+  --series-4: color-mix(in srgb, var(--fg) 26%, transparent);
+  /* The site leans on hairlines rather than shadows, so a lift is a soft edge. */
+  --shadow-raised: none;
+  --shadow-floating: 0 18px 48px rgb(0 0 0 / 0.28);
 }
 
 .dark {
@@ -298,7 +346,7 @@
   --secondary: #1f1f1f;
   --secondary-foreground: #ffffff;
   --muted-foreground: rgba(255, 255, 255, 0.6);
-  --accent-foreground: #ffffff;
+  --accent-foreground: var(--accent-on);
   --destructive: #f87171;
   --destructive-foreground: #ffffff;
   --border: rgba(255, 255, 255, 0.12);
@@ -773,12 +821,21 @@ img { max-width: 100%; display: block; }
    Hairlines and tonal fills only — no new colour, radius, spacing or shadow. */
 .arc-service-tokens {
   --surface-muted: color-mix(in srgb, var(--fg) 5%, transparent);
+  --surface-raised: var(--surface);
   --border-strong: var(--border);
   --radius-panel: 8px;
   --radius-control: 50px;
   --control-height-sm: 38px;
+  --control-height-md: 44px;
   --shadow-resting: none;
+  /* The card and card stack lift on interaction. The site leans on hairlines,
+     so the lift is a soft edge rather than a cast shadow. */
+  --shadow-raised: none;
+  --shadow-floating: 0 12px 40px rgba(0, 0, 0, 0.16);
   --duration-instant: 100ms;
+  /* The FAQ heading is a section heading, so it takes the house display scale
+     rather than the oversized display scale the block ships with. */
+  --faq-title-size: clamp(40px, 5vw, 64px);
 }
 
 /* Arc contact section on the paper theme.

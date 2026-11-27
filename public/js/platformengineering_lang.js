@@ -29,7 +29,7 @@ const translations = {
     platform_services_toolchain_desc: "Standardized development tools and workflows",
     platform_services_automation: "Infrastructure Automation",
     platform_services_automation_desc: "Automated provisioning and management",
-    platform_services_button: "Explore Platform Services",
+    platform_services_button: "Explore Platform Engineering",
     
     // Backstage Consulting
     backstage_title: "Backstage Consulting",
@@ -113,7 +113,7 @@ const translations = {
     platform_services_toolchain_desc: "أدوات تطوير وسير عمل موحدة",
     platform_services_automation: "أتمتة البنية التحتية",
     platform_services_automation_desc: "توفير وإدارة مؤتمتة",
-    platform_services_button: "استكشف خدمات المنصات",
+    platform_services_button: "استكشف هندسة المنصات",
     
     // Backstage Consulting
     backstage_title: "استشارات Backstage",

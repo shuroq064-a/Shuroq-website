@@ -101,7 +101,6 @@ export default function SiteNav() {
       title: "PLATFORM ENGINEERING",
       links: [
         { href: "/platformengineering/", label: "Platform Engineering" },
-        { href: "/platform-services/", label: "Platform Engineering Services" },
         { href: "/ci-cd-dev/", label: "CI/CD & Dev Experience" },
       ],
     },
@@ -120,14 +119,13 @@ export default function SiteNav() {
     },
   ];
 
-  const solutionsLinks = [
-    { href: "/fission/", label: "AI Marketplace" },
+  const marketplaceLinks = [
     { href: "/botkube/", label: "Botkube Enterprise" },
     { href: "/kubernetes-services/", label: "Managed Services for Kubernetes" },
+    { href: "/fission/", label: "Fission" },
   ];
 
   const resourcesLinks = [
-    { href: "/resources/", label: "Resources" },
     { href: "/blogs/blogs.html", label: "Blogs" },
     { href: "/events/", label: "Events" },
     { href: "/skill-rubrics/", label: "Skill Rubrics" },
@@ -200,12 +198,12 @@ export default function SiteNav() {
                 </MotionNavigationMenuContent>
               </MotionNavigationMenuItem>
 
-              {/* Solutions */}
-              <MotionNavigationMenuItem value="solutions">
-                <MotionNavigationMenuTrigger>Solutions</MotionNavigationMenuTrigger>
+              {/* Marketplace */}
+              <MotionNavigationMenuItem value="marketplace">
+                <MotionNavigationMenuTrigger>Marketplace</MotionNavigationMenuTrigger>
                 <MotionNavigationMenuContent>
                   <div style={{ display: "flex", flexDirection: "column", gap: 12, minWidth: 260 }}>
-                    {solutionsLinks.map((l) => (
+                    {marketplaceLinks.map((l) => (
                       <MotionNavigationMenuLink key={l.href} href={l.href}>
                         <span style={{ fontSize: 15 }}>{l.label}</span>
                       </MotionNavigationMenuLink>
@@ -278,8 +276,8 @@ export default function SiteNav() {
               ))}
             </details>
             <details style={{ marginTop: 8 }}>
-              <summary style={{ padding: "8px 0", fontWeight: 600, cursor: "pointer", color: "var(--fg)" }}>Solutions</summary>
-              {solutionsLinks.map((l) => (
+              <summary style={{ padding: "8px 0", fontWeight: 600, cursor: "pointer", color: "var(--fg)" }}>Marketplace</summary>
+              {marketplaceLinks.map((l) => (
                 <Link key={l.href} href={l.href} style={{ padding: "6px 0 6px 16px", display: "block", color: "var(--fg)", fontSize: 14 }}>{l.label}</Link>
               ))}
             </details>
