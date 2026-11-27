@@ -92,6 +92,9 @@
   .table[data-selectable] tbody tr[data-selected] { --row-fill: color-mix(in oklab, var(--accent) 8%, var(--surface)); }
   .table tbody tr:last-child { border-bottom: 0; }
   .table td { order: 2; display: block; min-width: 0; height: auto; border: 0; padding: 0; background: transparent; color: var(--text-secondary); font-size: var(--text-xs); text-align: left; }
+  /* Folded into a card, a value has no column above it, so each one carries
+     its own name. The primary column keeps the row's title and needs none. */
+  .table td:not([data-primary]):not(.empty)::before { margin-right: 6px; color: var(--text-muted); content: attr(data-label) ":"; }
   .table[data-selectable] td[data-primary]:not([data-sortable]) { padding-left: 0; }
   .table td[data-primary] { order: 0; flex: 1 1 0; color: var(--foreground); font-size: var(--text-sm); font-weight: 500; }
   .table td[data-numeric]:not([data-primary]) { order: 0; flex: none; margin-left: auto; padding-left: var(--space-2); color: var(--foreground); font-size: var(--text-sm); }

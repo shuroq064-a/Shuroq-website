@@ -160,6 +160,7 @@
 .steps li {
   position: relative;
   padding-top: 44px;
+  counter-increment: step;
 }
 
 .steps li::before {
@@ -337,8 +338,29 @@
     gap: 32px;
   }
 
+  /* The rule does not fit a wrapped row, so each step takes a numbered marker
+     instead of a dot on a line. */
   .steps li::before {
     display: none;
+  }
+
+  .steps li {
+    padding-top: 38px;
+  }
+
+  .steps li::after {
+    top: 0;
+    left: 0;
+    display: grid;
+    width: 26px;
+    height: 26px;
+    place-items: center;
+    border: 0;
+    background: var(--fg);
+    color: var(--bg);
+    font-family: var(--font-mono);
+    font-size: 12px;
+    content: counter(step);
   }
 
   .benefitStrip {
@@ -367,6 +389,22 @@
   }
 }
 
+@media (max-width: 760px) {
+  /* The fields read as a form, so each one is a labelled row rather than
+     three cramped columns. */
+  .matchField {
+    padding: 14px 18px;
+  }
+
+  .matchField strong {
+    font-size: 15px;
+  }
+
+  .expertTable {
+    padding: 12px 10px;
+  }
+}
+
 @media (max-width: 640px) {
   .hero {
     padding: 146px 0 60px;
@@ -375,5 +413,53 @@
   .steps,
   .benefitStrip {
     grid-template-columns: 1fr;
+  }
+
+  /* Once the steps stack, the rule between them turns vertical, so they read
+     as one timeline instead of five rows with a stray dash. */
+  .steps {
+    gap: 0;
+  }
+
+  .steps li {
+    min-height: 0;
+    padding: 0 0 30px 42px;
+  }
+
+  .steps li:last-child {
+    padding-bottom: 0;
+  }
+
+  .steps li::before {
+    top: 15px;
+    right: auto;
+    bottom: -15px;
+    left: 15px;
+    width: 1px;
+    height: auto;
+  }
+
+  .steps li:first-child::before {
+    left: 15px;
+  }
+
+  .steps li:last-child::before {
+    bottom: auto;
+    height: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .matchButton {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .ctaActions a {
+    width: 100%;
+  }
+
+  .benefit {
+    padding: 20px;
   }
 }

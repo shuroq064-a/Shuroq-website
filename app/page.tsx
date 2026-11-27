@@ -197,7 +197,7 @@ export default function Home() {
       {/* Hero */}
       {/* Slightly deeper than the default 96px so the black panel runs a little
           further down the screen, without filling the whole viewport. */}
-      <section className="hero-gradient-bg" style={{ marginTop: -80, padding: "250px 0 160px" }}>
+      <section className="hero-gradient-bg hero-band" style={{ marginTop: -80 }}>
         <div className="hero-ascii-word" aria-hidden>
           <FlareWord />
         </div>
@@ -206,7 +206,7 @@ export default function Home() {
           <p className="body-lg" style={{ color: "rgba(255,255,255,0.72)", maxWidth: 560, marginTop: 12, fontSize: 16, lineHeight: 1.5 }}>
             Shuroq partners with enterprise teams to design, build, and operate cloud-native platforms, resilient infrastructure, and intelligent automation — so every release is faster, safer, and more predictable.
           </p>
-          <div style={{ display: "flex", gap: 16, marginTop: 40, flexWrap: "wrap" }}>
+          <div className="action-row">
             <a href="/contact/" className="btn btn-pill btn-black">Get Started</a>
             <a href="/fission" className="btn btn-pill btn-glass-dark">Learn More</a>
           </div>

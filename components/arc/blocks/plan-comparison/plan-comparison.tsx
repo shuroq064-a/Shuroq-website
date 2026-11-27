@@ -114,12 +114,16 @@ export function PlanComparison({
   useLayoutEffect(() => {
     const node = rootRef.current;
     if (!node) return;
-    const measure = (width: number) => setSize(width <= 340 ? "xs" : width <= 540 ? "sm" : width <= 720 ? "md" : "lg");
+    // More columns need more room before they stack. Two plans fit a tablet,
+    // three need a wide screen, so the thresholds follow the plan count.
+    const wide = plans.length >= 3 ? 1040 : 720;
+    const narrow = plans.length >= 3 ? 900 : 540;
+    const measure = (width: number) => setSize(width <= 340 ? "xs" : width <= narrow ? "sm" : width <= wide ? "md" : "lg");
     measure(node.getBoundingClientRect().width);
     const observer = new ResizeObserver(([entry]) => { if (entry) measure(entry.contentRect.width); });
     observer.observe(node);
     return () => observer.disconnect();
-  }, []);
+  }, [plans.length]);
   const visibleFeatures = differencesOnly ? features.filter((feature) => !feature.shared) : features;
 
   return (

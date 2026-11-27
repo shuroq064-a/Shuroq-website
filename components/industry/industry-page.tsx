@@ -107,8 +107,8 @@ export function IndustryPage({ industry, related }: IndustryPageProps) {
 
       {/* Hero — the same black band used across the site. */}
       <section
-        className="hero-gradient-bg"
-        style={{ marginTop: -80, padding: "250px 0 160px" }}
+        className="hero-gradient-bg hero-band"
+        style={{ marginTop: -80 }}
       >
         <div className="hero-ascii-word" aria-hidden>
           <FlareWord />
@@ -153,7 +153,7 @@ export function IndustryPage({ industry, related }: IndustryPageProps) {
       {/* Overview — text and a single image, held in hairlines. */}
       <section className="section" style={{ paddingBottom: 0 }}>
         <div className="container grid-2" style={{ alignItems: "start" }}>
-          <div style={{ position: "sticky", top: 96 }}>
+          <div className="sticky-col">
             <h2 className="section-title">{industry.introTitle}</h2>
             <p className="body-lg" style={{ marginTop: 16, color: "var(--muted)" }}>
               {industry.name}, seen through the systems that make it work.
@@ -193,7 +193,7 @@ export function IndustryPage({ industry, related }: IndustryPageProps) {
       {/* Solutions — four numbered rows, closed until pressed. */}
       <section className="section" style={{ background: "var(--surface-warm)" }}>
         <div className="container grid-2" style={{ alignItems: "start" }}>
-          <div style={{ position: "sticky", top: 96 }}>
+          <div className="sticky-col">
             <h2 className="section-title">Key solutions</h2>
             <p className="body-lg" style={{ marginTop: 16, color: "var(--muted)" }}>
               What we deliver in {industry.name}.

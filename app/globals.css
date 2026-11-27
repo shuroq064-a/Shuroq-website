@@ -405,15 +405,50 @@ img { max-width: 100%; display: block; }
   padding: 0 var(--container-gutter-desktop);
 }
 
+/* The gutter narrows with the viewport, so a phone keeps the width for the
+   page instead of spending it on margin. */
+@media (max-width: 1024px) {
+  .container {
+    padding: 0 var(--container-gutter-tablet);
+  }
+}
+
+@media (max-width: 560px) {
+  .container {
+    padding: 0 var(--container-gutter-phone);
+  }
+}
+
+/* A ruled row: an index, a title and a note. The three tracks sit side by side
+   on a wide screen and stack under one another on a phone. */
+.rule-row {
+  display: grid;
+  grid-template-columns: 48px minmax(0, 1fr) minmax(0, 1fr);
+  gap: 16px 24px;
+  align-items: baseline;
+  padding: 24px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+@media (max-width: 760px) {
+  .rule-row {
+    grid-template-columns: 36px minmax(0, 1fr);
+  }
+
+  .rule-row > :nth-child(3) {
+    grid-column: 2 / -1;
+  }
+}
+
 /* Typography */
-.display { font-family: var(--font-display); font-size: var(--text-4xl); font-weight: 520; line-height: 1.02; letter-spacing: -2.6px; }
-.section-title { font-family: var(--font-display); font-size: var(--text-3xl); font-weight: 460; line-height: 1.10; letter-spacing: -1.4px; }
-.subheading { font-size: var(--text-xl); font-weight: 540; line-height: 1.35; letter-spacing: -0.26px; }
-.subheading-light { font-size: var(--text-xl); font-weight: 340; line-height: 1.35; letter-spacing: -0.26px; }
+.display { font-family: var(--font-display); font-size: clamp(38px, 9vw, var(--text-4xl)); font-weight: 520; line-height: 1.02; letter-spacing: -2.6px; }
+.section-title { font-family: var(--font-display); font-size: clamp(30px, 6.6vw, var(--text-3xl)); font-weight: 460; line-height: 1.10; letter-spacing: -1.4px; }
+.subheading { font-size: clamp(20px, 4vw, var(--text-xl)); font-weight: 540; line-height: 1.35; letter-spacing: -0.26px; }
+.subheading-light { font-size: clamp(20px, 4vw, var(--text-xl)); font-weight: 340; line-height: 1.35; letter-spacing: -0.26px; }
 .feature-title { font-size: 24px; font-weight: 700; line-height: 1.45; }
-.body-lg { font-size: var(--text-lg); font-weight: 330; line-height: 1.40; letter-spacing: -0.14px; }
+.body-lg { font-size: clamp(17px, 2.4vw, var(--text-lg)); font-weight: 330; line-height: 1.40; letter-spacing: -0.14px; }
 .body { font-size: var(--text-base); font-weight: 330; line-height: 1.45; letter-spacing: -0.14px; }
-.mono-label { font-family: var(--font-mono); font-size: 18px; font-weight: 400; line-height: 1.30; letter-spacing: 0.54px; text-transform: uppercase; }
+.mono-label { font-family: var(--font-mono); font-size: clamp(14px, 2.4vw, 18px); font-weight: 400; line-height: 1.30; letter-spacing: 0.54px; text-transform: uppercase; }
 .mono-small { font-family: var(--font-mono); font-size: 12px; font-weight: 400; line-height: 1.00; letter-spacing: 0.6px; text-transform: uppercase; }
 
 /* Buttons */
@@ -437,6 +472,12 @@ img { max-width: 100%; display: block; }
 .btn-pill { border-radius: var(--radius-sm); padding: 8px 18px 10px; }
 .btn-circle { border-radius: 50%; width: 44px; height: 44px; padding: 0; }
 
+/* A pill is a touch target on a phone, so it keeps a comfortable height even
+   when the copy beside it shrinks. */
+@media (max-width: 640px) {
+  .btn-pill { min-height: 44px; }
+}
+
 .btn-black { background: var(--fg); color: var(--bg); }
 .btn-black:hover { background: var(--accent-hover); }
 .btn-white { background: var(--bg); color: var(--fg); }
@@ -457,6 +498,53 @@ img { max-width: 100%; display: block; }
   align-items: center;
   justify-content: space-between;
   height: 64px;
+}
+
+/* The services dropdown lays its groups out in six columns on a wide screen.
+   Below that the groups fold into two and then one column, so a group title
+   never wraps into a single letter per line. */
+.nav-services-grid {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 12px;
+  max-width: 760px;
+  padding: 12px;
+}
+
+@media (max-width: 1200px) {
+  .nav-services-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    max-width: 560px;
+  }
+}
+
+@media (max-width: 820px) {
+  .nav-services-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    max-width: 420px;
+  }
+}
+
+@media (max-width: 520px) {
+  .nav-services-grid {
+    grid-template-columns: minmax(0, 1fr);
+    max-width: 300px;
+  }
+}
+
+/* The dropdown panels themselves never exceed the viewport. */
+.nav-menu-column {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+  max-width: calc(100vw - 48px);
+}
+
+@media (min-width: 768px) {
+  .nav-menu-column {
+    min-width: 220px;
+  }
 }
 
 /* Nav — glasscn-style liquid glass (see components/ui/liquid-glass.tsx).
@@ -713,13 +801,80 @@ img { max-width: 100%; display: block; }
 .section { padding: var(--section-y-desktop) 0; }
 .section-sm { padding: var(--space-12) 0; }
 
+/* Sections breathe less as the viewport narrows, so a phone keeps its
+   content close together instead of scrolling through empty bands. */
+@media (max-width: 1024px) {
+  .section { padding: var(--section-y-tablet) 0; }
+}
+
+@media (max-width: 640px) {
+  .section { padding: var(--section-y-phone) 0; }
+
+  .section-sm { padding: var(--space-8) 0; }
+}
+
+/* The site-wide black hero band. Its padding was a fixed desktop value, which
+   pushed the headline far below the fold on a phone. */
+.hero-band {
+  padding: 250px 0 160px;
+}
+
+@media (max-width: 1024px) {
+  .hero-band { padding: 200px 0 120px; }
+}
+
+@media (max-width: 640px) {
+  .hero-band { padding: 146px 0 72px; }
+}
+
+/* The heading column of a two-column section keeps its place beside the
+   content on a wide screen. Once the columns stack, a sticky heading would
+   float over the text that follows it, so it lets go. */
+.sticky-col {
+  position: sticky;
+  top: 96px;
+}
+
+@media (max-width: 900px) {
+  .sticky-col {
+    position: static;
+  }
+}
+
+/* A row of calls to action. On a phone the buttons take the full width and
+   stack, so each one stays a comfortable tap target. */
+.action-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px;
+  margin-top: 40px;
+}
+
+@media (max-width: 480px) {
+  .action-row {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+
+  .action-row > * {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
 /* Grid */
-.grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-6); }
-.grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-6); }
+.grid-3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-6); }
+.grid-2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-6); }
 
 /* Stack side-by-side blocks before the columns get too narrow to hold a card. */
 @media (max-width: 900px) {
   .grid-2 { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 720px) {
+  .grid-3 { grid-template-columns: 1fr; }
 }
 
 /* Footer */

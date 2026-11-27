@@ -279,8 +279,12 @@ export function OrbitalImageWheel({
   const boundedFocusSpread = clamp(focusSpread, 0.08, 0.8);
   const boundedScaleEffect = clamp(scaleEffect, 0, 0.3);
   const boundedScrollSensitivity = clamp(scrollSensitivity, 0.25, 1.6);
-  const boundedItemWidth = clamp(itemWidth, 140, 520);
-  const boundedItemHeight = clamp(itemHeight, 180, 620);
+  // The posters keep their size on a wide screen, but on a phone the focused
+  // card has to fit the viewport or the ring pushes it off both edges.
+  const responsiveItemWidth = clamp(viewportWidth * 0.68, 140, 520);
+  const responsiveItemHeight = clamp(viewportWidth * 0.9, 180, 620);
+  const boundedItemWidth = clamp(Math.min(itemWidth, responsiveItemWidth), 140, 520);
+  const boundedItemHeight = clamp(Math.min(itemHeight, responsiveItemHeight), 180, 620);
   const boundedCropRatio = clamp(cropRatio, 0.2, 0.8);
   const boundedScrollLength = clamp(scrollLength, 180, 700);
   const boundedCaptionOffset = clamp(captionOffset, 2, 22);

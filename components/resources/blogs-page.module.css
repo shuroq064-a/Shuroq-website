@@ -167,3 +167,17 @@
     padding: 146px 0 48px;
   }
 }
+
+@media (max-width: 480px) {
+  .masthead {
+    gap: 28px;
+  }
+
+  .subscribeCard {
+    padding: 16px 14px;
+  }
+
+  .heroMeta div {
+    padding: 12px 0;
+  }
+}

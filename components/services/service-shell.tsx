@@ -26,8 +26,8 @@ export function ServiceHero({
     <>
       <SiteNav />
       <section
-        className="hero-gradient-bg"
-        style={{ marginTop: -80, padding: "250px 0 160px" }}
+        className="hero-gradient-bg hero-band"
+        style={{ marginTop: -80 }}
       >
         <div className="hero-ascii-word" aria-hidden>
           <FlareWord />
@@ -58,7 +58,7 @@ export function ServiceHero({
           >
             {lead}
           </p>
-          <div style={{ display: "flex", gap: 16, marginTop: 40, flexWrap: "wrap" }}>
+          <div className="action-row">
             <a href="#services" className="btn btn-pill btn-white">
               What we do
             </a>

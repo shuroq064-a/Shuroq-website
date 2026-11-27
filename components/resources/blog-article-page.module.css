@@ -130,6 +130,9 @@
 
 .article {
   max-width: 760px;
+  /* A long URL or command in the copy breaks the column instead of pushing
+     the page sideways. */
+  overflow-wrap: break-word;
 }
 
 .article h2 {
@@ -246,5 +249,31 @@
 
   .related {
     position: static;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero {
+    padding: 142px 0 44px;
+  }
+
+  .byline {
+    gap: 12px;
+  }
+
+  .bylineFacts {
+    gap: 12px;
+  }
+
+  .article p {
+    font-size: 17px;
+  }
+
+  .body {
+    padding: 48px 0 64px;
+  }
+
+  .article h2 {
+    margin-top: 44px;
   }
 }

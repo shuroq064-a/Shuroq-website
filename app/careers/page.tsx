@@ -140,8 +140,8 @@ export default function CareersPage() {
 
       {/* Hero — same black panel as home and about, with the floating ASCII word */}
       <section
-        className="hero-gradient-bg"
-        style={{ marginTop: -80, padding: "250px 0 160px" }}
+        className="hero-gradient-bg hero-band"
+        style={{ marginTop: -80 }}
       >
         <div className="hero-ascii-word" aria-hidden>
           <FlareWord />
@@ -162,7 +162,7 @@ export default function CareersPage() {
             A collaborative environment where talented professionals work on impactful
             projects, modern technologies, and scalable digital solutions.
           </p>
-          <div style={{ display: "flex", gap: 16, marginTop: 40, flexWrap: "wrap" }}>
+          <div className="action-row">
             <a
               href="mailto:hr-team@shuroq.com?subject=Application"
               className="btn btn-pill btn-black"
@@ -203,7 +203,7 @@ export default function CareersPage() {
       {/* Application Process — real ordered steps, numbers from a list, no icon chips */}
       <section className="section" style={{ background: "var(--surface-warm)" }}>
         <div className="container grid-2" style={{ alignItems: "start" }}>
-          <div style={{ position: "sticky", top: 96 }}>
+          <div className="sticky-col">
             <h2 className="section-title">Application Process</h2>
             <p className="body-lg" style={{ marginTop: 16, color: "var(--muted)" }}>
               Four steps from application to decision.

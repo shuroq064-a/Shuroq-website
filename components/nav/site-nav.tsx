@@ -142,10 +142,11 @@ export default function SiteNav() {
         style={{ padding: "0 16px" }}
       >
         {/* Left spacer keeps the menu optically centred in the bar */}
-        <div className="hidden md:block" style={{ flex: 1 }} aria-hidden="true" />
+        <div className="hidden lg:block" style={{ flex: 1 }} aria-hidden="true" />
 
-        {/* Desktop motion menu */}
-        <div className="hidden md:flex" style={{ justifyContent: "center" }}>
+        {/* Desktop motion menu. Below 1024px the triggers no longer fit on one
+            row, so the panel menu takes over instead of wrapping. */}
+        <div className="hidden lg:flex" style={{ justifyContent: "center" }}>
           <MotionNavigationMenu
             viewportClassName="border-none shadow-none"
             springStiffness={350}
@@ -167,7 +168,7 @@ export default function SiteNav() {
               <MotionNavigationMenuItem value="about">
                 <MotionNavigationMenuTrigger>About Us</MotionNavigationMenuTrigger>
                 <MotionNavigationMenuContent>
-                  <div style={{ display: "flex", flexDirection: "column", gap: 4, minWidth: 220 }}>
+                  <div className="nav-menu-column">
                     {companyLinks.map((l) => (
                       <MotionNavigationMenuLink key={l.href} href={l.href}>
                         <span style={{ fontSize: 15 }}>{l.label}</span>
@@ -181,7 +182,7 @@ export default function SiteNav() {
               <MotionNavigationMenuItem value="services">
                 <MotionNavigationMenuTrigger>Services</MotionNavigationMenuTrigger>
                 <MotionNavigationMenuContent>
-                  <div style={{ display: "grid", gridTemplateColumns: "repeat(6, minmax(0, 1fr))", gap: 12, maxWidth: 760, padding: 12 }}>
+                  <div className="nav-services-grid">
                     {serviceGroups.map((g) => (
                       <div key={g.title} style={{ display: "flex", flexDirection: "column", gap: 5 }}>
                         <span className="text-[10px] font-semibold uppercase tracking-wide text-neutral-500">
@@ -202,7 +203,7 @@ export default function SiteNav() {
               <MotionNavigationMenuItem value="marketplace">
                 <MotionNavigationMenuTrigger>Marketplace</MotionNavigationMenuTrigger>
                 <MotionNavigationMenuContent>
-                  <div style={{ display: "flex", flexDirection: "column", gap: 12, minWidth: 260 }}>
+                  <div className="nav-menu-column">
                     {marketplaceLinks.map((l) => (
                       <MotionNavigationMenuLink key={l.href} href={l.href}>
                         <span style={{ fontSize: 15 }}>{l.label}</span>
@@ -216,7 +217,7 @@ export default function SiteNav() {
               <MotionNavigationMenuItem value="resources">
                 <MotionNavigationMenuTrigger>Resources</MotionNavigationMenuTrigger>
                 <MotionNavigationMenuContent>
-                  <div style={{ display: "flex", flexDirection: "column", gap: 12, minWidth: 220 }}>
+                  <div className="nav-menu-column">
                     {resourcesLinks.map((l) => (
                       <MotionNavigationMenuLink key={l.href} href={l.href}>
                         <span style={{ fontSize: 15 }}>{l.label}</span>
@@ -242,7 +243,7 @@ export default function SiteNav() {
           </span>
 
           <button
-            className="mobile-menu-btn md:hidden"
+            className="mobile-menu-btn lg:hidden"
             onClick={() => setMobileOpen((o) => !o)}
             aria-label={mobileOpen ? "Close menu" : "Open menu"}
             aria-expanded={mobileOpen}
@@ -255,7 +256,7 @@ export default function SiteNav() {
 
       {/* Mobile menu */}
       {mobileOpen && (
-        <div className="md:hidden" style={{ borderTop: "1px solid var(--border)", padding: "12px 16px", background: "var(--bg)", maxHeight: "70vh", overflowY: "auto" }}>
+        <div className="lg:hidden" style={{ borderTop: "1px solid var(--border)", padding: "12px 16px", background: "var(--bg)", maxHeight: "70vh", overflowY: "auto" }}>
           <div style={{ display: "flex", flexDirection: "column", gap: 4 }}>
             <Link href="/" style={{ padding: "8px 0", fontWeight: 600 }}>Home</Link>
             <details style={{ marginTop: 8 }}>

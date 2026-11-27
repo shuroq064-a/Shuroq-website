@@ -60,8 +60,8 @@ export default function IndustriesPage() {
 
       {/* Hero — same black panel as every other route. */}
       <section
-        className="hero-gradient-bg"
-        style={{ marginTop: -80, padding: "250px 0 160px" }}
+        className="hero-gradient-bg hero-band"
+        style={{ marginTop: -80 }}
       >
         <div className="hero-ascii-word" aria-hidden>
           <FlareWord />
@@ -96,7 +96,7 @@ export default function IndustriesPage() {
             technology changes; the discipline — precision, reliability,
             clarity — does not.
           </p>
-          <div style={{ display: "flex", gap: 16, marginTop: 40, flexWrap: "wrap" }}>
+          <div className="action-row">
             <a href="#sectors" className="btn btn-pill btn-white">
               Explore industries
             </a>
@@ -139,10 +139,10 @@ export default function IndustriesPage() {
       {/* Sector index — the same expanding rows used on the home page. */}
       <section className="section" id="sectors" style={{ background: "var(--surface-warm)" }}>
         <div className="container grid-2" style={{ alignItems: "start" }}>
-          <div style={{ position: "sticky", top: 96 }}>
+          <div className="sticky-col">
             <h2 className="section-title">Where we work</h2>
             <p className="body-lg" style={{ marginTop: 16, color: "var(--muted)" }}>
-              Five sectors. Hover or focus a row to see it, open a page to go
+              Five sectors. Hover, focus or tap a row to see it, open a page to go
               deeper.
             </p>
           </div>
@@ -161,7 +161,7 @@ export default function IndustriesPage() {
           <div
             style={{
               display: "grid",
-              gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
+              gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 260px), 1fr))",
               gap: 24,
               marginTop: 48,
             }}

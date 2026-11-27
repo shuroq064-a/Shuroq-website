@@ -37,6 +37,9 @@ export function HoverExpand({
   className,
 }: HoverExpandProps) {
   const [hoveredIndex, setHoveredIndex] = React.useState<number | null>(null);
+  // A touch screen never fires a hover, so the row opens on a tap instead. The
+  // same press closes it again, which keeps every row reachable on a phone.
+  const [tappedIndex, setTappedIndex] = React.useState<number | null>(null);
 
   return (
     <div className={cn("flex flex-col w-full", className)}>
@@ -44,14 +47,16 @@ export function HoverExpand({
 
       {items.map((item, i) => {
         const isHovered = hoveredIndex === i;
-        const isOtherHovered = hoveredIndex !== null && !isHovered;
+        const isTapped = tappedIndex === i;
+        const isOpen = isHovered || isTapped;
+        const isOtherHovered = hoveredIndex !== null && !isHovered && !isTapped;
 
         return (
           <React.Fragment key={item.label}>
             <motion.div
               className="relative w-full overflow-hidden cursor-default"
               animate={{
-                height: isHovered ? expandedHeight : collapsedHeight,
+                height: isOpen ? expandedHeight : collapsedHeight,
                 opacity: isOtherHovered ? 0.38 : 1,
               }}
               transition={{
@@ -65,13 +70,23 @@ export function HoverExpand({
               }}
               onHoverStart={() => setHoveredIndex(i)}
               onHoverEnd={() => setHoveredIndex(null)}
+              onClick={() => setTappedIndex((current) => (current === i ? null : i))}
+              role="button"
+              tabIndex={0}
+              aria-expanded={isOpen}
+              onKeyDown={(event) => {
+                if (event.key === "Enter" || event.key === " ") {
+                  event.preventDefault();
+                  setTappedIndex((current) => (current === i ? null : i));
+                }
+              }}
             >
               <motion.div
                 className="absolute inset-0 w-full h-full"
                 initial={false}
                 animate={{
-                  opacity: isHovered ? 1 : 0,
-                  scale: isHovered ? 1 : 1.06,
+                  opacity: isOpen ? 1 : 0,
+                  scale: isOpen ? 1 : 1.06,
                 }}
                 transition={{
                   opacity: { duration: 0.45, ease: [0.23, 1, 0.32, 1] },
@@ -89,13 +104,13 @@ export function HoverExpand({
               </motion.div>
 
               <div className="absolute inset-0 flex items-end px-5 pb-4">
-                <div className="flex w-full items-end justify-between gap-4">
-                  <div className="flex items-baseline gap-3 min-w-0">
+                <div className="flex w-full flex-col items-start justify-between gap-1 sm:flex-row sm:items-end sm:gap-4">
+                  <div className="flex min-w-0 flex-wrap items-baseline gap-x-3 gap-y-1">
                     <motion.span
                       className="text-xs tabular-nums shrink-0 opacity-40"
                       animate={{
-                        color: isHovered ? "#ffffff" : "currentColor",
-                        opacity: isHovered ? 0.5 : 0.4,
+                        color: isOpen ? "#ffffff" : "currentColor",
+                        opacity: isOpen ? 0.5 : 0.4,
                       }}
                       transition={{ duration: 0.2 }}
                     >
@@ -106,7 +121,7 @@ export function HoverExpand({
                       className="font-semibold tracking-tight truncate"
                       style={{ fontSize: "clamp(1.1rem, 2.2vw, 1.5rem)" }}
                       animate={{
-                        color: isHovered ? "#ffffff" : "currentColor",
+                        color: isOpen ? "#ffffff" : "currentColor",
                       }}
                       transition={{ duration: 0.2 }}
                     >
@@ -115,15 +130,15 @@ export function HoverExpand({
 
                     {item.description && (
                       <motion.span
-                        className="text-sm text-white/70 truncate hidden sm:block"
+                        className="hidden text-sm text-white/70 truncate sm:block"
                         initial={{ opacity: 0, x: -8 }}
                         animate={{
-                          opacity: isHovered ? 1 : 0,
-                          x: isHovered ? 0 : -8,
+                          opacity: isOpen ? 1 : 0,
+                          x: isOpen ? 0 : -8,
                         }}
                         transition={{
                           duration: 0.3,
-                          delay: isHovered ? 0.12 : 0,
+                          delay: isOpen ? 0.12 : 0,
                           ease: [0.23, 1, 0.32, 1],
                         }}
                       >
@@ -136,10 +151,10 @@ export function HoverExpand({
                     <motion.span
                       className="text-xs tracking-widest uppercase shrink-0"
                       animate={{
-                        color: isHovered
+                        color: isOpen
                           ? "rgba(255,255,255,0.55)"
                           : "currentColor",
-                        opacity: isHovered ? 1 : 0.45,
+                        opacity: isOpen ? 1 : 0.45,
                       }}
                       transition={{ duration: 0.2 }}
                     >

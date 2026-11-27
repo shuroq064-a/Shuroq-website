@@ -423,3 +423,29 @@
     grid-template-columns: 1fr;
   }
 }
+
+@media (max-width: 480px) {
+  .heroActions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .heroActions :global(.btn) {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .ctaActions a {
+    width: 100%;
+  }
+
+  .scorecard,
+  .rubricTable,
+  .weightsPanel {
+    padding: 16px 12px;
+  }
+
+  .benefit {
+    padding: 22px 20px;
+  }
+}

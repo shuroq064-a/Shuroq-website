@@ -36,6 +36,11 @@
 
 /* The legend doubles as the keyboard path: arrow keys move between categories, focus previews one, a press pins it. */
 .legend { display: grid; grid-template-columns: repeat(auto-fit, minmax(108px, 1fr)); gap: 2px; margin: 0 calc(var(--space-2) * -1); }
+/* On a phone three narrow columns leave a category name one word wide, so the
+   legend drops to two. */
+@media (max-width: 640px) {
+  .legend { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2px var(--space-3); }
+}
 .item { display: grid; min-width: 0; justify-items: start; gap: 2px; padding: var(--space-2); border: 0; border-radius: calc(var(--radius-control) - 6px); background: transparent; color: inherit; font: inherit; text-align: left; cursor: pointer; -webkit-tap-highlight-color: transparent; transition: background-color var(--duration-fast) var(--ease-standard), opacity var(--duration-fast) var(--ease-standard); }
 @media (hover: hover) and (pointer: fine) { .item:hover { background: var(--surface-muted); } }
 .item[aria-pressed="true"] { background: var(--surface-muted); }

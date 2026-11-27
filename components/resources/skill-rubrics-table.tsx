@@ -52,19 +52,22 @@ export function SkillRubricsTable() {
       {
         id: "area",
         header: "Competency area",
-        width: "minmax(0, 1.6fr)",
+        width: "minmax(120px, 1.6fr)",
         cell: (data) => <span>{data.title}</span>,
       },
       {
         id: "level",
         header: "Expected level",
-        width: "minmax(0, 0.7fr)",
+        width: "minmax(110px, 0.7fr)",
+        // The expected level and the evidence line fold away as the table
+        // narrows, so a phone keeps the competency and its share.
+        hideBelow: 760,
         cell: (data) => data.level,
       },
       {
         id: "weight",
         header: "Share of role",
-        width: "minmax(0, 0.6fr)",
+        width: "minmax(76px, 0.6fr)",
         align: "end",
         sortValue: (data) => data.weight,
         cell: (data) => `${data.weight}%`,
@@ -72,8 +75,13 @@ export function SkillRubricsTable() {
       {
         id: "signal",
         header: "What good looks like",
-        width: "minmax(0, 1.4fr)",
-        cell: (data) => data.signal,
+        width: "minmax(180px, 1.4fr)",
+        // The note now ends in an ellipsis inside its own column, so it can
+        // stay as long as the column has room for it.
+        hideBelow: 860,
+        // The note is a full sentence, so it ends in an ellipsis at the edge of
+        // its column rather than stretching the row wider than the table.
+        cell: (data) => <span title={data.signal}>{data.signal}</span>,
       },
     ],
     [],

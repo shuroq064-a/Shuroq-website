@@ -32,7 +32,7 @@ export function CloudNativePage() {
       {/* Overview — the same quiet expandable copy treatment. */}
       <section className="section" style={{ paddingBottom: 0 }}>
         <div className="container grid-2" style={{ alignItems: "start" }}>
-          <div style={{ position: "sticky", top: 96 }}>
+          <div className="sticky-col">
             <h2 className="section-title">{cloudOverview.title}</h2>
             <p className="body-lg" style={{ marginTop: 16, color: "var(--muted)" }}>
               {cloudOverview.lead}
@@ -55,7 +55,7 @@ export function CloudNativePage() {
       {/* Capabilities — vendored Expandable Card, all closed at first paint. */}
       <section className="section" id="services" style={{ background: "var(--surface-warm)" }}>
         <div className="container grid-2" style={{ alignItems: "start" }}>
-          <div style={{ position: "sticky", top: 96 }}>
+          <div className="sticky-col">
             <h2 className="section-title">What we deliver</h2>
             <p className="body-lg" style={{ marginTop: 16, color: "var(--muted)" }}>
               The practices that make a cloud product dependable in production.
@@ -82,7 +82,7 @@ export function CloudNativePage() {
       {/* Where to start — vendored Arc segmented control, three views. */}
       <section className="section">
         <div className="container grid-2" style={{ alignItems: "start" }}>
-          <div style={{ position: "sticky", top: 96 }}>
+          <div className="sticky-col">
             <h2 className="section-title">Where to start</h2>
             <p className="body-lg" style={{ marginTop: 16, color: "var(--muted)" }}>
               The right entry point depends on what you are running today.
@@ -97,7 +97,7 @@ export function CloudNativePage() {
       {/* Platform layers — a typographic stack, not a card grid. */}
       <section className="section" style={{ background: "var(--surface-warm)" }}>
         <div className="container grid-2" style={{ alignItems: "start" }}>
-          <div style={{ position: "sticky", top: 96 }}>
+          <div className="sticky-col">
             <h2 className="section-title">The platform, layer by layer</h2>
             <p className="body-lg" style={{ marginTop: 16, color: "var(--muted)" }}>
               Each layer has one job and a clear boundary with the next.
@@ -153,17 +153,7 @@ export function CloudNativePage() {
           </p>
           <div style={{ marginTop: 48, borderTop: "1px solid var(--border)" }}>
             {cloudUseCases.map((item, i) => (
-              <div
-                key={item.title}
-                style={{
-                  display: "grid",
-                  gridTemplateColumns: "48px minmax(0, 1fr) minmax(0, 1fr)",
-                  gap: 24,
-                  alignItems: "baseline",
-                  padding: "24px 0",
-                  borderBottom: "1px solid var(--border)",
-                }}
-              >
+              <div key={item.title} className="rule-row">
                 <span style={{ fontSize: 12, color: "var(--muted)", fontVariantNumeric: "tabular-nums" }}>
                   0{i + 1}
                 </span>

@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 import { Treemap, type TreemapNode } from "@/components/arc/treemap/treemap";
 
@@ -28,11 +28,22 @@ export function SkillRubricsWeights() {
     [],
   );
 
+  // A narrow tile stack needs a deeper stage, or the small tiles lose their
+  // labels entirely.
+  const [height, setHeight] = useState(440);
+  useEffect(() => {
+    const narrow = window.matchMedia("(max-width: 640px)");
+    const apply = () => setHeight(narrow.matches ? 360 : 440);
+    apply();
+    narrow.addEventListener("change", apply);
+    return () => narrow.removeEventListener("change", apply);
+  }, []);
+
   return (
     <Treemap
       data={data}
       label="Share of role by competency area"
-      height={440}
+      height={height}
       formatValue={(value) => `${value}%`}
     />
   );

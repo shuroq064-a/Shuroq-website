@@ -300,8 +300,8 @@ export default function ShuroqWayPage() {
 
       {/* Hero — same black panel as home, about and careers, with the floating ASCII word */}
       <section
-        className="hero-gradient-bg"
-        style={{ marginTop: -80, padding: "250px 0 160px" }}
+        className="hero-gradient-bg hero-band"
+        style={{ marginTop: -80 }}
       >
         <div className="hero-ascii-word" aria-hidden>
           <FlareWord />
@@ -334,7 +334,7 @@ export default function ShuroqWayPage() {
             operational complexity. The Shuroq Way defines how we consult, architect,
             implement and deliver scalable digital systems for startups and enterprises.
           </p>
-          <div style={{ display: "flex", gap: 16, marginTop: 40, flexWrap: "wrap" }}>
+          <div className="action-row">
             <a href="/contact/" className="btn btn-pill btn-black">
               Partner With Shuroq
             </a>
@@ -380,7 +380,7 @@ export default function ShuroqWayPage() {
         style={{ background: "var(--surface-warm)" }}
       >
         <div className="container grid-2" style={{ alignItems: "start" }}>
-          <div style={{ position: "sticky", top: 96 }}>
+          <div className="sticky-col">
             <div className="mono-label" style={{ marginBottom: 16 }}>
               Delivery
             </div>

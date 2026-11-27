@@ -473,3 +473,30 @@
     height: 480px;
   }
 }
+
+@media (max-width: 480px) {
+  .heroActions {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+
+  .heroActions :global(.btn),
+  .anchorLink {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .ctaActions a {
+    width: 100%;
+  }
+
+  .threadFrame {
+    height: 420px;
+  }
+
+  .capability,
+  .deliveryStep {
+    padding: 22px 20px;
+  }
+}

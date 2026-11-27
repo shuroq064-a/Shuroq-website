@@ -31,7 +31,7 @@ export function ProductEngineeringPage() {
       {/* Overview — sticky heading, expandable copy. */}
       <section className="section" style={{ paddingBottom: 0 }}>
         <div className="container grid-2" style={{ alignItems: "start" }}>
-          <div style={{ position: "sticky", top: 96 }}>
+          <div className="sticky-col">
             <h2 className="section-title">{productOverview.title}</h2>
             <p className="body-lg" style={{ marginTop: 16, color: "var(--muted)" }}>
               {productOverview.lead}
@@ -65,7 +65,7 @@ export function ProductEngineeringPage() {
           <div
             style={{
               display: "grid",
-              gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
+              gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 260px), 1fr))",
               gap: 24,
               marginTop: 48,
             }}
@@ -116,7 +116,7 @@ export function ProductEngineeringPage() {
       {/* Process — the vendored Arc accordion, one step open at a time. */}
       <section className="section">
         <div className="container grid-2" style={{ alignItems: "start" }}>
-          <div style={{ position: "sticky", top: 96 }}>
+          <div className="sticky-col">
             <h2 className="section-title">How an engagement runs</h2>
             <p className="body-lg" style={{ marginTop: 16, color: "var(--muted)" }}>
               Four steps, in order. Open the one you want to read.

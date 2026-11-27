@@ -130,8 +130,8 @@ export default function AboutPage() {
 
       {/* Hero — same black panel as the home page, with the floating ASCII word */}
       <section
-        className="hero-gradient-bg"
-        style={{ marginTop: -80, padding: "250px 0 160px" }}
+        className="hero-gradient-bg hero-band"
+        style={{ marginTop: -80 }}
       >
         <div className="hero-ascii-word" aria-hidden>
           <FlareWord />
@@ -153,7 +153,7 @@ export default function AboutPage() {
             modernize operations and solve complex operational challenges through
             intelligent digital solutions.
           </p>
-          <div style={{ display: "flex", gap: 16, marginTop: 40, flexWrap: "wrap" }}>
+          <div className="action-row">
             <a href="/contact/" className="btn btn-pill btn-black">
               Get Started
             </a>
@@ -265,7 +265,7 @@ export default function AboutPage() {
       {/* Operational Challenges — plain text list closing the previous section's gap */}
       <section className="section" style={{ background: "var(--surface-warm)" }}>
         <div className="container grid-2" style={{ alignItems: "start" }}>
-          <div style={{ position: "sticky", top: 96 }}>
+          <div className="sticky-col">
             <h2 className="section-title">Operational Challenges We Solve</h2>
             <p className="body-lg" style={{ marginTop: 16, color: "var(--muted)" }}>
               The problems that bring teams to us — in our clients&apos; own terms.
